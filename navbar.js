@@ -96,9 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <a href="about.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">About</a>
+                <a href="blog.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Blog</a>
+
         <a href="flavours.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Flavors</a>
         <a href="process.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Process</a>
-                <a href="shop.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Shop</a>
+       <a href="shop.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Shop</a>
 
         <a href="taproom.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Taproom</a>
         <a href="contact.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Contact</a>
