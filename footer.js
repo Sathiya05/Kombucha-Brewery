@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
 
-    <div class="md:col-span-4 lg:col-span-2">
+    <div class="md:col-span-6 lg:col-span-2">
       <h3 class="text-sm font-black mb-6 uppercase tracking-widest text-gray-900 dark:text-white border-b-2 inline-block pb-1" style="border-color: var(--kombu-green);">Quick Links</h3>
       <ul class="space-y-4 text-sm font-bold">
         <li>
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </ul>
     </div>
     
-    <div class="md:col-span-4 lg:col-span-2">
+    <div class="md:col-span-6 lg:col-span-2">
       <h3 class="text-sm font-black mb-6 uppercase tracking-widest text-gray-900 dark:text-white border-b-2 inline-block pb-1" style="border-color: var(--kombu-orange);">Support</h3>
       <ul class="space-y-4 text-sm font-bold">
         <li>
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </ul>
     </div>
 
-    <div class="md:col-span-4 lg:col-span-4">
+    <div class="md:col-span-12 lg:col-span-4">
       <h3 class="text-sm font-black mb-6 uppercase tracking-widest text-gray-900 dark:text-white border-b-2 inline-block pb-1" style="border-color: var(--kombu-green);">Join the Culture</h3>
       <p class="text-sm text-gray-600 dark:text-slate-400 font-semibold mb-5 leading-relaxed">
         Sign up for exclusive drops, secret taproom flavors, and <span class="text-[#FF7043] font-black">10% off</span> your first online order.
