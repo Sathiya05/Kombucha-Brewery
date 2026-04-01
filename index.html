@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferment & Flow – Kombucha Brewery & Taproom</title>
+  <script src="tailwind.js"></script>
+  <link rel="icon" href="images\logo.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          kombugreen: '#8FC140',
+          kombuorange: '#FF7043',
+          slate900: '#0f172a',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  @media(max-width:1024px){
+    .points{
+      justify-items: center;
+    }
+  }
+   @media(max-width:1024px){
+    .icon{
+      margin-right: 10px;
+    }
+  }
+   @media(max-width:1024px){
+    .btn{
+      justify-content: center;
+    }
+  }
+   @media(max-width:820px){
+    .text-title{
+      text-align:center;
+    }
+  }
+  @media(max-width:820px){
+    .title{
+      margin-left:260px;
+    }
+  }
+  @media(max-width:420px){
+    .title{
+      margin-left:0px;
+    }
+  }
+
+  /* ── CTA Bubble Animation ── */
+  .cta-bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+  @keyframes ctaBubble {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 0.8; transform: translateY(-20px) scale(1.1); }
+    80% { opacity: 0.8; transform: translateY(-80px) scale(0.9); }
+    100% { transform: translateY(-130px) scale(1); opacity: 0; }
+  }
+</style>
+</head>
+
+<body
+  class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans overflow-x-hidden">
+  <div id="navbar"></div>
+  <section class="relative w-full min-h-[100svh] flex items-center pt-20 pb-12 overflow-hidden">
+
+    <div class="absolute inset-0 z-0">
+      <img src="images\bg1.jpg" alt="Kombucha brewing process"
+        class="w-full h-full object-cover object-center transform scale-105 animate-[pulse_20s_ease-in-out_infinite_alternate]" />
+
+      <div class="absolute inset-0 bg-gradient-to-r from-slate900/95 via-slate900/70 to-slate900/95 z-10"></div>
+    </div>
+
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-10 md:mt-0">
+
+      <div class="max-w-2xl lg:max-w-3xl flex flex-col items-center text-center lg:items-start lg:text-left mx-auto lg:mx-0">
+
+        <div
+          class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-lg">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombuorange opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-kombuorange"></span>
+          </span>
+          <span class="uppercase tracking-widest text-[11px] font-black text-white">Fresh Batch on Tap</span>
+        </div>
+
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] mb-6 tracking-tight drop-shadow-md">
+          Brewed with <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Wild
+            Ambition.</span>
+        </h1>
+
+        <p class="text-base sm:text-lg md:text-xl font-bold text-slate-300 leading-relaxed mb-10 max-w-xl drop-shadow">
+          Unfiltered, unpasteurized, and undeniably delicious. Discover the raw power of living probiotics wrapped in
+          bold, cold-pressed fruit flavors.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <a href="shop.html"
+            class="group relative px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full overflow-hidden text-center transition-all shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 border-none">
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              Order Delivery
+              <i class="fas fa-truck text-xs ml-1"></i>
+            </span>
+          </a>
+
+          <a href="taproom.html"
+            class="group flex items-center justify-center space-x-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+            <span>Visit the Brewery</span>
+            <i class="fas fa-map-marker-alt text-xs transition-transform duration-300 group-hover:scale-125"></i>
+          </a>
+        </div>
+
+
+      </div>
+
+      <div class="hidden lg:flex justify-end items-center relative">
+        <!-- Decorative backing glows -->
+        <div
+          class="absolute w-[120%] h-[120%] bg-kombugreen/10 blur-[100px] rounded-full scale-75 animate-pulse transition-opacity duration-1000 origin-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div
+          class="absolute w-[100%] h-[100%] bg-kombuorange/15 blur-[100px] rounded-full scale-75 translate-x-12 translate-y-12">
+        </div>
+
+        <div
+          class="relative z-10 p-4 border-2 border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-700 ease-in-out hover:-rotate-1">
+          <img src="images\img1.jpg" alt="Premium Kombucha Bottle"
+            class="w-full max-w-sm h-auto object-cover rounded-2xl animate-[float_6s_ease-in-out_infinite]"
+            style="filter: drop-shadow(0 25px 35px rgba(0,0,0,0.6));" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="relative py-20 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden">
+
+    <div
+      class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-3xl pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+
+        <div class="relative order-2 lg:order-1 w-full max-w-md mx-auto lg:max-w-none">
+
+
+          <div
+            class="relative rounded-3xl overflow-hidden shadow-2xl aspect-square sm:aspect-[4/3] lg:aspect-square border-4 border-white dark:border-slate-800 z-10">
+            <img src="images\img2.avif" alt="Fresh fruit and brewing ingredients"
+              class="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate900/60 to-transparent opacity-60"></div>
+          </div>
+
+
+
+        </div>
+
+        <div class="order-1 lg:order-2 flex flex-col justify-center">
+
+         
+
+          <h2 class="text-title text-4xl sm:text-5xl font-black text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
+            Real Ingredients. <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Zero
+              Shortcuts.</span>
+          </h2>
+
+          <p class="text-base sm:text-lg font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-10">
+            Every batch of FizzyCulture is patiently wild-fermented and flavored exclusively with cold-pressed, organic
+            produce.
+          </p>
+
+          <div class="space-y-8 mb-10">
+
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 group-hover:bg-kombugreen group-hover:text-white transition-colors duration-300 text-kombugreen">
+                <i class="fas fa-leaf text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-black text-gray-900 dark:text-white mb-1">Small Batch & Wild Fermented</h4>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Brewed in traditional glass vessels
+                  to allow our SCOBY to thrive naturally, creating a complex, tangy flavor profile.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 group-hover:bg-kombuorange group-hover:text-white transition-colors duration-300 text-kombuorange">
+                <i class="fas fa-lemon text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-black text-gray-900 dark:text-white mb-1">Cold-Pressed Botanicals</h4>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">No extracts. No purees. Just whole,
+                  organic fruits, roots, and herbs cold-pressed directly into the brew.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-5 group">
+              <div
+                class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300 text-purple-500">
+                <i class="fas fa-shield-alt text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-black text-gray-900 dark:text-white mb-1">Raw Probiotic Power</h4>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Packed with naturally occurring
+                  organic acids and beneficial bacteria to support your digestion and immunity.</p>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section
+    class="py-20 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 border-t border-gray-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col items-center text-center mb-12 md:mb-16 gap-4">
+        <div class="max-w-2xl mx-auto">
+          <div class="inline-flex items-center justify-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Core
+              Lineup</span>
+            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
+            Freshly <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Canned.</span>
+          </h2>
+          <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-lg mx-auto">
+            Build your own 12-pack or grab a sampler. Shipped ice-cold right to your doorstep.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+
+        <article
+          class="group bg-white dark:bg-slate-800 rounded-[2rem] p-4 sm:p-5 shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-slate-700 relative flex flex-col h-full hover:-translate-y-2">
+
+          <div
+            class="absolute top-6 left-6 z-20 bg-white dark:bg-slate-900 text-kombugreen text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md border border-gray-100 dark:border-slate-700">
+            Bestseller
+          </div>
+
+          <div
+            class="relative w-full aspect-square bg-gradient-to-br from-kombugreen/20 to-kombugreen/5 dark:from-kombugreen/20 dark:to-slate-800 rounded-3xl mb-5 flex items-center justify-center overflow-hidden group-hover:bg-kombugreen/30 transition-colors duration-500">
+            <div class="absolute w-40 h-40 bg-white/40 dark:bg-white/10 rounded-full blur-2xl"></div>
+            <img src="images\img3.avif" alt="Guava Mint Kombucha"
+              class="relative z-10 w-full h-full object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700 mix-blend-multiply dark:mix-blend-normal" />
+          </div>
+
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex justify-between items-start mb-2">
+              <h3
+                class="text-xl font-black text-gray-900 dark:text-white group-hover:text-kombugreen transition-colors">
+                Guava Mint</h3>
+              <span class="text-base font-black text-gray-900 dark:text-white">$48 <span
+                  class="text-[10px] text-gray-500 font-bold uppercase">/ 12-pack</span></span>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-slate-400 font-semibold mb-5 flex-grow">
+              Tropical pink guava puree cold-pressed with fresh spearmint leaves. Sweet, tart, and incredibly
+              refreshing.
+            </p>
+
+            <button
+              class="w-full py-3 rounded-full font-black uppercase tracking-widest text-xs bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-white group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 flex justify-center items-center gap-2">
+              <i class="fas fa-plus text-[10px]"></i>
+              Add to Box
+            </button>
+          </div>
+        </article>
+
+        <article
+          class="group bg-white dark:bg-slate-800 rounded-[2rem] p-4 sm:p-5 shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-slate-700 relative flex flex-col h-full hover:-translate-y-2">
+
+          <div
+            class="absolute top-6 left-6 z-20 bg-white dark:bg-slate-900 text-kombuorange text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md border border-gray-100 dark:border-slate-700">
+            Immunity
+          </div>
+
+          <div
+            class="relative w-full aspect-square bg-gradient-to-br from-kombuorange/20 to-kombuorange/5 dark:from-kombuorange/20 dark:to-slate-800 rounded-3xl mb-5 flex items-center justify-center overflow-hidden group-hover:bg-kombuorange/30 transition-colors duration-500">
+            <div class="absolute w-40 h-40 bg-white/40 dark:bg-white/10 rounded-full blur-2xl"></div>
+            <img src="images\img4.avif" alt="Ginger Spice Kombucha"
+              class="relative z-10 w-full h-full object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700 mix-blend-multiply dark:mix-blend-normal" />
+          </div>
+
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex justify-between items-start mb-2">
+              <h3
+                class="text-xl font-black text-gray-900 dark:text-white group-hover:text-kombuorange transition-colors">
+                Ginger Spice</h3>
+              <span class="text-base font-black text-gray-900 dark:text-white">$48 <span
+                  class="text-[10px] text-gray-500 font-bold uppercase">/ 12-pack</span></span>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-slate-400 font-semibold mb-5 flex-grow">
+              A serious kick of cold-pressed Peruvian ginger root paired with earthy turmeric and a crack of black
+              pepper.
+            </p>
+
+            <button
+              class="w-full py-3 rounded-full font-black uppercase tracking-widest text-xs bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-white group-hover:bg-kombuorange group-hover:text-white transition-all duration-300 flex justify-center items-center gap-2">
+              <i class="fas fa-plus text-[10px]"></i>
+              Add to Box
+            </button>
+          </div>
+        </article>
+
+        <article
+          class="group bg-white dark:bg-slate-800 rounded-[2rem] p-4 sm:p-5 shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-slate-700 relative flex flex-col h-full hover:-translate-y-2">
+
+          <div
+            class="absolute top-6 left-6 z-20 bg-white dark:bg-slate-900 text-kombugreen text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-md border border-gray-100 dark:border-slate-700">
+            Seasonal
+          </div>
+
+          <div
+            class="relative w-full aspect-square bg-gradient-to-br from-purple-500/20 to-purple-500/5 dark:from-purple-500/20 dark:to-slate-800 rounded-3xl mb-5 flex items-center justify-center overflow-hidden group-hover:bg-purple-500/30 transition-colors duration-500">
+            <div class="absolute w-40 h-40 bg-white/40 dark:bg-white/10 rounded-full blur-2xl"></div>
+            <img src="images\img5.avif" alt="Berry Hibiscus Kombucha"
+              class="relative z-10 w-full h-full object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700 mix-blend-multiply dark:mix-blend-normal" />
+          </div>
+
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex justify-between items-start mb-2">
+              <h3
+                class="text-xl font-black text-gray-900 dark:text-white group-hover:text-kombugreen transition-colors">
+                Berry Hibiscus</h3>
+              <span class="text-base font-black text-gray-900 dark:text-white">$52 <span
+                  class="text-[10px] text-gray-500 font-bold uppercase">/ 12-pack</span></span>
+            </div>
+            <p class="text-xs text-gray-600 dark:text-slate-400 font-semibold mb-5 flex-grow">
+              Tart Egyptian hibiscus flowers steeped with wild blackberries and a touch of Madagascar vanilla.
+            </p>
+
+            <button
+              class="w-full py-3 rounded-full font-black uppercase tracking-widest text-xs bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-white group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 flex justify-center items-center gap-2">
+              <i class="fas fa-plus text-[10px]"></i>
+              Add to Box
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="mt-12 text-center md:hidden">
+        <a href="shop.html"
+          class="inline-flex items-center space-x-2 text-kombugreen font-black uppercase tracking-widest hover:text-kombuorange transition-colors group px-8 py-4 border-2 border-kombugreen rounded-full">
+          <span>Shop All Flavors</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+ <section class="relative py-20 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden">
+
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      <div
+        class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-kombugreen/10 dark:bg-kombugreen/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[120px]">
+      </div>
+      <div
+        class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-kombuorange/10 dark:bg-kombuorange/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-[120px]">
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="flex flex-col items-center text-center mb-12 md:mb-16 gap-4">
+        <div class="max-w-2xl mx-auto">
+          <div class="inline-flex items-center justify-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[11px] font-black text-kombugreen">Open to the Public</span>
+            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+          </div>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] mb-0 tracking-tight">
+            Pull Up a <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Barstool.</span>
+          </h2>
+        </div>
+      </div>
+
+      <div
+        class="bg-gray-50/80 dark:bg-slate-800/40 backdrop-blur-xl border border-gray-200 dark:border-slate-700 rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-10 lg:p-16 shadow-2xl overflow-hidden relative">
+
+        <div
+          class="absolute inset-0 opacity-5 dark:opacity-10 mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')] z-0">
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+
+          <div class="xl:col-span-7 relative group w-full">
+
+            <div
+              class="relative aspect-[4/3] sm:aspect-video lg:aspect-[16/9] xl:aspect-[4/3] rounded-[2rem] overflow-hidden border-2 border-gray-200 dark:border-white/20 shadow-xl">
+              <div
+                class="absolute inset-0 bg-gray-900/5 dark:bg-slate900/20 group-hover:bg-transparent transition-colors duration-500 z-10">
+              </div>
+              <img src="images/img6.avif"
+                alt="FizzyCulture Taproom"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            </div>
+
+          </div>
+
+          <div class="xl:col-span-5 flex flex-col xl:flex-col lg:flex-row lg:items-start xl:items-stretch gap-10 xl:gap-0 justify-center w-full">
+
+            <div class="lg:w-1/2 xl:w-full">
+               
+
+                <ul class="points space-y-5 mb-10">
+                  <li class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-kombugreen/20 flex items-center justify-center text-kombugreen shrink-0 shadow-sm">
+                      <i class="fas fa-beer text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-black text-gray-900 dark:text-white text-sm uppercase tracking-wide">12 Rotating Taps</h4>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 font-bold">Exclusive seasonal micro-batches.</p>
+                    </div>
+                  </li>
+                  <li class="icon flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-kombuorange/20 flex items-center justify-center text-kombuorange shrink-0 shadow-sm">
+                      <i class="fas fa-paw text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-black text-gray-900 dark:text-white text-sm uppercase tracking-wide">Dog-Friendly Patio</h4>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 font-bold">Bring your furry friends along.</p>
+                    </div>
+                  </li>
+                  <li class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-500 shrink-0 shadow-sm">
+                      <i class="fas fa-recycle text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-black text-gray-900 dark:text-white text-sm uppercase tracking-wide">Growler Refills</h4>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 font-bold">Bring your own or grab one here.</p>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="btn flex flex-col sm:flex-row gap-4">
+                <a href="directions.html" class="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-kombugreen to-kombuorange text-white text-sm font-black uppercase tracking-widest rounded-full transition-all shadow-lg hover:shadow-kombuorange/40 hover:-translate-y-1 text-center border-none whitespace-nowrap">
+                    <i class="fas fa-location-arrow text-xs"></i>
+                    Get Directions
+                </a>
+                <a href="events.html" class="flex items-center justify-center px-8 py-4 bg-transparent border-2 border-gray-300 dark:border-white/30 text-gray-900 dark:text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-gray-100 dark:hover:bg-white dark:hover:text-slate900 transition-colors duration-300 text-center whitespace-nowrap">
+                    View Events
+                </a>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="py-20 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 relative overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12 md:mb-16 relative z-10">
+         
+            
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
+                Join the <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Culture.</span>
+            </h2>
+            
+            <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-2xl mx-auto">
+                Tag us in your wild adventures, backyard hangs, and taproom toasts for a chance to be featured on our feed and win a free case.
+            </p>
+        </div>
+
+<div class="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                
+                <a href="#" class="group relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <img src="images\img7.avif" alt="Drinking kombucha outdoors" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                    <div class="absolute inset-0 bg-slate900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 z-10">
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-heart text-kombuorange"></i> <span>428</span>
+                        </div>
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-comment text-kombugreen"></i> <span>24</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="group relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <img src="images\img8.avif" alt="Pouring kombucha over ice" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                    <div class="absolute inset-0 bg-slate900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 z-10">
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-heart text-kombuorange"></i> <span>856</span>
+                        </div>
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-comment text-kombugreen"></i> <span>52</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="group relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <img src="images\img9.avif" alt="Kombucha ingredients" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                    <div class="absolute inset-0 bg-slate900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 z-10">
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-heart text-kombuorange"></i> <span>312</span>
+                        </div>
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-comment text-kombugreen"></i> <span>18</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="group relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <img src="images\img10.avif" alt="Brewery taproom" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 filter saturate-150" />
+                    <div class="absolute inset-0 bg-slate900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 z-10">
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-heart text-kombuorange"></i> <span>1.2k</span>
+                        </div>
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-comment text-kombugreen"></i> <span>89</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="group relative aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                    <img src="images\img11.avif" alt="Fresh fruits" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                    <div class="absolute inset-0 bg-slate900/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 z-10">
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-heart text-kombuorange"></i> <span>645</span>
+                        </div>
+                        <div class="flex items-center text-white font-black text-lg gap-2">
+                            <i class="fas fa-comment text-kombugreen"></i> <span>41</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        
+
+    </section>
+<section class="relative py-20 md:py-32 bg-[#8FC140]/5 dark:bg-slate-800/30 transition-colors duration-500 overflow-hidden">
+        
+    <i class="fas fa-quote-left absolute top-10 left-10 text-[10rem] text-kombugreen/10 dark:text-kombugreen/5 transform -rotate-12 z-0 pointer-events-none"></i>
+    <i class="fas fa-quote-right absolute bottom-10 right-10 text-[10rem] text-kombuorange/10 dark:text-kombuorange/5 transform rotate-12 z-0 pointer-events-none"></i>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center mb-16 md:mb-20">
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
+                Word on the <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange">Street.</span>
+            </h2>
+            <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-2xl mx-auto">
+                Don't just take our word for it. Here is what the FizzyCulture community is saying about our brews.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 relative transform hover:-translate-y-2">
+                <div class="flex text-kombuorange text-sm mb-6 gap-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">"Finally, a kombucha isn't basically vinegar."</h3>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-8 flex-grow">
+                    If you live near the brewery, you have to go. Sitting on the patio with a fresh flight of their seasonal micro-batches is my new favorite Sunday routine.
+                </p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full bg-kombugreen/20 text-kombugreen flex items-center justify-center font-black text-lg">
+                        S
+                    </div>
+                    <div>
+                        <p class="font-black text-gray-900 dark:text-white text-sm">Sarah Jenkins</p>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 relative transform hover:-translate-y-2">
+                <div class="flex text-kombuorange text-sm mb-6 gap-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">"My gut has never been happier before."</h3>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-8 flex-grow">
+                    If you live near the brewery, you have to go. Sitting on the patio with a fresh flight of their seasonal micro-batches is my new favorite Sunday routine.
+                </p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full bg-kombuorange/20 text-kombuorange flex items-center justify-center font-black text-lg">
+                        M
+                    </div>
+                    <div>
+                        <p class="font-black text-gray-900 dark:text-white text-sm">Marcus T.</p>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 relative group transform hover:-translate-y-2">
+                <div class="flex text-kombuorange text-sm mb-6 gap-1">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">"The taproom is a total vibe for us everytime."</h3>
+                <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-8 flex-grow">
+                    If you live near the brewery, you have to go. Sitting on the patio with a fresh flight of their seasonal micro-batches is my new favorite Sunday routine.
+                </p>
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="w-12 h-12 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center font-black text-lg">
+                        E
+                    </div>
+                    <div>
+                        <p class="font-black text-gray-900 dark:text-white text-sm">Elena R.</p>
+                        <p class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="py-16 md:py-24 bg-white dark:bg-slate900 transition-colors duration-500 px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-7xl mx-auto relative">
+            
+            <div class="relative bg-slate900 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
+
+        <!-- BG texture & glows -->
+        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <!-- Floating bubbles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div class="cta-bubble w-10 h-10" style="left:8%; bottom:0; animation:ctaBubble 7s ease-in infinite; animation-delay:0s;"></div>
+          <div class="cta-bubble w-16 h-16" style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
+          <div class="cta-bubble w-8  h-8"  style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
+          <div class="cta-bubble w-20 h-20" style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
+        </div>
+
+                <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+                    
+                    <div class="inline-flex items-center space-x-2 mb-6 bg-white/20 backdrop-blur-md px-5 py-2 rounded-full border border-white/30 shadow-sm">
+                        <i class="fas fa-bolt text-white text-sm"></i>
+                        <span class="uppercase tracking-widest text-[11px] font-black text-white">Stock Your Fridge</span>
+                    </div>
+
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tight drop-shadow-sm">
+                        Ready to Trust <br class="hidden sm:block"/> Your Gut?
+                    </h2>
+
+                    <p class="text-white/90 font-bold text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
+                        Build a custom 12-pack of your favorite flavors. Subscribe to the Culture Club and free shipping on every order.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+                        <a href="shop.html" class="group relative px-8 py-4 bg-white text-slate-900 text-sm font-black uppercase tracking-widest rounded-full overflow-hidden text-center transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange group-hover:from-kombuorange group-hover:to-kombuorange transition-all">Build Your Box</span>
+                                <i class="fas fa-box-open text-kombuorange group-hover:scale-110 transition-transform"></i>
+                            </span>
+                        </a>
+                        
+                        <a href="flavours.html" class="group flex items-center justify-center space-x-3 px-8 py-4 border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate-900 transition-all duration-300">
+                            <span>Find in Stores</span>
+                            <i class="fas fa-map-pin text-xs transition-transform duration-300 group-hover:scale-125 group-hover:text-kombugreen"></i>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+  <div id="footer"></div>
+
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>

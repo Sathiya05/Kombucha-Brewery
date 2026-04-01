@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Lost Your Fizz? | FizzyCulture</title>
+
+  <script src="tailwind.js"></script>
+      <link rel="icon" href="images\logo.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kombugreen: '#8FC140',
+                        kombuorange: '#FF7043',
+                        slate900: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        bebas: ['Bebas Neue', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #0f172a; /* Forced dark theme for the cellar vibe */
+            color: #ffffff;
+            overflow: hidden; 
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #8FC140, #FF7043);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Outlined 404 Text - FIXED FOR VISIBILITY */
+        .outline-text {
+            color: rgba(255, 255, 255, 0.03); /* Added a slight fill */
+            -webkit-text-stroke: 3px rgba(255, 255, 255, 0.15); /* Thicker, brighter stroke */
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Centered horizontally */
+            transform: translate(-50%, -50%); /* Perfectly centered */
+            font-size: clamp(12rem, 35vw, 40rem); /* Responsive sizing */
+            line-height: 1;
+            font-family: 'Bebas Neue', cursive;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap; /* Prevents wrapping */
+        }
+
+        /* Liquid Morphing Animation */
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+        .animate-morph {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 7s ease-in-out 3s infinite;
+        }
+
+        /* Gradient Button Hover */
+        .kombu-btn {
+            background: linear-gradient(to right, #8FC140, #FF7043);
+            background-size: 200% auto;
+            transition: all 0.5s ease;
+        }
+        .kombu-btn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(143, 193, 64, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-[100dvh] flex items-center justify-center relative overflow-hidden bg-slate900">
+
+    <!-- Background decorative 404 -->
+    <div class="outline-text">404</div>
+
+    <!-- Animated blobs -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-kombugreen/20 rounded-full blur-[120px] animate-float text-center"></div>
+        <div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-kombuorange/15 rounded-full blur-[150px] animate-float-delayed"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
+        <div class="flex flex-col items-center text-center">
+            
+            <!-- Label -->
+            <div class="inline-flex items-center space-x-2 mb-6">
+                <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+                <span class="uppercase tracking-widest text-[11px] font-black text-slate-400">Error Page</span>
+                <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] mb-8 tracking-tight drop-shadow-lg" style="font-family:'Playfair Display',serif;">
+                Lost in the <br/>
+                <span class="gradient-text italic">Fermentation Tank.</span>
+            </h1>
+
+            <!-- Big 404 (Above Paragraph) -->
+            <div class="text-[120px] sm:text-[160px] font-black leading-none gradient-text mb-8 select-none" style="font-family:'Bebas Neue',cursive; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));">
+                404
+            </div>
+
+            <!-- Description -->
+            <p class="text-base sm:text-lg font-bold text-slate-300 leading-relaxed mb-12 max-w-xl mx-auto">
+                We've searched every barrel, but the page you're looking for seems to have lost its fizz. It may have been moved, deleted, or drank by the Head Brewer.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
+                <a href="index.html" class="kombu-btn w-full sm:w-auto px-10 py-4 text-white text-sm font-black uppercase tracking-widest rounded-full flex items-center justify-center gap-2 shadow-xl">
+                    <i class="fas fa-home text-xs"></i> Back to Home
+                </a>
+                
+                <a href="shop.html" class="w-full sm:w-auto px-10 py-4 border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate-900 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fas fa-shopping-bag text-xs"></i> Shop Flavours
+                </a>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>

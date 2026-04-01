@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FizzyCulture – The Brewing Process</title>
+  <script src="tailwind.js"></script>
+    <link rel="icon" href="images\logo.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          kombugreen: '#8FC140',
+          kombuorange: '#FF7043',
+          slate900: '#0f172a',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root {
+    --green: #8FC140;
+    --orange: #FF7043;
+    --dark: #0f172a;
+  }
+
+
+
+
+  .ticker-track { animation: ticker 30s linear infinite; }
+  .ticker-track:hover { animation-play-state: paused; }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--green), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Shimmer text */
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--green) 0%, var(--orange) 40%, var(--green) 80%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Glass */
+  .glass {
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,.14);
+  }
+
+  /* Lift hover */
+  .lift { transition: transform .3s ease, box-shadow .3s ease; }
+  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,.12); }
+
+  /* CTA bubble */
+  .cta-bubble { position: absolute; border-radius: 50%; background: rgba(255,255,255,.12); }
+
+  /* Progress bar */
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+    animation: revealBar 1.4s cubic-bezier(.22,1,.36,1) both;
+  }
+
+ 
+
+  /* Rotating circle decoration */
+  .rotate-slow { animation: rotateSlow 18s linear infinite; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+  .dark ::-webkit-scrollbar-track { background: #0f172a; }
+
+  /* Smooth active tab underline */
+  .tab-btn.active {
+    color: var(--green);
+  }
+  .tab-btn.active .tab-bar {
+    width: 100%;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+  }
+  .tab-bar {
+    height: 2px;
+    width: 0;
+    border-radius: 2px;
+    transition: width .4s ease, background .4s ease;
+    background: var(--green);
+  }
+
+  /* Stage detail card pop */
+  .stage-detail { display: none; }
+  .stage-detail.active { display: block; }
+
+  @media (max-width: 640px) {
+    .ticker-track { animation-duration: 20s; }
+  }
+</style>
+
+<body class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans overflow-x-hidden">
+
+  <div id="navbar"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       1. HERO — Centred, cinematic, oversized type
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="relative w-full min-h-[100svh] flex flex-col justify-center items-center text-center pt-24 pb-16 overflow-hidden bg-slate900">
+
+    <!-- BG -->
+    <div class="absolute inset-0 z-0">
+      <img src="images/img2.avif" alt="Brewing vessels" class="w-full h-full object-cover opacity-20" />
+      <div class="absolute inset-0 bg-gradient-to-b from-slate900/60 via-slate900/85 to-slate900"></div>
+      <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[150px] pointer-events-none"></div>
+      <div class="absolute bottom-1/3 right-1/5 w-[400px] h-[400px] bg-kombuorange/10 rounded-full blur-[120px] pointer-events-none"></div>
+    </div>
+
+    <!-- Giant watermark -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0">
+      <span class="text-[clamp(4rem,20vw,16rem)] font-black text-white/[0.025] uppercase whitespace-nowrap tracking-widest" style="font-family:'Bebas Neue',cursive;">The Craft</span>
+    </div>
+
+    <!-- Rotating ring decoration -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] sm:w-[700px] sm:h-[700px] rounded-full border border-white/[0.04] rotate-slow pointer-events-none z-0"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[520px] sm:h-[520px] rounded-full border border-kombugreen/[0.06] pointer-events-none z-0" style="animation: rotateSlow 12s linear infinite reverse;"></div>
+
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
+      <!-- Breadcrumb -->
+      <div class="animate-fade-up flex items-center justify-center gap-2 mb-10" style="animation-delay:.05s;">
+        <a href="index.html" class="text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-kombugreen transition-colors">Home</a>
+        <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+        <span class="text-[11px] font-black uppercase tracking-widest text-kombugreen">The Process</span>
+      </div>
+
+      <!-- Badge -->
+      <div class="animate-fade-up inline-flex items-center space-x-2 mb-8 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-lg" style="animation-delay:.1s;">
+        <i class="fas fa-flask text-kombugreen text-xs"></i>
+        <span class="uppercase tracking-widest text-[11px] font-black text-white">21 Days · 4 Stages · 1 Living Drink</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="animate-fade-up font-black text-white leading-[1.0] mb-6 tracking-tight drop-shadow-xl"
+          style="font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,5rem); animation-delay:.15s;">
+        The Art of Wild<br/>
+        <span class="gradient-text italic">Fermentation.</span>
+      </h1>
+
+      <p class="animate-fade-up text-lg sm:text-xl font-bold text-slate-300 leading-relaxed max-w-2xl mx-auto mb-12" style="animation-delay:.25s;">
+        Every can of FizzyCulture is the result of a slow, deliberate 21-day ritual — part science, part intuition, entirely obsessive. Here's every step, laid bare.
+      </p>
+
+     
+
+      <!-- CTAs -->
+      <div class="animate-fade-up flex flex-col sm:flex-row gap-4 justify-center" style="animation-delay:.45s;">
+        <a href="blog.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+          <span class="flex items-center justify-center gap-2">Explore the Stages <i class="fas fa-arrow-down text-xs group-hover:translate-y-0.5 transition-transform"></i></span>
+        </a>
+        <a href="shop.html" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+          Shop the Result <i class="fas fa-shopping-bag text-xs"></i>
+        </a>
+      </div>
+    </div>
+
+   
+    </div>
+  </section>
+
+  
+
+  <!-- ══════════════════════════════════════════════════════════════
+       3. PHILOSOPHY INTRO — Wide editorial 2-col
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 md:py-36 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden">
+    <div class="absolute -top-16 -right-16 w-80 h-80 bg-kombuorange/5 dark:bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top label -->
+      <div class="flex items-center justify-center space-x-2 mb-4">
+        <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+        <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Our Philosophy</span>
+        <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+      </div>
+
+      <!-- Split headline -->
+      <div class="flex flex-col items-center text-center gap-10 lg:gap-12 mb-20 max-w-4xl mx-auto">
+        <div>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.05] tracking-tight text-center" style="font-family:'Playfair Display',serif;">
+            Patience Isn't a Virtue Here ! It's a Requirement
+          </h2>
+        </div>
+        <div class="flex flex-col items-center gap-6 text-center max-w-2xl">
+         
+        
+        </div>
+      </div>
+
+      <!-- Wide image -->
+      <div class="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 group">
+        <img src="images/img6.avif" alt="The FizzyCulture brewery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8s] ease-out" />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate900/70 via-transparent to-slate900/40"></div>
+
+        <!-- Floating stats over image -->
+        <div class="absolute top-6 left-6 sm:top-10 sm:left-10 glass rounded-2xl px-5 py-4 text-white">
+          <div class="text-[9px] font-black uppercase tracking-widest text-white/60 mb-1">Batch size</div>
+          <div class="text-2xl font-black" style="font-family:'Bebas Neue',cursive;">500 L</div>
+          <div class="text-[9px] font-black uppercase tracking-widest text-white/60">per vessel</div>
+        </div>
+        <div class="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 glass rounded-2xl px-5 py-4 text-white text-right">
+          <div class="text-[9px] font-black uppercase tracking-widest text-white/60 mb-1">Ferment Temp</div>
+          <div class="text-2xl font-black gradient-text" style="font-family:'Bebas Neue',cursive;">24°C</div>
+          <div class="text-[9px] font-black uppercase tracking-widest text-white/60">Controlled</div>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="glass rounded-2xl px-8 py-5 text-center">
+            <div class="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1">Portland, OR · Est. 2017</div>
+            <div class="text-lg font-black text-white" style="font-family:'Playfair Display',serif; font-style:italic;">5,000 sq ft Taproom & Brewery</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       4. THE 4 STAGES — Interactive tab switcher with detail panels
+  ══════════════════════════════════════════════════════════════ -->
+  <section id="stages" class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center justify-center space-x-2 mb-4">
+          <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">The Four Stages</span>
+          <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+          Inside Every 21-Day Batch
+        </h2>
+        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-xl mx-auto">
+          Click any stage to explore it in depth — what happens, why it matters, and how long it takes.
+        </p>
+      </div>
+
+      <!-- Tab buttons -->
+      <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
+        <button onclick="switchStage(0)" id="tab-0" class="tab-btn active group flex flex-col items-center px-5 sm:px-8 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-kombugreen text-xs"><i class="fas fa-leaf"></i></span>
+            <span class="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-wide">Stage 01</span>
+          </div>
+          <span class="text-[10px] font-bold text-gray-500 hidden sm:block">Source & Steep</span>
+          <div class="tab-bar mt-2 w-full"></div>
+        </button>
+        <button onclick="switchStage(1)" id="tab-1" class="tab-btn group flex flex-col items-center px-5 sm:px-8 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-kombuorange text-xs"><i class="fas fa-bacteria"></i></span>
+            <span class="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-wide">Stage 02</span>
+          </div>
+          <span class="text-[10px] font-bold text-gray-500 hidden sm:block">First Ferment</span>
+          <div class="tab-bar mt-2 w-full"></div>
+        </button>
+        <button onclick="switchStage(2)" id="tab-2" class="tab-btn group flex flex-col items-center px-5 sm:px-8 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-purple-500 text-xs"><i class="fas fa-lemon"></i></span>
+            <span class="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-wide">Stage 03</span>
+          </div>
+          <span class="text-[10px] font-bold text-gray-500 hidden sm:block">Cold-Press & Blend</span>
+          <div class="tab-bar mt-2 w-full"></div>
+        </button>
+        <button onclick="switchStage(3)" id="tab-3" class="tab-btn group flex flex-col items-center px-5 sm:px-8 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-teal-500 text-xs"><i class="fas fa-wine-bottle"></i></span>
+            <span class="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-wide">Stage 04</span>
+          </div>
+          <span class="text-[10px] font-bold text-gray-500 hidden sm:block">Bottle & Carbonate</span>
+          <div class="tab-bar mt-2 w-full"></div>
+        </button>
+      </div>
+
+      <!-- Stage detail panels -->
+
+      <!-- Stage 01 -->
+      <div id="stage-0" class="stage-detail active">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 sm:p-12 shadow-sm border border-gray-100 dark:border-slate-700">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="relative w-16 h-16 rounded-2xl bg-kombugreen/10 dark:bg-kombugreen/20 flex items-center justify-center text-kombugreen step-pulse flex-shrink-0">
+                <i class="fas fa-leaf text-2xl"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-kombugreen mb-1">Stage 01 · Day 1–2</div>
+                <h3 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white" style="font-family:'Playfair Display',serif;">Source &amp; Steep</h3>
+              </div>
+            </div>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">
+              Every FizzyCulture batch begins with a pilgrimage — not literally, but the sourcing feels like one. We use single-origin teas from small-holder farms in Darjeeling and Yunnan Province, selected for their polyphenol density and depth of flavour.
+            </p>
+           
+            <!-- Detail specs -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-kombugreen/5 dark:bg-kombugreen/10 border border-kombugreen/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">78°C</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Steep Temp</div>
+              </div>
+              <div class="bg-kombuorange/5 dark:bg-kombuorange/10 border border-kombuorange/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">8 hrs</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Steep Duration</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">2 Origins</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Darjeeling & Yunnan</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">Raw</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Unrefined Sugar</div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <div class="rounded-[2rem] overflow-hidden aspect-square shadow-xl border-4 border-white dark:border-slate-700">
+              <img src="images\bg1.jpg" alt="Tea sourcing and steeping" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 02 -->
+      <div id="stage-1" class="stage-detail">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 sm:p-12 shadow-sm border border-gray-100 dark:border-slate-700">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="relative w-16 h-16 rounded-2xl bg-kombuorange/10 dark:bg-kombuorange/20 flex items-center justify-center text-kombuorange step-pulse flex-shrink-0">
+                <i class="fas fa-bacteria text-2xl"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-kombuorange mb-1">Stage 02 · Day 3–14</div>
+                <h3 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white" style="font-family:'Playfair Display',serif;">The First Ferment</h3>
+              </div>
+            </div>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">
+              This is where Gerald takes over. Gerald is our heritage SCOBY — a Symbiotic Culture of Bacteria and Yeast — that we've been maintaining and subdividing since 2017. The entire FizzyCulture culture descends from that original farmer's-market find.
+            </p>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
+              The sweetened tea is transferred to our open-glass fermentation vessels and Gerald goes in. Over 12 days, the yeast converts sugar to alcohol; the bacteria convert that to organic acids. pH drops from 7.0 to a tart 3.1. Probiotics multiply. The liquid transforms.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-kombuorange/5 dark:bg-kombuorange/10 border border-kombuorange/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">12 Days</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Ferment Window</div>
+              </div>
+              <div class="bg-kombugreen/5 dark:bg-kombugreen/10 border border-kombugreen/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">pH 3.1</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Target Acidity</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">24°C</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Controlled Temp</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">Open</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Glass Vessels</div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <div class="rounded-[2rem] overflow-hidden aspect-square shadow-xl border-4 border-white dark:border-slate-700">
+              <img src="images/img4.avif" alt="SCOBY in fermentation vessel" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div class="absolute -bottom-5 -right-5 glass rounded-2xl px-5 py-4 text-white animate-float shadow-xl">
+              <div class="text-[9px] font-black uppercase tracking-widest opacity-60 mb-1">Culture Age</div>
+              <div class="text-base font-black">7 Years</div>
+              <div class="text-[9px] font-black uppercase tracking-widest text-kombuorange">Gerald · Est. 2017</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 03 -->
+      <div id="stage-2" class="stage-detail">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 sm:p-12 shadow-sm border border-gray-100 dark:border-slate-700">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="relative w-16 h-16 rounded-2xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center text-purple-500 step-pulse flex-shrink-0">
+                <i class="fas fa-lemon text-2xl"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-purple-500 mb-1">Stage 03 · Day 15–18</div>
+                <h3 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white" style="font-family:'Playfair Display',serif;">Cold-Press &amp; Blend</h3>
+              </div>
+            </div>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">
+              This is Priya's kingdom. After the base kombucha passes quality checks, it's time to introduce flavour. We use a hydraulic cold-press — no heat, no blades, just 40,000 lbs of pressure extracting pure juice, enzymes and phytonutrients from whole, organic produce.
+            </p>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
+              No extracts. No concentrates. No "natural flavourings." If the label says guava mint, there are whole guavas and fresh spearmint leaves in that press. The cold-pressed juice is blended into the kombucha base at precise ratios — too little loses flavour, too much throws off fermentation.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-purple-500/5 dark:bg-purple-500/10 border border-purple-500/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">40K lbs</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Press Pressure</div>
+              </div>
+              <div class="bg-kombugreen/5 dark:bg-kombugreen/10 border border-kombugreen/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">0°C</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">No Heat Used</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">Whole</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Organic Produce Only</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">12</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Flavour Profiles</div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <div class="rounded-[2rem] overflow-hidden aspect-square shadow-xl border-4 border-white dark:border-slate-700">
+              <img src="images/img5.avif" alt="Cold-pressing fresh fruit" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div class="absolute -bottom-5 -right-5 glass rounded-2xl px-5 py-4 text-white animate-float shadow-xl">
+              <div class="text-[9px] font-black uppercase tracking-widest opacity-60 mb-1">Flavour Lead</div>
+              <div class="text-base font-black">Priya Kapoor</div>
+              <div class="text-[9px] font-black uppercase tracking-widest text-purple-400">Flavour Alchemist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 04 -->
+      <div id="stage-3" class="stage-detail">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 sm:p-12 shadow-sm border border-gray-100 dark:border-slate-700">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="relative w-16 h-16 rounded-2xl bg-teal-500/10 dark:bg-teal-500/20 flex items-center justify-center text-teal-500 step-pulse flex-shrink-0">
+                <i class="fas fa-wine-bottle text-2xl"></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-teal-500 mb-1">Stage 04 · Day 19–21</div>
+                <h3 class="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white" style="font-family:'Playfair Display',serif;">Bottle &amp; Carbonate</h3>
+              </div>
+            </div>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">
+              The flavoured kombucha is transferred into sealed cans for its second fermentation. This is where carbonation happens — not from an injection gun but from the bacteria and yeast continuing their work in an oxygen-free environment, producing CO₂ naturally.
+            </p>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
+              The sealed cans rest at 18°C for 3 days. Every can is sampled before release. Marcus checks pH, measures carbonation levels, and counts probiotic colony-forming units under microscope. Only batches hitting 4B+ CFU per 16oz leave the brewery.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-teal-500/5 dark:bg-teal-500/10 border border-teal-500/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">3 Days</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">Natural Carbonation</div>
+              </div>
+              <div class="bg-kombugreen/5 dark:bg-kombugreen/10 border border-kombugreen/20 rounded-2xl p-4">
+                <div class="text-2xl font-black gradient-text mb-1" style="font-family:'Bebas Neue',cursive;">4B+</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-400">CFU Min. Threshold</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">100%</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Batches Sampled</div>
+              </div>
+              <div class="bg-slate-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-2xl p-4">
+                <div class="text-2xl font-black text-gray-900 dark:text-white mb-1" style="font-family:'Bebas Neue',cursive;">Live</div>
+                <div class="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Never Pasteurised</div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <div class="rounded-[2rem] overflow-hidden aspect-square shadow-xl border-4 border-white dark:border-slate-700">
+              <img src="images/img7.avif" alt="Canning and carbonation" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div class="absolute -bottom-5 -right-5 glass rounded-2xl px-5 py-4 text-white animate-float shadow-xl">
+              <div class="text-[9px] font-black uppercase tracking-widest opacity-60 mb-1">QC Lead</div>
+              <div class="text-base font-black">Marcus Webb</div>
+              <div class="text-[9px] font-black uppercase tracking-widest text-teal-400">Lab Manager</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       5. VISUAL TIMELINE — Horizontal numbered strip
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-slate900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+    <div class="absolute top-0 left-1/3 w-[500px] h-[500px] bg-kombugreen/8 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-kombuorange/8 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center justify-center space-x-2 mb-4">
+          <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+          <span class="uppercase tracking-widest text-[11px] font-black text-slate-400">Day by Day</span>
+          <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+          21 Days in <span class="gradient-text">One Glance.</span>
+        </h2>
+      </div>
+
+      <!-- Timeline ribbon -->
+      <div class="relative w-full pb-4 max-w-6xl mx-auto">
+        
+        <!-- Track line (Mobile: Vertical, Desktop: Horizontal) -->
+        <!-- Mobile Vertical Line -->
+        <div class="absolute top-7 bottom-7 left-1/2 -translate-x-1/2 md:hidden w-0.5 bg-gradient-to-b from-kombugreen via-kombuorange to-kombugreen opacity-30 z-0"></div>
+        <!-- Desktop Horizontal Line -->
+        <div class="hidden md:block absolute top-7 left-[5%] right-[5%] lg:left-8 lg:right-8 h-0.5 bg-gradient-to-r from-kombugreen via-kombuorange to-kombugreen opacity-30 z-0"></div>
+
+        <div class="flex flex-col md:grid md:grid-cols-7 gap-10 md:gap-4 lg:gap-0 relative z-10 w-full">
+
+          <!-- Day 1 -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-kombugreen bg-kombugreen/20"></div>
+              <i class="fas fa-leaf text-kombugreen text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-kombugreen mb-1">Day 1</div>
+              <div class="text-xs font-black text-white mb-1">Sourcing</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Tea leaves selected</div>
+            </div>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-kombugreen/50 bg-kombugreen/15"></div>
+              <i class="fas fa-mug-hot text-kombugreen/70 text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-kombugreen/70 mb-1">Day 2</div>
+              <div class="text-xs font-black text-white mb-1">Steeping</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">8 hrs at 78°C Farenheit</div>
+            </div>
+          </div>
+
+          <!-- Day 3–14 -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-kombuorange bg-kombuorange/20"></div>
+              <i class="fas fa-bacteria text-kombuorange text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-kombuorange mb-1">Days 3</div>
+              <div class="text-xs font-black text-white mb-1">Ferment</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Gerald at workplace</div>
+            </div>
+          </div>
+
+          <!-- Day 14 QC -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-white/30 bg-white/10"></div>
+              <i class="fas fa-microscope text-white/60 text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-white/50 mb-1">Day 14</div>
+              <div class="text-xs font-black text-white mb-1">pH Check</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Target: 3.1 check</div>
+            </div>
+          </div>
+
+          <!-- Day 15–18 -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-purple-500 bg-purple-500/20"></div>
+              <i class="fas fa-lemon text-purple-400 text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-purple-400 mb-1">Days 15</div>
+              <div class="text-xs font-black text-white mb-1">Pressed</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Real fruit essance </div>
+            </div>
+          </div>
+
+          <!-- Day 19–21 -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 mx-auto">
+              <div class="absolute inset-0 rounded-full border-2 border-teal-500 bg-teal-500/20"></div>
+              <i class="fas fa-wine-bottle text-teal-400 text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-teal-400 mb-1">Days 19</div>
+              <div class="text-xs font-black text-white mb-1"> Ferment</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Sealed + carbonated</div>
+            </div>
+          </div>
+
+          <!-- Day 21 — Ship -->
+          <div class="flex flex-col items-center text-center px-4 md:px-1 gap-2 md:gap-0">
+            <div class="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#0f172a] flex items-center justify-center md:mb-4 z-10 shadow-lg shadow-kombugreen/30 mx-auto">
+              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange"></div>
+              <i class="fas fa-truck text-white text-lg relative z-10"></i>
+            </div>
+            <div class="flex flex-col items-center bg-[#0f172a] px-3 py-1 relative z-10">
+              <div class="text-[9px] font-black uppercase tracking-widest text-kombugreen mb-1">Day 21+</div>
+              <div class="text-xs font-black text-white mb-1">Shiped</div>
+              <div class="text-[9px] text-slate-500 font-semibold leading-tight">Ice-cold delivery</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <!-- ══════════════════════════════════════════════════════════════
+       7. INGREDIENTS DEEP DIVE — Tabbed ingredient cards
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center justify-center space-x-2 mb-4">
+          <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">What Goes In</span>
+          <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+          Five Ingredients. <span class="gradient-text">That's It.</span>
+        </h2>
+        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-xl mx-auto">
+          No fillers. No "natural flavourings." No mystery. Every single thing in a FizzyCulture can, explained.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+        <!-- Ingredient 1 -->
+        <div class="lift bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] p-6 flex flex-col group hover:border-kombugreen/40 transition-colors duration-300 cursor-default">
+         <h3 class="text-base font-black text-gray-900 dark:text-white mb-2">Organic Green Tea</h3>
+          <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex-grow leading-relaxed">Single-origin from Darjeeling and Yunnan. Rich in polyphenols and antioxidants. The backbone of every batch.</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500">From the Origin: India / China</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 2 -->
+        <div class="lift bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] p-6 flex flex-col group hover:border-kombuorange/40 transition-colors duration-300 cursor-default">
+         <h3 class="text-base font-black text-gray-900 dark:text-white mb-2">Raw Cane Sugarfree</h3>
+          <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex-grow leading-relaxed">Single-origin from Darjeeling and Yunnan. Rich in polyphenols and antioxidants. The backbone of every batch.</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500">Unrefined · USDA Organic</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 3 -->
+        <div class="lift bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] p-6 flex flex-col group hover:border-purple-500/40 transition-colors duration-300 cursor-default">
+          <h3 class="text-base font-black text-gray-900 dark:text-white mb-2">Live SCOBY Culture</h3>
+          <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex-grow leading-relaxed">Single-origin from Darjeeling and Yunnan. Rich in polyphenols and antioxidants. The backbone of every batch.</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500">Heritage Culture · Est. 2017</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 4 -->
+        <div class="lift bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] p-6 flex flex-col group hover:border-teal-500/40 transition-colors duration-300 cursor-default">
+          <h3 class="text-base font-black text-gray-900 dark:text-white mb-2">Filtered Watering</h3>
+          <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex-grow leading-relaxed">Single-origin from Darjeeling and Yunnan. Rich in polyphenols and antioxidants. The backbone of every batch.</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500">Portland, OR · Triple Filtered</span>
+          </div>
+        </div>
+
+        <!-- Ingredient 5 -->
+        <div class="lift bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-[2rem] p-6 flex flex-col group hover:border-pink-500/40 transition-colors duration-300 cursor-default">
+         <h3 class="text-base font-black text-gray-900 dark:text-white mb-2">Pressed Botanicals</h3>
+          <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 flex-grow leading-relaxed">Single-origin from Darjeeling and Yunnan. Rich in polyphenols and antioxidants. The backbone of every batch.</p>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500">100% Organic · 12 Varieties</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ══════════════════════════════════════════════════════════════
+       9. CTA — Dark rounded banner
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-16 md:py-24 bg-white dark:bg-slate900 transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto relative">
+
+      <div class="relative bg-slate900 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
+
+        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <!-- Floating bubbles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div class="cta-bubble w-10 h-10" style="left:8%;  bottom:0; animation:ctaBubble 7s  ease-in infinite; animation-delay:0s;"></div>
+          <div class="cta-bubble w-16 h-16" style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
+          <div class="cta-bubble w-8  h-8"  style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
+          <div class="cta-bubble w-20 h-20" style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-3xl mx-auto text-center">
+
+          <div class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
+            <i class="fas fa-award text-kombugreen text-sm"></i>
+            <span class="uppercase tracking-widest text-[11px] font-black text-white">21 Days in the Making</span>
+          </div>
+
+          <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tight" style="font-family:'Playfair Display',serif;">
+            You've Seen the Work.<br class="hidden sm:block"/>
+            <span class="gradient-text italic">Now Taste It.</span>
+          </h2>
+
+          <p class="text-white/80 font-bold text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
+            Every sip is the result of 21 days of patience, 4 billion live cultures, and zero compromises. Build your box today.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="shop.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+              <span class="flex items-center justify-center gap-2">Shop All Flavours <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
+            </a>
+            <a href="about.html" class="group flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+              Our Full Story <i class="fas fa-book-open text-xs"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+
+  <!-- Tab Switcher JS -->
+  <script>
+    function switchStage(index) {
+      // Hide all panels
+      document.querySelectorAll('.stage-detail').forEach(el => el.classList.remove('active'));
+      // Deactivate all tabs
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      // Activate selected
+      document.getElementById('stage-' + index).classList.add('active');
+      document.getElementById('tab-' + index).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

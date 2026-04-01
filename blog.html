@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Culture Chronicle | FizzyCulture Blog</title>
+  
+  <script src="tailwind.js"></script>
+    <link rel="icon" href="images\logo.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            kombugreen: '#8FC140',
+            kombuorange: '#FF7043',
+            slate900: '#0f172a',
+          },
+         
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { overflow-x: hidden; }
+
+
+    /* ── Glassmorphism ── */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* ── Gradients ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #8FC140, #FF7043);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hover-gradient-bg {
+      transition: all 0.4s ease;
+    }
+    .hover-gradient-bg:hover {
+      background: linear-gradient(135deg, #8FC140, #FF7043);
+      color: white !important;
+      border-color: transparent;
+    }
+
+    /* ── Blog Card Hover Effects ── */
+    .blog-card .blog-img { transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .blog-card:hover .blog-img { transform: scale(1.08); }
+    
+    /* ── Custom Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    .dark ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #8FC140; border-radius: 10px; }
+
+    /* Filter pill active state */
+    .filter-pill.active {
+      background: linear-gradient(135deg, #8FC140, #FF7043);
+      color: #fff;
+      border-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans">
+
+  <div id="navbar"></div>
+
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-[#111827] text-white font-sans">
+    
+    <div class="absolute top-[45%] left-[5%] -translate-y-1/2 text-[8rem] sm:text-[10rem] lg:text-[14rem] font-black text-white/[0.03] uppercase tracking-tighter pointer-events-none select-none z-0">
+        CHRONICLE
+    </div>
+
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-kombugreen/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+            
+            <div class="max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
+                
+                <div class="flex items-center justify-center lg:justify-start gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400 mb-8">
+                    <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                    <i class="fas fa-chevron-right text-[8px]"></i>
+                    <span class="text-kombugreen">Blog</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl md:text-[5rem] font-black leading-[1.05] mb-6 tracking-tight text-white drop-shadow-lg" style="font-family:'Playfair Display',serif;">
+                    The Culture<br>
+                    <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-kombugreen to-kombuorange pr-2">Chronicle</span>
+                </h1>
+
+                <p class="text-gray-300 text-base md:text-lg font-bold mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                    Deep dives into wild fermentation, taproom tales, and the pursuit of the perfect cold-pressed flavour. All truth, zero shortcuts.
+                </p>
+
+              
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <button onclick="document.getElementById('blog-grid').scrollIntoView({behavior: 'smooth'})" class="inline-flex items-center justify-center px-8 py-4 bg-kombugreen text-slate-900 font-black uppercase tracking-widest text-xs rounded-full hover:bg-[#7da838] transition-colors hover:-translate-y-1 duration-300 shadow-lg shadow-kombugreen/20">
+                        Read Latest <i class="fas fa-arrow-down ml-2"></i>
+                    </button>
+                    <button class="inline-flex items-center justify-center px-8 py-4 border-2 border-slate-600 text-white font-black uppercase tracking-widest text-xs rounded-full hover:bg-white hover:text-slate-900 transition-all duration-300">
+                        Subscribe <i class="fas fa-envelope ml-2"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="relative w-full max-w-md lg:max-w-lg mx-auto aspect-square flex justify-center items-center mt-12 lg:mt-0">
+                
+               
+                <div class="relative z-10 w-[82%] h-[82%] rounded-full overflow-hidden shadow-2xl border-[6px] border-[#111827]">
+                    <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=800&auto=format&fit=crop" 
+                         alt="Reading and drinking kombucha" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-slate-900/20 mix-blend-multiply"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+  <section class="py-16 md:py-24 bg-slate-50 dark:bg-slate900 transition-colors duration-500 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Add Topic Here -->
+      <div class="text-center mb-12 transition-all">
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+          Latest <span class="gradient-text italic">Stories.</span>
+        </h2>
+        <p class="text-gray-600 dark:text-slate-400 font-bold text-sm max-w-xl mx-auto">
+          Insights, recipes, and behind the scenes action.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 mb-16 border-b border-gray-200 dark:border-slate-800 pb-8" id="filter-bar">
+        <button onclick="filterPosts('all', this)" class="filter-pill active px-6 py-2.5 rounded-full border-2 border-gray-200 dark:border-slate-700 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-300 transition-all hover:border-kombugreen dark:hover:border-kombugreen">Latest</button>
+        <button onclick="filterPosts('brewing', this)" class="filter-pill px-6 py-2.5 rounded-full border-2 border-gray-200 dark:border-slate-700 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-300 transition-all hover:border-kombugreen dark:hover:border-kombugreen">Brewing 101</button>
+        <button onclick="filterPosts('recipes', this)" class="filter-pill px-6 py-2.5 rounded-full border-2 border-gray-200 dark:border-slate-700 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-300 transition-all hover:border-kombugreen dark:hover:border-kombugreen">Recipes</button>
+        <button onclick="filterPosts('culture', this)" class="filter-pill px-6 py-2.5 rounded-full border-2 border-gray-200 dark:border-slate-700 text-xs font-black uppercase tracking-widest text-gray-600 dark:text-slate-300 transition-all hover:border-kombugreen dark:hover:border-kombugreen">Our Culture</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-12" id="blog-grid">
+
+        <article class="blog-card group flex flex-col" data-cat="recipes">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\img3.avif" alt="Mocktails" class="blog-img w-full h-full object-cover" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombuorange text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Recipes</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>May 12, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>4 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombuorange transition-colors" style="font-family:'Playfair Display',serif;">
+              5 Summer Mocktails Using Guava Mint
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              Elevate your backyard BBQ without the hangover. We've crafted five incredibly refreshing mocktails using our bestselling Guava Mint kombucha.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombuorange transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="blog-card group flex flex-col" data-cat="brewing">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\img13.avif" alt="Ingredients" class="blog-img w-full h-full object-cover" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombugreen text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Brewing 101</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>Apr 28, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>6 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombugreen transition-colors" style="font-family:'Playfair Display',serif;">
+              The Science of Cold-Pressed Botanicals
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              Why do we refuse to use extracts? We break down the enzymatic difference between whole, cold-pressed roots and artificial flavourings.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombugreen transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="blog-card group flex flex-col" data-cat="culture">
+          <!-- Swapped text-purple-500 to text-kombuorange to ensure only green/orange are used -->
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\img14.avif" alt="Taproom" class="blog-img w-full h-full object-cover filter saturate-150" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombuorange text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Our Culture</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>Apr 15, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>3 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombuorange transition-colors" style="font-family:'Playfair Display',serif;">
+              Zero Waste at the Brewery: An Update
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              From composting our tea leaves to our new 100% recyclable aluminum cans. See how we are shrinking our footprint this quarter.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombuorange transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article> 
+
+
+        <!-- NEW CARD 6 / Culture / Kombugreen -->
+        <article class="blog-card group flex flex-col" data-cat="culture">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\img15.webp" alt="Team meeting" class="blog-img w-full h-full object-cover filter saturate-150" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombugreen text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Our Culture</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>Feb 28, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>4 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombugreen transition-colors" style="font-family:'Playfair Display',serif;">
+              Meet Marcus, the King of QC
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              An interview with our Lead Fermenter. Why he insists on personally checking the pH and probiotic count of every single batch we ship.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombugreen transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- NEW CARD 7 / Recipes / Kombuorange -->
+        <article class="blog-card group flex flex-col" data-cat="recipes">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\img16.webp" alt="Food pairing" class="blog-img w-full h-full object-cover" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombuorange text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Recipes</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>Feb 12, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>7 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombuorange transition-colors" style="font-family:'Playfair Display',serif;">
+              Kombucha Braised Short Ribs
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              Cooking with kombucha adds deep umami and tenderizes meats effortlessly. Here is our secret weekend recipe using Ginger Lemon.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombuorange transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- NEW CARD 8 / Brewing / Kombugreen -->
+        <article class="blog-card group flex flex-col" data-cat="brewing">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 dark:border-slate-800">
+            <img src="images\Storage Guide.avif" alt="Kombucha bottles" class="blog-img w-full h-full object-cover" />
+            <div class="absolute top-4 left-4">
+              <span class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-kombugreen text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">Brewing 101</span>
+            </div>
+          </div>
+          <div class="flex flex-col flex-grow px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-3">
+              <span>Jan 28, 2026</span>
+              <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+              <span>5 Min Read</span>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white mb-3 group-hover:text-kombugreen transition-colors" style="font-family:'Playfair Display',serif;">
+              Storage & Temperature Guide
+            </h3>
+            <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-6 line-clamp-2">
+              Why must pure, raw kombucha always stay refrigerated? A quick look at what happens when live bacteria meets room temperature.
+            </p>
+            <a href="#" class="mt-auto text-xs font-black uppercase tracking-widest text-gray-900 dark:text-white group-hover:text-kombugreen transition-colors flex items-center gap-2">
+              Read Article <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="mt-16 flex justify-center">
+        <button class="inline-flex items-center gap-3 px-8 py-4 border-2 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white font-black uppercase tracking-widest text-xs rounded-full hover:border-kombugreen hover:text-kombugreen transition-colors group">
+          Load Older Entries <i class="fas fa-sync-alt text-[10px] group-hover:animate-spin"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+  <section class="py-24 md:py-32 bg-white dark:bg-slate-800/40 border-y border-gray-100 dark:border-slate-800 transition-colors duration-500 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Topic Centered at top -->
+      <div class="flex flex-col items-center text-center mb-16 px-4">
+        <div class="inline-flex items-center space-x-2 mb-4">
+          <span class="w-2 h-2 rounded-full bg-kombuorange animate-pulse"></span>
+          <span class="uppercase tracking-widest text-[10px] font-black text-gray-500 dark:text-slate-400">Most Read</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-[1.1] tracking-tight" style="font-family:'Playfair Display',serif;">
+          Trending in the <span class="gradient-text italic">Culture.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        
+        <div class="lg:col-span-5 lg:sticky lg:top-32 flex flex-col">
+
+          <div class="relative w-full aspect-square sm:aspect-video lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-gray-100 dark:border-slate-700">
+            <img src="images\img17.avif" alt="Pouring Kombucha" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate900/80 via-slate900/20 to-transparent"></div>
+            
+            <div class="absolute bottom-8 left-8 right-8">
+              <span class="bg-white/20 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/30 mb-3 inline-block">Editors' Pick</span>
+              <h3 class="text-2xl font-black text-white leading-tight" style="font-family:'Playfair Display',serif;">
+                The 7 Myths of Probiotics You Need to Stop Believing
+              </h3>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col">
+          
+          <div class="flex flex-col gap-0 border-t border-gray-200 dark:border-slate-700">
+            
+            <a href="#" class="trending-row group flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 py-8 border-b border-gray-200 dark:border-slate-700">
+              <div class="text-5xl font-black text-gray-300 dark:text-slate-700 row-number transition-all duration-300" style="font-family:'Bebas Neue',cursive;">01</div>
+              
+              <div class="flex-1">
+                <div class="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-2">
+                  <span class="text-kombugreen">Brewing 101</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+                  <span>5 Min Read</span>
+                </div>
+                <h3 class="row-title text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-snug mb-3 transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+                  How to Build a Continuous Brew System at Home
+                </h3>
+                <p class="text-sm font-semibold text-gray-500 dark:text-slate-400 line-clamp-2">
+                  Tired of bottling every single week? We break down the exact vessel, spigot, and timing required to keep a continuous kombucha brew flowing effortlessly.
+                </p>
+              </div>
+
+              <div class="hidden sm:block w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-gray-100 dark:border-slate-700">
+                <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover grayscale transition-all duration-500" alt="Brewing" />
+              </div>
+            </a>
+
+            <a href="#" class="trending-row group flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 py-8 border-b border-gray-200 dark:border-slate-700">
+              <div class="text-5xl font-black text-gray-300 dark:text-slate-700 row-number transition-all duration-300" style="font-family:'Bebas Neue',cursive;">02</div>
+              
+              <div class="flex-1">
+                <div class="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-2">
+                  <span class="text-kombuorange">Recipes</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+                  <span>3 Min Read</span>
+                </div>
+                <h3 class="row-title text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-snug mb-3 transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+                  The Perfect Ginger Spice Kombucha Mule
+                </h3>
+                <p class="text-sm font-semibold text-gray-500 dark:text-slate-400 line-clamp-2">
+                  Spicy, bubbly, and wildly refreshing. This 3-ingredient cocktail uses our Ginger Spice kombucha as a fiery mixer that outshines traditional ginger beer.
+                </p>
+              </div>
+
+              <div class="hidden sm:block w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-gray-100 dark:border-slate-700">
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover grayscale transition-all duration-500" alt="Cocktail" />
+              </div>
+            </a>
+
+            <a href="#" class="trending-row group flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 py-8 border-b border-gray-200 dark:border-slate-700">
+              <div class="text-5xl font-black text-gray-300 dark:text-slate-700 row-number transition-all duration-300" style="font-family:'Bebas Neue',cursive;">03</div>
+              
+              <div class="flex-1">
+                <div class="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-gray-400 dark:text-slate-500 mb-2">
+                  <span class="text-purple-500">Our Culture</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600"></span>
+                  <span>7 Min Read</span>
+                </div>
+                <h3 class="row-title text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-snug mb-3 transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+                  Why We Refuse to Use Artificial Carbonation
+                </h3>
+                <p class="text-sm font-semibold text-gray-500 dark:text-slate-400 line-clamp-2">
+                  Natural fizz is a hallmark of patience. We explain the painstaking secondary fermentation process that gives FizzyCulture its signature champagne-like bubbles.
+                </p>
+              </div>
+
+              <div class="hidden sm:block w-24 h-24 rounded-2xl overflow-hidden shrink-0 border border-gray-100 dark:border-slate-700">
+                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover grayscale transition-all duration-500" alt="Bubbles" />
+              </div>
+            </a>
+
+            
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="py-24 md:py-32 bg-kombugreen/5 dark:bg-slate-800/30 transition-colors duration-500 relative overflow-hidden">
+    
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white dark:bg-slate-800 rounded-full blur-3xl opacity-50 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-kombuorange/10 dark:bg-kombuorange/20 rounded-full blur-3xl pointer-events-none transform -translate-x-1/2 translate-y-1/2"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Centered Topic -->
+      <div class="flex flex-col items-center text-center mb-16 gap-6">
+        <div class="max-w-2xl mx-auto">
+          <div class="inline-flex items-center justify-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[10px] font-black text-gray-500 dark:text-slate-400">FizzyTV</span>
+            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full hidden sm:block"></span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+            Press Play on <span class="gradient-text italic">Culture.</span>
+          </h2>
+          <p class="text-gray-600 dark:text-slate-400 font-bold text-lg">
+            Brewing tutorials, taproom tours, and mixology masterclasses straight from the team.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <article class="video-card group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[16/10] rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 dark:border-slate-700 mb-6">
+            <img src="images\Brewery.webp" alt="Brewing" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/40 transition-colors duration-300"></div>
+            
+            <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full">
+              08:45
+            </div>
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="glass-play w-16 h-16 rounded-full flex items-center justify-center">
+                <i class="fas fa-play play-icon text-white text-xl ml-1 transition-colors duration-300"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-kombugreen mb-2">
+              <span>Brewing 101</span>
+            </div>
+            <h3 class="text-xl md:text-2xl font-black text-gray-900 dark:text-white leading-snug group-hover:text-kombugreen transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+              Mastering the Second Fermentation (F2)
+            </h3>
+          </div>
+        </article>
+
+        <article class="video-card group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[16/10] rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 dark:border-slate-700 mb-6">
+            <img src="images\Mocktail.avif" alt="Mocktail" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/40 transition-colors duration-300"></div>
+            
+            <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full">
+              03:12
+            </div>
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="glass-play w-16 h-16 rounded-full flex items-center justify-center">
+                <i class="fas fa-play play-icon text-white text-xl ml-1 transition-colors duration-300"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-kombuorange mb-2">
+              <span>Recipes</span>
+            </div>
+            <h3 class="text-xl md:text-2xl font-black text-gray-900 dark:text-white leading-snug group-hover:text-kombuorange transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+              How to Mix the Perfect Guava Mint Mojito
+            </h3>
+          </div>
+        </article>
+
+        <article class="video-card group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[16/10] rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 dark:border-slate-700 mb-6">
+            <img src="images\Taproom.avif" alt="Taproom" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 filter saturate-150" />
+            <div class="absolute inset-0 bg-slate-900/30 group-hover:bg-slate-900/40 transition-colors duration-300"></div>
+            
+            <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full">
+              12:30
+            </div>
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="glass-play w-16 h-16 rounded-full flex items-center justify-center">
+                <i class="fas fa-play play-icon text-white text-xl ml-1 transition-colors duration-300"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="px-2">
+            <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-purple-500 mb-2">
+              <span>Our Culture</span>
+            </div>
+            <h3 class="text-xl md:text-2xl font-black text-gray-900 dark:text-white leading-snug group-hover:text-purple-500 transition-colors duration-300" style="font-family:'Playfair Display',serif;">
+              Behind the Scenes: A Tour of the Fizzy Taproom
+            </h3>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="mt-12 text-center w-full">
+        <a href="#" class="inline-flex items-center space-x-2 text-kombugreen font-black uppercase tracking-widest hover:text-kombuorange transition-colors group">
+          <span class="border-b-2 border-transparent group-hover:border-kombuorange pb-1 transition-colors">Visit Our Channel</span>
+          <i class="fas fa-play-circle transform group-hover:scale-110 transition-transform"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="py-24 md:py-32 bg-white dark:bg-slate-800/30 transition-colors duration-500">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl mb-8">
+        <img src="images\Taproom.avif" alt="Head Brewer" class="w-full h-full object-cover">
+      </div>
+
+      <i class="fas fa-quote-left text-3xl text-kombugreen/30 mb-6"></i>
+      
+      <h3 class="text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-snug mb-8" style="font-family:'Playfair Display',serif;">
+        "We started this blog to peel back the curtain. Fermentation is a living science, and we want you to understand exactly what you're putting into your body."
+      </h3>
+
+      <p class="text-xs font-black uppercase tracking-widest text-kombugreen mb-2">Priya Kapoor</p>
+      <p class="text-xs font-bold text-gray-500 dark:text-slate-400 mb-8">Head Brewer & Founder</p>
+
+      <a href="about.html" class="inline-flex items-center gap-2 text-gray-900 dark:text-white font-black uppercase tracking-widest text-[10px] hover:text-kombuorange transition-colors border-b-2 border-transparent hover:border-kombuorange pb-1">
+        Read Our Full Story <i class="fas fa-arrow-right"></i>
+      </a>
+
+    </div>
+  </section>
+    <section class="py-0 relative mb-16 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-[#8FC140] to-[#FF7043] rounded-[3rem] p-10 md:p-16 shadow-2xl relative overflow-hidden">
+        
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')] mix-blend-overlay"></div>
+
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white leading-tight mb-4 tracking-tight" style="font-family:'Playfair Display',serif;">
+              Get the Ledger Delivered.
+            </h2>
+            <p class="text-white/90 font-bold text-sm md:text-base">
+              Join the Culture Club. We send out a monthly digest featuring new flavour drops, brewing tips, and exclusive discount codes for subscribers. No spam, just good culture.
+            </p>
+          </div>
+          <div>
+            <form class="flex flex-col sm:flex-row gap-3">
+              <input type="email" placeholder="Enter your email..." required class="flex-1 px-6 py-4 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/60 focus:outline-none focus:border-white font-bold text-sm shadow-inner transition-colors">
+              <button type="submit" class="px-8 py-4 bg-white text-slate-900 font-black uppercase tracking-widest text-xs rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+
+  <script>
+    function filterPosts(category, btnElement) {
+      // Update Active Pill Styling
+      const pills = document.querySelectorAll('.filter-pill');
+      pills.forEach(pill => {
+        pill.classList.remove('active', 'border-transparent');
+        pill.classList.add('border-gray-200', 'dark:border-slate-700');
+      });
+      btnElement.classList.add('active');
+      btnElement.classList.remove('border-gray-200', 'dark:border-slate-700');
+
+      // Filter Logic
+      const posts = document.querySelectorAll('#blog-grid > article');
+      posts.forEach(post => {
+        if (category === 'all' || post.getAttribute('data-cat') === category) {
+          post.style.display = 'flex';
+          // Re-trigger fade up animation
+          post.style.animation = 'none';
+          post.offsetHeight; /* trigger reflow */
+          post.style.animation = 'fadeUp 0.5s ease-out both';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FizzyCulture – Shop</title>
+  <script src="tailwind.js"></script>
+    <link rel="icon" href="images\logo.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          kombugreen: '#8FC140',
+          kombuorange: '#FF7043',
+          slate900: '#0f172a',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root { --green:#8FC140; --orange:#FF7043; --dark:#0f172a; }
+
+
+
+  /* ── Ticker ── */
+  .ticker-track { animation:ticker 30s linear infinite; }
+  .ticker-track:hover { animation-play-state:paused; }
+  @media(max-width:640px){ .ticker-track{ animation-duration:18s; } }
+
+  /* ── Gradient text ── */
+  .gradient-text {
+    background:linear-gradient(135deg,var(--green),var(--orange));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+
+  /* ── Glass ── */
+  .glass {
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.15);
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:#f1f5f9}
+  ::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
+  .dark ::-webkit-scrollbar-track{background:#0f172a}
+
+  /* ── Lift ── */
+  .lift{transition:transform .3s ease,box-shadow .3s ease}
+  .lift:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(0,0,0,.13)}
+
+  /* ── CTA bubble ── */
+  .cta-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+
+  /* ── Product card ── */
+  .prod-card { transition: transform .3s ease, box-shadow .3s ease; }
+  .prod-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,.12); }
+  .prod-card .prod-img { transition: transform .7s ease; }
+  .prod-card:hover .prod-img { transform: scale(1.06); }
+  .prod-card .add-btn { transition: all .25s ease; }
+  .prod-card:hover .add-btn {
+    background: linear-gradient(135deg, var(--green), var(--orange));
+    color: #fff;
+  }
+
+  /* ── Filter pill active ── */
+  .filter-pill { cursor:pointer; transition:all .2s ease; }
+  .filter-pill.active {
+    background: linear-gradient(135deg, var(--green), var(--orange));
+    color: #fff;
+    border-color: transparent;
+  }
+  .filter-pill:not(.active):hover { border-color: var(--green); color: var(--green); }
+
+  /* ── Sort select ── */
+  .sort-sel:focus { outline:none; box-shadow:0 0 0 3px rgba(143,193,64,.3); }
+
+  /* ── Bundle card hover ── */
+  .bundle-card { transition: transform .3s ease, box-shadow .3s ease; }
+  .bundle-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px rgba(0,0,0,.14); }
+
+  /* ── Qty control ── */
+  .qty-btn { transition: background .2s ease; }
+  .qty-btn:hover { background: var(--green); color: #fff; }
+
+  /* ── Newsletter input ── */
+  .nl-input:focus { outline:none; box-shadow:0 0 0 3px rgba(143,193,64,.35); }
+
+  /* ── Bar fill (subscription benefits) ── */
+  .bar-fill {
+    height:100%; border-radius:99px;
+    background:linear-gradient(90deg,var(--green),var(--orange));
+    animation:barReveal 1.4s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  /* ── Star rating ── */
+  .star-fill { color: var(--orange); }
+  .star-empty { color: #e5e7eb; }
+  .dark .star-empty { color: #374151; }
+
+  /* ── Testimonial card hover ── */
+  .review-card { transition: transform .3s ease, box-shadow .3s ease; }
+  .review-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,.1); }
+
+  /* ── Trust badge ── */
+  .trust-badge { transition: all .3s ease; }
+  .trust-badge:hover { transform: translateY(-4px); }
+</style>
+
+<body class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans overflow-x-hidden">
+
+  <div id="navbar"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       1. HERO — Split editorial: text left, product mosaic right
+  ══════════════════════════════════════════════════════ -->
+  <section class="relative w-full min-h-[100svh] flex items-center pt-24 pb-16 overflow-hidden bg-slate900">
+
+    <!-- BG layers -->
+    <div class="absolute inset-0 z-0">
+      <img src="images/bg1.jpg" alt="Shop hero" class="w-full h-full object-cover opacity-20 scale-105" />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate900 via-slate900/90 to-slate900/60"></div>
+      <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[150px] pointer-events-none"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-kombuorange/12 rounded-full blur-[120px] pointer-events-none"></div>
+    </div>
+
+    <!-- Giant watermark -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
+      <span class="font-black text-white/[0.025] uppercase tracking-[.3em] whitespace-nowrap" style="font-family:'Bebas Neue',cursive;font-size:clamp(5rem,18vw,14rem);">SHOP</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+        <!-- LEFT — Text -->
+        <div class="lg:col-span-6 flex flex-col items-center text-center lg:items-start lg:text-left">
+
+          <!-- Breadcrumb -->
+          <div class="anim-fade-up flex items-center gap-2 mb-8">
+            <a href="index.html" class="text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-kombugreen transition-colors">Home</a>
+            <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+            <span class="text-[11px] font-black uppercase tracking-widest text-kombugreen">Shop</span>
+          </div>
+
+          <!-- Badge -->
+          <div class="anim-fade-up inline-flex items-center space-x-2 mb-7 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/20 shadow-lg" style="animation-delay:.1s;">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombugreen opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-kombugreen"></span>
+            </span>
+            <span class="text-[11px] font-black uppercase tracking-widest text-white">Fresh Batch — Ships Today</span>
+          </div>
+
+          <h1 class="anim-slide-l font-black text-white leading-none mb-6 tracking-tight" style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4.5rem);">
+            Stock Your<br/><span class="gradient-text italic">Fridge Right.</span>
+          </h1>
+
+          <p class="anim-fade-up text-lg sm:text-xl font-bold text-slate-300 leading-relaxed max-w-xl mb-10" style="animation-delay:.25s;">
+            12 wild-fermented flavours. Zero refined sugar. Billions of live probiotics per can. Build your perfect box and let us handle the rest.
+          </p>
+
+         
+
+          <div class="anim-fade-up flex flex-col sm:flex-row gap-4" style="animation-delay:.5s;">
+            <a href="#products" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all text-center">
+              <span class="flex items-center justify-center gap-2">Shop All Flavours <i class="fas fa-arrow-down text-xs group-hover:translate-y-0.5 transition-transform"></i></span>
+            </a>
+            <a href="#bundles" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+              Build a Box <i class="fas fa-box-open text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT — Floating product cards collage -->
+        <div class="lg:col-span-6 relative hidden lg:flex items-center justify-center min-h-[480px]">
+
+          <!-- Centre glow -->
+          <div class="absolute w-72 h-72 bg-kombugreen/15 rounded-full blur-[80px] pointer-events-none"></div>
+
+          <!-- Card 1 — large, centre -->
+          <div class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-sm border border-white/15 rounded-[2rem] p-4 shadow-2xl anim-float">
+            <img src="images/img3.avif" alt="Guava Mint" class="w-44 h-44 object-cover rounded-[1.5rem]" />
+            <div class="mt-3 px-1">
+              <div class="text-sm font-black text-white">Guava Mint</div>
+              <div class="text-xs text-slate-400 font-semibold">Tropical • Refreshing</div>
+            </div>
+          </div>
+
+          <!-- Card 2 — top-left -->
+          <div class="absolute top-4 left-6 z-10 bg-white/5 backdrop-blur-sm border border-white/15 rounded-[1.75rem] p-3 shadow-xl anim-float-rev">
+            <img src="images\Ginger Spice.webp" alt="Ginger Spice" class="w-32 h-32 object-cover rounded-[1.25rem]" />
+            <div class="mt-2 px-1">
+              <div class="text-xs font-black text-white">Ginger Spice</div>
+            </div>
+          </div>
+
+          <!-- Card 3 — bottom-right -->
+          <div class="absolute bottom-8 right-4 z-10 bg-white/5 backdrop-blur-sm border border-white/15 rounded-[1.75rem] p-3 shadow-xl anim-float" style="animation-delay:1.5s;">
+            <img src="images/img5.avif" alt="Berry Hibiscus" class="w-32 h-32 object-cover rounded-[1.25rem]" />
+            <div class="mt-2 px-1">
+              <div class="text-xs font-black text-white">Berry Hibiscus</div>
+            </div>
+          </div>
+
+          <!-- Floating badge — bestseller -->
+          <div class="absolute top-8 right-8 z-30 bg-gradient-to-r from-kombugreen to-kombuorange text-white rounded-2xl px-4 py-2.5 shadow-xl anim-float-rev" style="animation-delay:.8s;">
+            <div class="text-xs font-black uppercase tracking-widest">Bestseller</div>
+            <div class="text-lg font-black" style="font-family:'Bebas Neue',cursive;">$4.50 / can</div>
+          </div>
+
+          <!-- Floating badge — shipping -->
+          <div class="absolute bottom-4 left-4 z-30 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-2.5 shadow-lg anim-float" style="animation-delay:2s;">
+            <div class="flex items-center gap-2">
+              <i class="fas fa-truck text-kombugreen text-sm"></i>
+              <div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-white">Free shipping</div>
+                <div class="text-[10px] text-slate-400 font-semibold">On orders $60+</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  
+  </section>
+
+
+  
+
+
+  <!-- ══════════════════════════════════════════════════════
+       3. TRUST BADGES — Horizontal icon strip
+  ══════════════════════════════════════════════════════ -->
+  <section class="py-10 bg-white dark:bg-slate900 transition-colors duration-500 border-b border-gray-100 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+
+        <div class="trust-badge flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 dark:bg-slate-800/60 dark:border-slate-700">
+          <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center text-black dark:text-white flex-shrink-0">
+            <i class="fas fa-truck text-xl"></i>
+          </div>
+          <div>
+            <div class="text-sm font-black text-gray-900 dark:text-white">Free Shipping</div>
+            <div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">On all orders $60+</div>
+          </div>
+        </div>
+
+        <div class="trust-badge flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 dark:bg-slate-800/60 dark:border-slate-700">
+          <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center text-black dark:text-white flex-shrink-0">
+            <i class="fas fa-shield-alt text-xl"></i>
+          </div>
+          <div>
+            <div class="text-sm font-black text-gray-900 dark:text-white">30-Day Guarantee</div>
+            <div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">Love it or money back</div>
+          </div>
+        </div>
+
+        <div class="trust-badge flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 dark:bg-slate-800/60 dark:border-slate-700">
+          <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center text-black dark:text-white flex-shrink-0">
+            <i class="fas fa-snowflake text-xl"></i>
+          </div>
+          <div>
+            <div class="text-sm font-black text-gray-900 dark:text-white">Ships Ice-Cold</div>
+            <div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">Insulated every order</div>
+          </div>
+        </div>
+
+        <div class="trust-badge flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 dark:bg-slate-800/60 dark:border-slate-700">
+          <div class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center text-black dark:text-white flex-shrink-0">
+            <i class="fas fa-leaf text-xl"></i>
+          </div>
+          <div>
+            <div class="text-sm font-black text-gray-900 dark:text-white">100% Organic</div>
+            <div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">USDA certified always</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       4. PRODUCT GRID — Filter + all flavours
+  ══════════════════════════════════════════════════════ -->
+  <section id="products" class="py-20 md:py-28 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
+    <div class="absolute top-0 right-0 w-80 h-80 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section header -->
+      <div class="flex flex-col items-center text-center gap-6 mb-10">
+        <div>
+          <div class="inline-flex items-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Flavour Lab</span>
+            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight" style="font-family:'Playfair Display',serif;">
+            All <span class="gradient-text">12 Flavours.</span>
+          </h2>
+        </div>
+
+      </div>
+
+      <!-- Filter pills -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10" id="filterPills">
+        <button class="filter-pill active text-[11px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border border-gray-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300" onclick="setFilter(this,'all')">All Flavours</button>
+        <button class="filter-pill text-[11px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border border-gray-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300" onclick="setFilter(this,'bestseller')">Bestsellers</button>
+        <button class="filter-pill text-[11px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border border-gray-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300" onclick="setFilter(this,'seasonal')">Seasonal</button>
+        <button class="filter-pill text-[11px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border border-gray-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300" onclick="setFilter(this,'wellness')">Wellness</button>
+        <button class="filter-pill text-[11px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full border border-gray-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300" onclick="setFilter(this,'new')">New Drops</button>
+      </div>
+
+      <!-- Product grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6" id="productGrid">
+
+        <!-- Product 1 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="bestseller">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-kombugreen/10 to-kombugreen/5 dark:from-kombugreen/15 dark:to-slate-700">
+            <img src="images/img3.avif" alt="Guava Mint" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-kombugreen text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Bestseller</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(128)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Guava Mint</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Tropical pink guava, fresh spearmint. Sweet, refreshing.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$4.50 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5 w-max">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="bestseller">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-kombuorange/10 to-kombuorange/5 dark:from-kombuorange/15 dark:to-slate-700">
+            <img src="images\Ginger Spice.webp" alt="Ginger Spice" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-kombuorange text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Fan Fave</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(97)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Ginger Spice</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Peruvian ginger, turmeric, cracked black pepper.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$4.50 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="seasonal">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-purple-500/10 to-purple-500/5 dark:from-purple-500/15 dark:to-slate-700">
+            <img src="images/img5.avif" alt="Berry Hibiscus" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-purple-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Seasonal</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="far fa-star star-empty text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(63)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Berry Hibiscus</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Egyptian hibiscus, wild blackberries, Madagascar vanilla.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$5.00 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="new">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-blue-500/10 to-blue-500/5 dark:from-blue-500/15 dark:to-slate-700">
+            <img src="images\Blueberry Sage.avif" alt="Blueberry Sage" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-blue-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">New Drop</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(22)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Blueberry Sage</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Wild Pacific blueberries, garden sage and pure herbal.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$4.50 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="wellness">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 dark:from-yellow-500/15 dark:to-slate-700">
+            <img src="images\Lemon Turmeric.avif" alt="Lemon Turmeric" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-yellow-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Wellness</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="far fa-star star-empty text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(55)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Lemon Turmeric</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Meyer lemon, golden turmeric,sprinkled black pepper.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$4.50 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="seasonal">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-pink-500/10 to-pink-500/5 dark:from-pink-500/15 dark:to-slate-700">
+            <img src="images\Rose Cardamom.webp" alt="Rose Cardamom" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-pink-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Limited</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(41)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Rose Cardamom</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Damask rose, green cardamom. Floral, exotic, complex.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$5.00 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="wellness">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-teal-500/10 to-teal-500/5 dark:from-teal-500/15 dark:to-slate-700">
+            <img src="images\Cucumber Mint.webp" alt="Cucumber Mint" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-teal-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Summer</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="far fa-star star-empty text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(38)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Cucumber Mint</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Garden cucumber, peppermint, lime. Cool and crisp.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$4.50 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="prod-card group bg-white dark:bg-slate-800 rounded-[2rem] border border-gray-100 dark:border-slate-700 overflow-hidden shadow-sm flex flex-col" data-tag="new">
+          <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-indigo-500/10 to-indigo-500/5 dark:from-indigo-500/15 dark:to-slate-700">
+            <img src="images\kombucha_bottle.png" alt="Elderflower Lychee" class="prod-img w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
+            <div class="absolute top-3 left-3 bg-indigo-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">New Drop</div>
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-kombuorange transition-colors shadow-sm">
+              <i class="fas fa-heart text-xs"></i>
+            </button>
+          </div>
+          <div class="p-4 sm:p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+              <span class="text-[10px] font-black text-gray-500 dark:text-slate-400 ml-1">(14)</span>
+            </div>
+            <h3 class="text-base font-black text-gray-900 dark:text-white mb-1">Elder Lychee</h3>
+            <p class="text-xs font-semibold text-gray-500 dark:text-slate-400 mb-4 flex-grow">Wild elderflower, fresh lychee. Delicate and elegant.</p>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-slate-700">
+              <span class="font-black text-gray-900 dark:text-white text-base">$5.00 <span class="text-[10px] text-gray-400 font-semibold">/can</span></span>
+              <button class="add-btn bg-slate-100 dark:bg-slate-700 text-gray-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-widest px-3 py-2 rounded-xl flex items-center gap-1.5">
+                <i class="fas fa-plus text-[9px]"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       5. BUILD-A-BOX BUNDLES
+  ══════════════════════════════════════════════════════ -->
+  <section id="bundles" class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden relative">
+    <div class="absolute top-0 left-0 w-80 h-80 bg-kombuorange/5 dark:bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center justify-center space-x-2 mb-4">
+          <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Best Value</span>
+          <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+          Build Your <span class="gradient-text">Perfect Box</span>
+        </h2>
+        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-xl mx-auto">Pick your size, mix your flavours, and save more the bigger you go.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7 max-w-5xl mx-auto">
+
+        <!-- Starter -->
+        <div class="bundle-card bg-white dark:bg-slate-800 rounded-[2rem] p-8 border border-gray-100 dark:border-slate-700 shadow-sm flex flex-col">
+          <div class="mb-6">
+            <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400 mb-2">Starter</div>
+            <div class="text-5xl font-black text-gray-900 dark:text-white leading-none mb-1" style="font-family:'Bebas Neue',cursive;">6-Pack</div>
+            <div class="text-3xl font-black text-gray-900 dark:text-white mt-3">$26 <span class="text-sm font-bold text-gray-500">one-time</span></div>
+            <div class="text-xs font-black text-kombugreen mt-1">Save 4% vs single</div>
+          </div>
+          <ul class="space-y-3 flex-grow mb-8 text-sm font-semibold text-gray-600 dark:text-slate-400">
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> 6 cans, pick your flavours</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> Free shipping on $60+ orders</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> Ships ice-cold</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> Subscribe & save</li>
+          </ul>
+          <button class="w-full py-3.5 rounded-full font-black uppercase tracking-widest text-sm bg-slate-100 dark:bg-slate-700 text-gray-900 dark:text-white hover:bg-kombugreen hover:text-white transition-all duration-300">
+            Build My 6-Pack
+          </button>
+        </div>
+
+        <!-- Most Popular -->
+        <div class="bundle-card relative rounded-[2rem] p-8 flex flex-col shadow-2xl scale-[1.03] bg-gradient-to-br from-kombugreen via-[#7da838] to-kombuorange overflow-hidden">
+          <!-- texture overlay -->
+          <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+          <div class="relative z-10 mb-6">
+            <div class="text-[10px] font-black uppercase tracking-widest text-white/70 mb-2">Best Value</div>
+            <div class="text-5xl font-black text-white leading-none mb-1" style="font-family:'Bebas Neue',cursive;">12-Pack</div>
+            <div class="text-3xl font-black text-white mt-3">$46 <span class="text-sm font-bold text-white/70">one-time</span></div>
+            <div class="text-xs font-black text-white/80 mt-1">Save 15% vs single</div>
+          </div>
+          <ul class="space-y-3 flex-grow mb-8 text-sm font-semibold text-white/90 relative z-10">
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-white text-xs"></i> 12 cans, fully customisable</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-white text-xs"></i> Free priority shipping always</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-white text-xs"></i> Ships ice-cold</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-white text-xs"></i> Early access to new drops</li>
+          </ul>
+          <button class="relative z-10 w-full py-3.5 rounded-full font-black uppercase tracking-widest text-sm bg-white text-slate900 hover:bg-slate900 hover:text-white transition-all duration-300 shadow-lg">
+            Build My 12-Pack
+          </button>
+        </div>
+
+        <!-- Devotee -->
+        <div class="bundle-card bg-white dark:bg-slate-800 rounded-[2rem] p-8 border border-gray-100 dark:border-slate-700 shadow-sm flex flex-col">
+          <div class="mb-6">
+            <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400 mb-2">Devotee</div>
+            <div class="text-5xl font-black text-gray-900 dark:text-white leading-none mb-1" style="font-family:'Bebas Neue',cursive;">24-Pack</div>
+            <div class="text-3xl font-black text-gray-900 dark:text-white mt-3">$85 <span class="text-sm font-bold text-gray-500">one-time</span></div>
+            <div class="text-xs font-black text-kombuorange mt-1">Save 22% vs single</div>
+          </div>
+          <ul class="space-y-3 flex-grow mb-8 text-sm font-semibold text-gray-600 dark:text-slate-400">
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> 24 cans, your mix</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> Free priority shipping always</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> Ships ice-cold</li>
+            <li class="flex items-center gap-2.5"><i class="fas fa-check text-kombugreen text-xs"></i> First access + exclusive drops</li>
+          </ul>
+          <button class="w-full py-3.5 rounded-full font-black uppercase tracking-widest text-sm bg-slate-100 dark:bg-slate-700 text-gray-900 dark:text-white hover:bg-kombuorange hover:text-white transition-all duration-300">
+            Build My 24-Pack
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       6. FEATURED PRODUCT SPOTLIGHT — Wide editorial card
+  ══════════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
+    <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+      <div class="max-w-5xl mx-auto bg-gradient-to-br from-kombugreen/5 via-transparent to-kombuorange/5 dark:from-kombugreen/10 dark:to-kombuorange/10 rounded-[2rem] border border-kombugreen/15 dark:border-kombugreen/20 overflow-hidden shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+
+          <!-- Image side -->
+          <div class="lg:col-span-5 relative flex items-center justify-center p-6 sm:p-10 overflow-hidden min-h-[300px]">
+            <!-- Subtle background logic -->
+            <div class="absolute inset-0 bg-gradient-to-br from-kombugreen/10 via-transparent to-kombuorange/10 opacity-30"></div>
+            
+            <!-- Contained Image -->
+            <img src="images/img3.avif" alt="Guava Mint Spotlight" class="relative z-10 w-full max-w-[220px] h-auto object-contain hover:scale-110 transition-transform duration-700 drop-shadow-[0_15px_35px_rgba(0,0,0,0.25)]" />
+            
+            
+          </div>
+
+          <!-- Content side -->
+          <div class="lg:col-span-7 p-6 sm:p-10 lg:pl-0 flex flex-col items-center text-center lg:items-start lg:text-left justify-center">
+            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white leading-[1.1] mb-4 tracking-tight" style="font-family:'Playfair Display',serif;">
+              The One That Started<br/><span class="gradient-text">Everything.</span>
+            </h2>
+            <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">
+              Tropical pink guava, cold-pressed with fresh spearmint leaves. The first flavour Sam and Priya ever perfected — still the one that makes first-timers close their eyes on the first sip.
+            </p>
+
+            <!-- Nutrition mini facts -->
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-3 text-center border border-gray-100 dark:border-slate-700">
+                <div class="text-xl font-black gradient-text" style="font-family:'Bebas Neue',cursive;">2g</div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Sugar</div>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-3 text-center border border-gray-100 dark:border-slate-700">
+                <div class="text-xl font-black gradient-text" style="font-family:'Bebas Neue',cursive;">30</div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Calories</div>
+              </div>
+              <div class="bg-white dark:bg-slate-800 rounded-xl p-3 text-center border border-gray-100 dark:border-slate-700">
+                <div class="text-xl font-black gradient-text" style="font-family:'Bebas Neue',cursive;">4B</div>
+                <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">CFU</div>
+              </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="flex items-center justify-center lg:justify-start gap-3 mb-7">
+              <div class="flex gap-1">
+                <i class="fas fa-star star-fill text-sm"></i><i class="fas fa-star star-fill text-sm"></i><i class="fas fa-star star-fill text-sm"></i><i class="fas fa-star star-fill text-sm"></i><i class="fas fa-star star-fill text-sm"></i>
+              </div>
+              <span class="text-sm font-black text-gray-700 dark:text-slate-300">4.9 / 5.0</span>
+              <span class="text-sm font-semibold text-gray-500 dark:text-slate-400">(128 reviews)</span>
+            </div>
+
+            <div class="w-full max-w-lg flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <div class="flex items-center border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800">
+                <button class="qty-btn px-6 py-3 text-gray-600 dark:text-slate-400 font-black text-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">−</button>
+                <span class="px-10 py-3 font-black text-gray-900 dark:text-white bg-white dark:bg-slate-700 text-base">1</span>
+                <button class="qty-btn px-6 py-3 text-gray-600 dark:text-slate-400 font-black text-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">+</button>
+              </div>
+              <button class="w-full sm:flex-1 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white font-black uppercase tracking-widest text-sm rounded-xl hover:shadow-lg hover:shadow-kombugreen/30 hover:-translate-y-0.5 transition-all">
+                Add to Cart — $4.50
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       7. SUBSCRIPTION — Why subscribe, perks comparison
+  ══════════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-slate900 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+    <div class="absolute top-0 left-1/3 w-[500px] h-[500px] bg-kombugreen/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-kombuorange/10 rounded-full blur-[110px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+        <!-- Left — Copy + perks list -->
+        <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <div class="inline-flex items-center space-x-2 mb-6">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[11px] font-black text-slate-400">Culture Club</span>
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-6 tracking-tight" style="font-family:'Playfair Display',serif;">
+            Subscribe &amp; Save<br/><span class="gradient-text">Every Month.</span>
+          </h2>
+          <p class="text-base font-bold text-slate-400 leading-relaxed mb-10">
+            Join the Culture Club and lock in 15% off every order, get early access to limited drops, and never run out of your favourite ferments again.
+          </p>
+
+          <!-- Perks -->
+          <div class="space-y-5 mb-10">
+            <div class="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-kombugreen/20 flex items-center justify-center text-kombugreen flex-shrink-0 mt-0.5"><i class="fas fa-percentage text-sm"></i></div>
+              <div>
+                <div class="text-base font-black text-white mb-1">15% Off Every Order</div>
+                <div class="text-sm font-semibold text-slate-400">Stacks with bundle savings. Cancel or skip any time — zero hassle, we promise.</div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-kombuorange/20 flex items-center justify-center text-kombuorange flex-shrink-0 mt-0.5"><i class="fas fa-star text-sm"></i></div>
+              <div>
+                <div class="text-base font-black text-white mb-1">First Access to New Drops</div>
+                <div class="text-sm font-semibold text-slate-400">Limited seasonal batches sell out in hours. Subscribers get 48-hour early access.</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              
+            </div>
+            <div class="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-4">
+              <div class="w-11 h-11 rounded-2xl bg-teal-500/20 flex items-center justify-center text-teal-400 flex-shrink-0 mt-0.5"><i class="fas fa-truck text-sm"></i></div>
+              <div>
+                <div class="text-base font-black text-white mb-1">Free Priority Shipping</div>
+                <div class="text-sm font-semibold text-slate-400">Every subscriber order ships free, priority, ice-cold — regardless of order size.</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+            <span class="flex items-center gap-2">Join Culture Club <i class="fas fa-arrow-right text-xs"></i></span>
+          </button>
+        </div>
+
+        <!-- Right — Comparison table -->
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[2rem] overflow-hidden">
+          <!-- Table header -->
+          <div class="grid grid-cols-3 text-center p-5 border-b border-white/10 bg-white/5">
+            <div class="text-xs font-black uppercase tracking-widest text-slate-400">Perk</div>
+            <div class="text-xs font-black uppercase tracking-widest text-slate-400">One-Time</div>
+            <div class="gradient-text text-xs font-black uppercase tracking-widest">Subscribe</div>
+          </div>
+          <!-- Rows -->
+          <div class="divide-y divide-white/10">
+            <div class="grid grid-cols-3 text-center px-5 py-4 items-center">
+              <div class="text-sm font-black text-white text-left">Savings</div>
+              <div class="text-sm font-semibold text-slate-400">0%</div>
+              <div class="text-sm font-black text-kombugreen">15% Off</div>
+            </div>
+            <div class="grid grid-cols-3 text-center px-5 py-4 items-center">
+              <div class="text-sm font-black text-white text-left">Shipping</div>
+              <div class="text-sm font-semibold text-slate-400">$60+</div>
+              <div class="text-sm font-black text-kombugreen">Always Free</div>
+            </div>
+            <div class="grid grid-cols-3 text-center px-5 py-4 items-center">
+              <div class="text-sm font-black text-white text-left">Early Access</div>
+              <div><i class="fas fa-times text-slate-600 text-xs"></i></div>
+              <div><i class="fas fa-check text-kombugreen text-sm"></i></div>
+            </div>
+          
+            <div class="grid grid-cols-3 text-center px-5 py-4 items-center">
+              <div class="text-sm font-black text-white text-left">Skip Anytime</div>
+              <div class="text-slate-500 text-xs font-semibold">N/A</div>
+              <div><i class="fas fa-check text-kombugreen text-sm"></i></div>
+            </div>
+            <div class="grid grid-cols-3 text-center px-5 py-4 items-center">
+              <div class="text-sm font-black text-white text-left">Cancel Anytime</div>
+              <div class="text-slate-500 text-xs font-semibold">N/A</div>
+              <div><i class="fas fa-check text-kombugreen text-sm"></i></div>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="p-5 bg-kombugreen/10 border-t border-kombugreen/20 text-center">
+            <p class="text-xs font-black uppercase tracking-widest text-kombugreen">Starting from just $39 / month</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       8. REVIEWS — Masonry-style testimonials
+  ══════════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-kombuorange/5 dark:bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col items-center text-center gap-8 mb-14">
+        <div>
+          <div class="inline-flex items-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Real People, Real Guts</span>
+            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight" style="font-family:'Playfair Display',serif;">
+            What Our<br/><span class="gradient-text">Customers Say</span>
+          </h2>
+        </div>
+      
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+
+        <!-- Review 1 -->
+        <div class="review-card bg-slate-50 dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+          </div>
+          <i class="fas fa-quote-left text-2xl text-kombugreen/20 mb-4 block"></i>
+          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-3">"Finally, a kombucha that doesn't taste like regret."</h3>
+          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">I've tried every brand out there. The is genuinely the most refreshing drink I've ever had. My fridge now has a dedicated FizzyCulture shelf.</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <div class="w-10 h-10 rounded-full bg-kombugreen/20 flex items-center justify-center text-kombugreen font-black text-sm">S</div>
+            <div>
+              <div class="text-sm font-black text-gray-900 dark:text-white">Sarah J.</div>
+              <div class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-[10px] font-black uppercase tracking-widest text-gray-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">Guava Mint</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card bg-slate-50 dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+          </div>
+          <i class="fas fa-quote-left text-2xl text-kombuorange/20 mb-4 block"></i>
+          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-3">"My gut has genuinely never been happier."</h3>
+          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">I've tried every brand out there. The is genuinely the most refreshing drink I've ever had. My fridge now has a dedicated FizzyCulture shelf.</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <div class="w-10 h-10 rounded-full bg-kombuorange/20 flex items-center justify-center text-kombuorange font-black text-sm">M</div>
+            <div>
+              <div class="text-sm font-black text-gray-900 dark:text-white">Marcus T.</div>
+              <div class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-[10px] font-black uppercase tracking-widest text-gray-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">Ginger Spice</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card bg-slate-50 dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700">
+          <div class="flex items-center gap-1 mb-4">
+            <i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i><i class="fas fa-star star-fill text-xs"></i>
+          </div>
+          <i class="fas fa-quote-left text-2xl text-purple-400/20 mb-4 block"></i>
+          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-3">"Berry Hibiscus is absolute art in a can."</h3>
+          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">I've tried every brand out there. The is genuinely the most refreshing drink I've ever had. My fridge now has a dedicated FizzyCulture shelf.</p>
+          <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-slate-700">
+            <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-500 font-black text-sm">E</div>
+            <div>
+              <div class="text-sm font-black text-gray-900 dark:text-white">Elena R.</div>
+              <div class="text-[10px] font-black uppercase tracking-widest text-kombugreen"><i class="fas fa-check-circle mr-1"></i>Verified Buyer</div>
+            </div>
+            <div class="ml-auto">
+              <span class="text-[10px] font-black uppercase tracking-widest text-gray-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">Berry Hibiscus</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       9. CTA — Final conversion + newsletter split
+  ══════════════════════════════════════════════════════ -->
+  <section class="py-16 md:py-24 bg-white dark:bg-slate900 transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="relative bg-slate900 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
+
+        <!-- Glows + texture -->
+        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <!-- Floating bubbles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div class="cta-bubble w-10 h-10" style="left:8%;  bottom:0; animation:ctaBubble 7s  ease-in infinite; animation-delay:0s;"></div>
+          <div class="cta-bubble w-16 h-16" style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
+          <div class="cta-bubble w-8  h-8"  style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
+          <div class="cta-bubble w-20 h-20" style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          <!-- Left: shop CTA -->
+          <div class="text-center lg:text-left">
+            <div class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
+              <i class="fas fa-box-open text-kombugreen text-sm"></i>
+              <span class="uppercase tracking-widest text-[11px] font-black text-white">Ready to Order?</span>
+            </div>
+            <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5 tracking-tight" style="font-family:'Playfair Display',serif;">
+              Trust Your Gut.<br/><span class="gradient-text italic">Order Today.</span>
+            </h2>
+            <p class="text-white/80 font-bold text-base md:text-lg mb-8 max-w-sm mx-auto lg:mx-0 leading-relaxed">
+              Free shipping on $60+. Ships ice-cold. 30-day happiness guarantee. What are you waiting for?
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="flavours.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+                <span class="flex items-center justify-center gap-2">Shop All Flavours <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
+              </a>
+              <a href="taproom.html" class="flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+                Visit Taproom <i class="fas fa-map-marker-alt text-xs"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: newsletter -->
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[2rem] p-8">
+            <div class="inline-flex items-center space-x-2 mb-5 bg-white/10 px-4 py-2 rounded-full border border-white/10">
+              <i class="fas fa-envelope text-kombugreen text-xs"></i>
+              <span class="uppercase tracking-widest text-[10px] font-black text-white">New Drops First</span>
+            </div>
+            <h3 class="text-2xl font-black text-white mb-2" style="font-family:'Playfair Display',serif;">
+              Get First Sip <span class="gradient-text">Every Time.</span>
+            </h3>
+            <p class="text-white/70 font-semibold text-sm mb-6 leading-relaxed">New flavour drops, exclusive subscriber discounts, and taproom event invites — straight to your inbox.</p>
+            <div class="flex flex-col gap-3">
+              <input type="email" placeholder="your@email.com" class="nl-input w-full px-5 py-3.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/40 font-semibold text-sm transition-all" />
+              <button class="w-full py-3.5 bg-gradient-to-r from-kombugreen to-[#7da838] text-white font-black uppercase tracking-widest text-xs rounded-full hover:shadow-lg hover:shadow-kombugreen/30 hover:-translate-y-0.5 transition-all">
+                Subscribe — It's Free
+              </button>
+            </div>
+            <p class="text-white/30 text-[11px] font-semibold mt-3 text-center">No spam. Unsubscribe anytime.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div id="footer"></div>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+
+  <script>
+    /* ── Filter pills ── */
+    function setFilter(btn, tag) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const cards = document.querySelectorAll('#productGrid [data-tag]');
+      cards.forEach(card => {
+        if (tag === 'all' || card.dataset.tag === tag) {
+          card.style.display = 'flex';
+          card.style.animation = 'popIn .35s ease both';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    /* ── Qty controls ── */
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const display = btn.parentElement.querySelector('span');
+        let val = parseInt(display.textContent);
+        if (btn.textContent === '+') val = Math.min(val + 1, 24);
+        if (btn.textContent === '−') val = Math.max(val - 1, 1);
+        display.textContent = val;
+      });
+    });
+  </script>
+
+</body>
+</html>
