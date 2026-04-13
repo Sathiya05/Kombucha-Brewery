@@ -4,175 +4,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> About Us</title>
+  <title>About Us</title>
   <script src="tailwind.js"></script>
-    <link rel="icon" href="images\logo.png">
+  <link rel="icon" href="images\logo.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
 
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        colors: {
-          kombugreen: '#8FC140',
-          kombuorange: '#FF7043',
-          slate900: '#0f172a',
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            kombugreen: '#8FC140',
+            kombuorange: '#FF7043',
+          }
         }
       }
     }
-  }
-</script>
+  </script>
 
-<style>
-  :root {
-    --green: #8FC140;
-    --orange: #FF7043;
-    --dark: #0f172a;
-  }
+  <style>
+    :root {
+      --green: #8FC140;
+      --orange: #FF7043;
+    }
 
- 
+    .ticker-track {
+      animation: ticker 32s linear infinite;
+    }
 
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
 
-  .ticker-track { animation: ticker 32s linear infinite; }
-  .ticker-track:hover { animation-play-state: paused; }
+    /* ── Gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-  /* ── Gradient text ── */
-  .gradient-text {
-    background: linear-gradient(135deg, var(--green), var(--orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
 
-  /* ── Glass card ── */
-  .glass {
-    background: rgba(255,255,255,0.07);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.14);
-  }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
 
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
-  .dark ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb {
+      background: var(--green);
+      border-radius: 3px;
+    }
 
-  /* ── Timeline dot pulse ── */
-  .tl-dot::after {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 2px solid var(--green);
-    animation: pulse-ring 2s ease-out infinite;
-  }
+    .dark ::-webkit-scrollbar-track {
+      background: #000000;
+    }
 
-  /* ── Bar chart bars ── */
-  .bar-fill {
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--green), var(--orange));
-    animation: revealBar 1.4s cubic-bezier(.22,1,.36,1) both;
-  }
+    /* ── Timeline dot pulse ── */
+    .tl-dot::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      animation: pulse-ring 2s ease-out infinite;
+    }
 
-  /* ── Hover card lift ── */
-  .lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .lift:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.12); }
+    /* ── Bar chart bars ── */
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--green), var(--orange));
+      animation: revealBar 1.4s cubic-bezier(.22, 1, .36, 1) both;
+    }
 
-  /* ── CTA bubble ── */
-  .cta-bubble {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-  }
+    /* ── Hover card lift ── */
+    .lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  /* ── Newsletter input focus ── */
-  .nl-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(143,193,64,0.35);
-  }
+    .lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+    }
 
-  /* ── Responsive helpers ── */
-  @media (max-width: 640px) {
-    .ticker-track { animation-duration: 20s; }
-  }
-</style>
+    /* ── CTA bubble ── */
+    .cta-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+    }
 
-<body class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans overflow-x-hidden">
+    /* ── Responsive helpers ── */
+    @media (max-width: 640px) {
+      .ticker-track {
+        animation-duration: 20s;
+      }
+    }
+  </style>
+</head>
 
-  <!-- NAVBAR -->
+<body
+  class="bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-200 transition-colors duration-500 font-sans overflow-x-hidden">
+
   <div id="navbar"></div>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       1. HERO  —  Full-screen cinematic with layered text
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="relative w-full min-h-[80svh] flex items-center lg:items-center pb-16 pt-32 overflow-hidden bg-slate900">
+  <section
+    class="relative w-full min-h-[80svh] flex items-center lg:items-center pb-16 pt-32 overflow-hidden bg-black">
 
-    <!-- BG image -->
     <div class="absolute inset-0 z-0">
       <img src="images\img6.avif" alt="Brewery interior" class="w-full h-[50svh] object-cover opacity-25" />
-      <div class="absolute inset-0 bg-gradient-to-r from-slate900/95 via-slate900/70 to-slate900/95 z-10"></div>
-      <!-- ambient glows -->
-      <div class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[140px] pointer-events-none"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-kombuorange/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute inset-0 bg-black/50"></div>
+      <div
+        class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[140px] pointer-events-none">
+      </div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-kombuorange/10 rounded-full blur-[120px] pointer-events-none">
+      </div>
     </div>
 
-    <!-- Oversized decorative word -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
-      <span class="text-[clamp(5rem,18vw,14rem)] font-black text-white/[0.03] tracking-widest uppercase whitespace-nowrap" style="font-family:'Bebas Neue',cursive;">FermaFizz</span>
+      <span
+        class="text-[clamp(5rem,18vw,14rem)] font-semibold text-white/[0.03] tracking-widest uppercase whitespace-nowrap"
+        style="font-family:'Bebas Neue',cursive;">FermaFizz</span>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        <!-- Image Left (5 cols) -->
         <div class="relative w-full order-last lg:order-first lg:col-span-5 mt-10 lg:mt-0 animate-fade-up">
-          <div class="group relative w-full aspect-square md:aspect-video lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_40px_-15px_rgba(143,193,64,0.4)] border-4 border-white/10 hover:border-kombugreen/40 z-10 mx-auto max-w-sm md:max-w-md lg:max-w-none transition-all duration-500 hover:-translate-y-2 cursor-pointer">
-            <img src="images\img6.avif" alt="Our Kombucha" class="w-full h-full object-cover transform group-hover:scale-105 group-hover:opacity-95 transition-all duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-tr from-slate900/40 via-transparent to-transparent opacity-100 group-hover:opacity-60 transition-opacity duration-700"></div>
+          <div
+            class="group relative w-full aspect-square md:aspect-video lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_40px_-15px_rgba(143,193,64,0.4)] border-4 border-white/10 hover:border-kombugreen/40 z-10 mx-auto max-w-sm md:max-w-md lg:max-w-none transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+            <img src="images\img6.avif" alt="Our Kombucha"
+              class="w-full h-full object-cover transform group-hover:scale-105 group-hover:opacity-95 transition-all duration-700" />
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent opacity-100 group-hover:opacity-60 transition-opacity duration-700">
+            </div>
           </div>
-          <!-- Floating decorative bubble 1 -->
-          <div class="absolute top-10 -left-6 lg:-left-10 w-24 lg:w-32 h-24 lg:h-32 bg-kombugreen/20 rounded-full blur-2xl animate-float pointer-events-none z-0"></div>
-          <!-- Floating decorative bubble 2 -->
-          <div class="absolute bottom-10 -right-6 lg:-right-4 w-32 lg:w-40 h-32 lg:h-40 bg-kombuorange/20 rounded-full blur-2xl animate-float pointer-events-none z-0" style="animation-delay: 1.5s;"></div>
+          <div
+            class="absolute top-10 -left-6 lg:-left-10 w-24 lg:w-32 h-24 lg:h-32 bg-kombugreen/20 rounded-full blur-2xl animate-float pointer-events-none z-0">
+          </div>
+          <div
+            class="absolute bottom-10 -right-6 lg:-right-4 w-32 lg:w-40 h-32 lg:h-40 bg-kombuorange/20 rounded-full blur-2xl animate-float pointer-events-none z-0"
+            style="animation-delay: 1.5s;"></div>
         </div>
 
-        <!-- Text Right (7 cols) -->
-        <div class="relative z-20 max-w-2xl mx-auto lg:mx-0 w-full lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left">
-          <!-- Breadcrumb -->
+        <div
+          class="relative z-20 max-w-2xl mx-auto lg:mx-0 w-full lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left">
           <div class="flex items-center gap-2 mb-8 animate-fade-up">
-            <a href="index.html" class="text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-kombugreen transition-colors">Home</a>
-            <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-            <span class="text-[11px] font-black uppercase tracking-widest text-kombugreen">About Us</span>
+            <a href="index.html"
+              class="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-kombugreen transition-colors">Home</a>
+            <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-kombugreen">About Us</span>
           </div>
 
-          <div class="animate-fade-up inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-lg" style="animation-delay:.1s;">
+          <div
+            class="animate-fade-up inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-lg"
+            style="animation-delay:.1s;">
             <span class="relative flex h-2.5 w-2.5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombuorange opacity-75"></span>
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombuorange opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-kombuorange"></span>
             </span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-white">Portland, Oregon · Est. 2017</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-white">Portland, Oregon · Est.
+              2017</span>
           </div>
 
-          <h1 class="animate-slide-left font-black text-white leading-[1.0] mb-6 tracking-tight"
+          <h1 class="animate-slide-left font-semibold text-white leading-[1.0] mb-6 tracking-tight"
             style="font-family:'Playfair Display',serif; font-size:clamp(1.75rem,4vw,4.5rem);">
-            We Don't Just Make<br/>
+            We Don't Just Make<br />
             <span class="gradient-text italic ">Kombucha</span>
           </h1>
 
-          <p class="animate-fade-up text-lg sm:text-xl font-bold text-slate-300 leading-relaxed max-w-2xl mb-10" style="animation-delay:.25s;">
-            We make a statement. A statement that gut health can be delicious, fermentation can be an art form, and a drink can actually change how you feel — body and soul.
+          <p class="animate-fade-up text-lg sm:text-xl font-medium text-gray-300 leading-relaxed max-w-2xl mb-10"
+            style="animation-delay:.25s;">
+            We make a statement. A statement that gut health can be delicious, fermentation can be an art form, and a
+            drink can actually change how you feel — body and soul.
           </p>
 
           <div class="animate-fade-up flex flex-col sm:flex-row gap-4 w-full sm:w-auto" style="animation-delay:.4s;">
-            <a href="about.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
-              <span class="flex items-center justify-center gap-2">Read Our Story <i class="fas fa-arrow-down text-xs group-hover:translate-y-0.5 transition-transform"></i></span>
+            <a href="about.html"
+              class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-semibold uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+              <span class="flex items-center justify-center gap-2">Read Our Story <i
+                  class="fas fa-arrow-down text-xs group-hover:translate-y-0.5 transition-transform"></i></span>
             </a>
-            <a href="taproom.html" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+            <a href="taproom.html"
+              class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all duration-300">
               Visit Taproom <i class="fas fa-map-marker-alt text-xs"></i>
             </a>
           </div>
@@ -183,84 +207,93 @@
 
   </section>
 
-
-  <!-- ══════════════════════════════════════════════════════════════
-       3. ORIGIN STORY  —  Magazine editorial split
-  ══════════════════════════════════════════════════════════════ -->
-  <section id="story" class="relative py-24 md:py-36 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
+  <section id="story"
+    class="relative py-24 md:py-36 bg-white dark:bg-black transition-colors duration-500 overflow-hidden border-t border-gray-100 dark:border-gray-800">
+    <div
+      class="absolute -top-24 -right-24 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none">
+    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-        <!-- Left — story copy -->
         <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
           <div class="inline-flex items-center space-x-2 mb-6">
             <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">The Origin</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">The
+              Origin</span>
             <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
           </div>
 
-          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight" style="font-family:'Playfair Display',serif;">
-            It Started with a<br/>
+          <h2 class="text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-white leading-[1.1] mb-8 tracking-tight"
+            style="font-family:'Playfair Display',serif;">
+            It Started with a<br />
             <span class="gradient-text ">Mason Jar & a Hunch.</span>
           </h2>
 
-          <!-- Pull quote -->
           <blockquote class="relative mb-8 pl-6 border-l-4 border-kombugreen text-left">
             <i class="fas fa-quote-left absolute -top-2 -left-3 text-2xl text-kombugreen/30"></i>
-            <p class="text-lg font-black text-gray-700 dark:text-slate-300 italic leading-snug">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 italic leading-snug">
               "Healthy drinks shouldn't taste like a punishment. We set out to fix that — one wild ferment at a time."
             </p>
-            <footer class="mt-2 text-xs font-black uppercase tracking-widest text-kombugreen">— Sam & Priya, Co-Founders</footer>
+            <footer class="mt-2 text-xs font-semibold uppercase tracking-widest text-kombugreen">— Sam & Priya, Co-Founders
+            </footer>
           </blockquote>
 
-          
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-5">
-            Armed with a SCOBY culture rescued from a farmers' market (since named Gerald), a rented garage in Portland's Pearl District, and a dog-eared copy of <em>The Art of Fermentation</em>, they started brewing. The neighbours complained about the smell. They kept going.
-          </p>
-          
 
-          <!-- Founder badges -->
-          <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-800 rounded-2xl px-5 py-3 border border-gray-200 dark:border-slate-700">
-              <div class="w-10 h-10 rounded-full bg-kombugreen/20 flex items-center justify-center text-kombugreen font-black text-sm">S</div>
+          <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-5">
+            Armed with a SCOBY culture rescued from a farmers' market (since named Gerald), a rented garage in
+            Portland's Pearl District, and a dog-eared copy of <em>The Art of Fermentation</em>, they started brewing.
+            The neighbours complained about the smell. They kept going.
+          </p>
+
+
+          <div class="flex flex-wrap gap-4 justify-center lg:justify-start mt-6">
+            <div
+              class="flex items-center gap-3 bg-gray-50 dark:bg-[#111111] rounded-2xl px-5 py-3 border border-gray-200 dark:border-gray-800">
+              <div
+                class="w-10 h-10 rounded-full bg-kombugreen/20 flex items-center justify-center text-kombugreen font-semibold text-sm">
+                S</div>
               <div>
-                <div class="text-sm font-black text-gray-900 dark:text-white">Sam Rodriguez</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Co-Founder · Head Brewer</div>
+                <div class="text-sm font-semibold text-gray-900 dark:text-white">Sam Rodriguez</div>
+                <div class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                  Co-Founder · Head Brewer</div>
               </div>
             </div>
-            <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-800 rounded-2xl px-5 py-3 border border-gray-200 dark:border-slate-700">
-              <div class="w-10 h-10 rounded-full bg-kombuorange/20 flex items-center justify-center text-kombuorange font-black text-sm">P</div>
+            <div
+              class="flex items-center gap-3 bg-gray-50 dark:bg-[#111111] rounded-2xl px-5 py-3 border border-gray-200 dark:border-gray-800">
+              <div
+                class="w-10 h-10 rounded-full bg-kombuorange/20 flex items-center justify-center text-kombuorange font-semibold text-sm">
+                P</div>
               <div>
-                <div class="text-sm font-black text-gray-900 dark:text-white">Priya Kapoor</div>
-                <div class="text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-slate-400">Co-Founder · Flavour Alchemist</div>
+                <div class="text-sm font-semibold text-gray-900 dark:text-white">Priya Kapoor</div>
+                <div class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
+                  Co-Founder · Flavour Alchemist</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right — asymmetric image collage -->
         <div class="relative order-first lg:order-last">
-          <!-- Main image -->
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square border-4 border-white dark:border-slate-800">
-            <img src="images/img2.avif" alt="Founders brewing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+          <div
+            class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-square border-4 border-white dark:border-[#111111]">
+            <img src="images/img2.avif" alt="Founders brewing"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
           </div>
 
-          <!-- Top-right inset -->
-          <div class="hidden lg:block absolute -top-6 -right-4 sm:-right-8 w-36 sm:w-44 aspect-square rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 animate-float">
+          <div
+            class="hidden lg:block absolute -top-6 -right-4 sm:-right-8 w-36 sm:w-44 aspect-square rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-[#111111] animate-float">
             <img src="images/img3.avif" alt="Fresh ingredients" class="w-full h-full object-cover" />
           </div>
 
-          <!-- Bottom-left inset -->
-          <div class="hidden lg:block absolute -bottom-6 -left-4 sm:-left-8 w-32 sm:w-40 aspect-square rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-800 animate-float-rev">
+          <div
+            class="hidden lg:block absolute -bottom-6 -left-4 sm:-left-8 w-32 sm:w-40 aspect-square rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white dark:border-[#111111] animate-float-rev">
             <img src="images/img5.avif" alt="Kombucha SCOBY" class="w-full h-full object-cover" />
           </div>
 
-          <!-- Year tag -->
-          <div class="absolute top-6 left-6 bg-gradient-to-r from-kombugreen to-kombuorange text-white rounded-xl px-4 py-2 shadow-lg">
-            <div class="text-2xl font-black leading-none" style="font-family:'Bebas Neue',cursive;">2017</div>
-            <div class="text-[9px] font-black uppercase tracking-widest opacity-80">Founded</div>
+          <div
+            class="absolute top-6 left-6 bg-gradient-to-r from-kombugreen to-kombuorange text-white rounded-xl px-4 py-2 shadow-lg">
+            <div class="text-2xl font-semibold leading-none" style="font-family:'Bebas Neue',cursive;">2017</div>
+            <div class="text-[9px] font-semibold uppercase tracking-widest opacity-80">Founded</div>
           </div>
         </div>
 
@@ -268,114 +301,138 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       4. MILESTONE TIMELINE  —  Vertical alternating cards
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden">
+  <section class="py-24 md:py-32 bg-gray-50 dark:bg-[#111111]/40 transition-colors duration-500 overflow-hidden border-t border-gray-100 dark:border-gray-800">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="text-center mb-16">
         <div class="inline-flex items-center justify-center space-x-2 mb-4">
           <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">How We Got Here</span>
+          <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">How We Got
+            Here</span>
           <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+        <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight mb-4"
+          style="font-family:'Playfair Display',serif;">
           Seven Years of <span class="gradient-text">Bold Moves.</span>
         </h2>
-        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-xl mx-auto">
+        <p class="text-gray-600 dark:text-gray-400 font-medium text-lg max-w-xl mx-auto">
           From a rented garage to a national brand — the short version.
         </p>
       </div>
 
-      <!-- Timeline -->
       <div class="relative">
-        <!-- Centre spine -->
-        <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-kombugreen via-kombuorange to-kombugreen opacity-30"></div>
+        <div
+          class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-kombugreen via-kombuorange to-kombugreen opacity-30">
+        </div>
 
         <div class="space-y-12 md:space-y-0">
 
-          <!-- 2017 — left -->
           <div class="md:grid md:grid-cols-2 md:gap-12 items-center md:mb-16">
-            <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-slate-700 md:text-right mb-6 md:mb-0">
+            <div
+              class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-800 md:text-right mb-6 md:mb-0">
               <div class="inline-flex items-center gap-2 mb-3 md:flex-row-reverse">
-                <div class="w-8 h-8 rounded-xl bg-kombugreen/20 flex items-center justify-center text-kombugreen text-sm"><i class="fas fa-home"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen">Year One</span>
+                <div
+                  class="w-8 h-8 rounded-xl bg-kombugreen/20 flex items-center justify-center text-kombugreen text-sm">
+                  <i class="fas fa-home"></i></div>
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen">Year One</span>
               </div>
-              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">The Garage Era</h3>
-              <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Sam and Priya brew their first 40-litre batch in a rented Pearl District garage. 47 failed attempts before the first drinkable batch. Neighbours vote it "Most Likely to Smell Weird."</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">The Garage Era</h3>
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Sam and Priya brew their first 40-litre
+                batch in a rented Pearl District garage. 47 failed attempts before the first drinkable batch. Neighbours
+                vote it "Most Likely to Smell Weird."</p>
             </div>
             <div class="hidden md:flex justify-start items-center">
-              <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center shadow-lg ml-auto mr-auto tl-dot">
-                <span class="text-white text-xs font-black" style="font-family:'Bebas Neue',cursive;">17</span>
+              <div
+                class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center shadow-lg ml-auto mr-auto tl-dot">
+                <span class="text-white text-xs font-semibold" style="font-family:'Bebas Neue',cursive;">17</span>
               </div>
             </div>
           </div>
 
-          <!-- 2018 — right -->
           <div class="md:grid md:grid-cols-2 md:gap-12 items-center md:mb-16">
             <div class="hidden md:flex justify-end items-center">
-              <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombuorange to-kombugreen flex items-center justify-center shadow-lg ml-auto mr-auto">
-                <span class="text-white text-xs font-black" style="font-family:'Bebas Neue',cursive;">18</span>
+              <div
+                class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombuorange to-kombugreen flex items-center justify-center shadow-lg ml-auto mr-auto">
+                <span class="text-white text-xs font-semibold" style="font-family:'Bebas Neue',cursive;">18</span>
               </div>
             </div>
-            <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-slate-700 mb-6 md:mb-0">
+            <div
+              class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-800 mb-6 md:mb-0">
               <div class="inline-flex items-center gap-2 mb-3">
-                <div class="w-8 h-8 rounded-xl bg-kombuorange/20 flex items-center justify-center text-kombuorange text-sm"><i class="fas fa-store"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-kombuorange">First Retail</span>
+                <div
+                  class="w-8 h-8 rounded-xl bg-kombuorange/20 flex items-center justify-center text-kombuorange text-sm">
+                  <i class="fas fa-store"></i></div>
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-kombuorange">First Retail</span>
               </div>
-              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Farmers' Market Debut</h3>
-              <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">FizzyCulture hits the Portland Saturday Market. 200 bottles sell out in 3 hours. A local food blogger calls it "the most dangerous kombucha I've ever tasted" — in the best possible way.</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Farmers' Market Debut</h3>
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">FizzyCulture hits the Portland Saturday
+                Market. 200 bottles sell out in 3 hours. A local food blogger calls it "the most dangerous kombucha I've
+                ever tasted" — in the best possible way.</p>
             </div>
           </div>
 
-          <!-- 2020 — left -->
           <div class="md:grid md:grid-cols-2 md:gap-12 items-center md:mb-16">
-            <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-slate-700 md:text-right mb-6 md:mb-0">
+            <div
+              class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-800 md:text-right mb-6 md:mb-0">
               <div class="inline-flex items-center gap-2 mb-3 md:flex-row-reverse">
-                <div class="w-8 h-8 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-500 text-sm"><i class="fas fa-rocket"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-purple-500">Pivot Year</span>
+                <div
+                  class="w-8 h-8 rounded-xl bg-kombugreen/20 flex items-center justify-center text-kombugreen text-sm">
+                  <i class="fas fa-rocket"></i></div>
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen">Pivot Year</span>
               </div>
-              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Online & Nationwide</h3>
-              <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Pandemic forces a full pivot to DTC shipping. The Culture Club subscription launches. Within 6 months, FizzyCulture ships to all 50 states and hits 10,000 active subscribers.</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Online & Nationwide</h3>
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Pandemic forces a full pivot to DTC
+                shipping. The Culture Club subscription launches. Within 6 months, FizzyCulture ships to all 50 states
+                and hits 10,000 active subscribers.</p>
             </div>
             <div class="hidden md:flex justify-start items-center">
-              <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-kombugreen flex items-center justify-center shadow-lg ml-auto mr-auto">
-                <span class="text-white text-xs font-black" style="font-family:'Bebas Neue',cursive;">20</span>
+              <div
+                class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center shadow-lg ml-auto mr-auto">
+                <span class="text-white text-xs font-semibold" style="font-family:'Bebas Neue',cursive;">20</span>
               </div>
             </div>
           </div>
 
-          <!-- 2022 — right -->
           <div class="md:grid md:grid-cols-2 md:gap-12 items-center md:mb-16">
             <div class="hidden md:flex justify-end items-center">
-              <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center shadow-lg ml-auto mr-auto">
-                <span class="text-white text-xs font-black" style="font-family:'Bebas Neue',cursive;">22</span>
+              <div
+                class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombuorange to-kombugreen flex items-center justify-center shadow-lg ml-auto mr-auto">
+                <span class="text-white text-xs font-semibold" style="font-family:'Bebas Neue',cursive;">22</span>
               </div>
             </div>
-            <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-slate-700 mb-6 md:mb-0">
+            <div
+              class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-800 mb-6 md:mb-0">
               <div class="inline-flex items-center gap-2 mb-3">
-                <div class="w-8 h-8 rounded-xl bg-kombugreen/20 flex items-center justify-center text-kombugreen text-sm"><i class="fas fa-building"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen">The Taproom</span>
+                <div
+                  class="w-8 h-8 rounded-xl bg-kombuorange/20 flex items-center justify-center text-kombuorange text-sm">
+                  <i class="fas fa-building"></i></div>
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-kombuorange">The Taproom</span>
               </div>
-              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">5,000 sq ft HQ Opens</h3>
-              <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">The flagship brewery and taproom opens on SE Division. 12 rotating taps, a dog-friendly patio, growler fills, and a live music stage. The neighbourhood finally forgives the smell.</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">5,000 sq ft HQ Opens</h3>
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">The flagship brewery and taproom opens
+                on SE Division. 12 rotating taps, a dog-friendly patio, growler fills, and a live music stage. The
+                neighbourhood finally forgives the smell.</p>
             </div>
           </div>
 
-          <!-- 2024 — left -->
           <div class="md:grid md:grid-cols-2 md:gap-12 items-center">
-            <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-slate-700 md:text-right mb-6 md:mb-0">
+            <div
+              class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-800 md:text-right mb-6 md:mb-0">
               <div class="inline-flex items-center gap-2 mb-3 md:flex-row-reverse">
-                <div class="w-8 h-8 rounded-xl bg-kombuorange/20 flex items-center justify-center text-kombuorange text-sm"><i class="fas fa-award"></i></div>
-                <span class="text-[10px] font-black uppercase tracking-widest text-kombuorange">Today</span>
+                <div
+                  class="w-8 h-8 rounded-xl bg-kombugreen/20 flex items-center justify-center text-kombugreen text-sm">
+                  <i class="fas fa-award"></i></div>
+                <span class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen">Today</span>
               </div>
-              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2">Best Craft Bev 2024</h3>
-              <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">250K+ loyal subscribers. "Best Craft Beverage" at the National Fermented Foods Awards. And Gerald? He's healthier than ever, still bubbling away in vessel number one.</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Best Craft Bev 2024</h3>
+              <p class="text-sm font-medium text-gray-600 dark:text-gray-400">250K+ loyal subscribers. "Best Craft
+                Beverage" at the National Fermented Foods Awards. And Gerald? He's healthier than ever, still bubbling
+                away in vessel number one.</p>
             </div>
             <div class="hidden md:flex justify-start items-center">
-              <div class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombuorange to-kombugreen flex items-center justify-center shadow-lg ml-auto mr-auto tl-dot">
-                <span class="text-white text-xs font-black" style="font-family:'Bebas Neue',cursive;">24</span>
+              <div
+                class="relative w-10 h-10 rounded-full bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center shadow-lg ml-auto mr-auto tl-dot">
+                <span class="text-white text-xs font-semibold" style="font-family:'Bebas Neue',cursive;">24</span>
               </div>
             </div>
           </div>
@@ -385,321 +442,378 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       5. MISSION & VALUES  —  3-column icon grid on dark bg
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-white dark:bg-slate900 relative overflow-hidden transition-colors duration-500">
+  <section class="py-24 md:py-32 bg-white dark:bg-black relative overflow-hidden transition-colors duration-500 border-t border-gray-100 dark:border-gray-800">
 
-    <!-- Texture + glows -->
-    <div class="absolute inset-0 opacity-5 dark:opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')] mix-blend-multiply dark:mix-blend-normal z-0"></div>
-    <div class="absolute top-0 left-1/3 w-96 h-96 bg-kombugreen/10 rounded-full blur-[130px] pointer-events-none z-0"></div>
-    <div class="absolute bottom-0 right-1/3 w-80 h-80 bg-kombuorange/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+    <div
+      class="absolute inset-0 opacity-5 dark:opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')] mix-blend-multiply dark:mix-blend-normal z-0">
+    </div>
+    <div class="absolute top-0 left-1/3 w-96 h-96 bg-kombugreen/10 rounded-full blur-[130px] pointer-events-none z-0">
+    </div>
+    <div
+      class="absolute bottom-0 right-1/3 w-80 h-80 bg-kombuorange/10 rounded-full blur-[100px] pointer-events-none z-0">
+    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-      <!-- Heading -->
       <div class="text-center mb-16">
         <div class="inline-flex items-center justify-center space-x-2 mb-4">
           <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">What We Stand For</span>
+          <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">What We Stand
+            For</span>
           <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+        <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight mb-4"
+          style="font-family:'Playfair Display',serif;">
           Our Mission & <span class="gradient-text">Core Values.</span>
         </h2>
-        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-xl mx-auto">
+        <p class="text-gray-600 dark:text-gray-400 font-medium text-lg max-w-xl mx-auto">
           Three words guide every decision we make in the brewery — and beyond it.
         </p>
       </div>
 
-      <!-- Mission statement banner -->
-      <div class="relative mb-16 bg-slate-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm dark:shadow-none rounded-[2rem] p-8 sm:p-12 text-center overflow-hidden">
+      <div
+        class="relative mb-16 bg-gray-50 dark:bg-[#111111] border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-none rounded-[2rem] p-8 sm:p-12 text-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-kombugreen/10 to-kombuorange/10 rounded-[2rem]"></div>
-        <i class="fas fa-quote-left absolute top-6 left-6 text-5xl text-kombugreen/20 dark:text-kombugreen/10 pointer-events-none"></i>
-        <i class="fas fa-quote-right absolute bottom-6 right-6 text-5xl text-kombuorange/20 dark:text-kombuorange/10 pointer-events-none"></i>
-        <p class="relative z-10 text-xl sm:text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-snug max-w-3xl mx-auto" style="font-family:'Playfair Display',serif;">
-          "To make the world's most flavourful living drinks — crafted with integrity, brewed with obsession, and shared with everyone."
+        <i
+          class="fas fa-quote-left absolute top-6 left-6 text-5xl text-kombugreen/20 dark:text-kombugreen/10 pointer-events-none"></i>
+        <i
+          class="fas fa-quote-right absolute bottom-6 right-6 text-5xl text-kombuorange/20 dark:text-kombuorange/10 pointer-events-none"></i>
+        <p class="relative z-10 text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white leading-snug max-w-3xl mx-auto"
+          style="font-family:'Playfair Display',serif;">
+          "To make the world's most flavourful living drinks — crafted with integrity, brewed with obsession, and shared
+          with everyone."
         </p>
       </div>
 
-      <!-- Values grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="lift bg-slate-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-kombugreen/40 transition-colors duration-300">
-          <div class="w-14 h-14 rounded-2xl bg-kombugreen/10 dark:bg-kombugreen/20 flex items-center justify-center text-kombugreen mb-6 group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-kombugreen/10 dark:border-transparent">
+        <div
+          class="lift bg-gray-50 dark:bg-[#111111] border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-kombugreen/40 transition-colors duration-300">
+          <div
+            class="w-14 h-14 rounded-2xl bg-kombugreen/10 dark:bg-kombugreen/20 flex items-center justify-center text-kombugreen mb-6 group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-kombugreen/10 dark:border-transparent">
             <i class="fas fa-leaf text-2xl"></i>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Radical Honesty</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">No proprietary blends. No hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we wouldn't serve it to our own families, we don't make it.</p>
-          <div class="mt-6 text-[10px] font-black uppercase tracking-widest text-kombugreen">Value 01</div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Radical Honesty</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">No proprietary blends. No
+            hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we
+            wouldn't serve it to our own families, we don't make it.</p>
+          <div class="mt-6 text-[10px] font-semibold uppercase tracking-widest text-kombugreen">Value 01</div>
         </div>
 
-        <div class="lift bg-slate-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-kombuorange/40 transition-colors duration-300">
-          <div class="w-14 h-14 rounded-2xl bg-kombuorange/10 dark:bg-kombuorange/20 flex items-center justify-center text-kombuorange mb-6 group-hover:bg-kombuorange group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-kombuorange/10 dark:border-transparent">
+        <div
+          class="lift bg-gray-50 dark:bg-[#111111] border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-kombuorange/40 transition-colors duration-300">
+          <div
+            class="w-14 h-14 rounded-2xl bg-kombuorange/10 dark:bg-kombuorange/20 flex items-center justify-center text-kombuorange mb-6 group-hover:bg-kombuorange group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-kombuorange/10 dark:border-transparent">
             <i class="fas fa-microscope text-2xl"></i>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Science-First Brewing</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">No proprietary blends. No hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we wouldn't serve it to our own families, we don't make it.</p>
-          <div class="mt-6 text-[10px] font-black uppercase tracking-widest text-kombuorange">Value 02</div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Science-First Brewing</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">No proprietary blends. No
+            hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we
+            wouldn't serve it to our own families, we don't make it.</p>
+          <div class="mt-6 text-[10px] font-semibold uppercase tracking-widest text-kombuorange">Value 02</div>
         </div>
 
-        <div class="lift bg-slate-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-purple-500/40 transition-colors duration-300">
-          <div class="w-14 h-14 rounded-2xl bg-kombugreen/10 dark:bg-kombugreen/20 flex items-center justify-center  text-kombugreen mb-6 group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-purple-500/10 dark:border-transparent">
+        <div
+          class="lift bg-gray-50 dark:bg-[#111111] border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-none rounded-[2rem] p-8 group hover:border-kombugreen/40 transition-colors duration-300">
+          <div
+            class="w-14 h-14 rounded-2xl bg-kombugreen/10 dark:bg-kombugreen/20 flex items-center justify-center  text-kombugreen mb-6 group-hover:bg-kombugreen group-hover:text-white transition-all duration-300 shadow-sm dark:shadow-none border border-kombugreen/10 dark:border-transparent">
             <i class="fas fa-globe-americas text-2xl"></i>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-3">Planet Positive</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">No proprietary blends. No hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we wouldn't serve it to our own families, we don't make it.</p>
-          <div class="mt-6 text-[10px] font-black uppercase tracking-widest text-kombugreen">Value 03</div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Planet Positive</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">No proprietary blends. No
+            hidden sweeteners. Every ingredient, every process — listed, explained, and open to inspection. If we
+            wouldn't serve it to our own families, we don't make it.</p>
+          <div class="mt-6 text-[10px] font-semibold uppercase tracking-widest text-kombugreen">Value 03</div>
         </div>
 
       </div>
     </div>
   </section>
 
- 
 
-  <!-- ══════════════════════════════════════════════════════════════
-       7. SUSTAINABILITY  —  2-col with bar charts + image
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden relative">
+
+  <section
+    class="py-24 md:py-32 bg-gray-50 dark:bg-[#111111]/40 transition-colors duration-500 overflow-hidden relative border-t border-gray-100 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-        <!-- Left — Image with overlaid stats -->
         <div class="relative">
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] border-4 border-white dark:border-slate-700">
-            <img src="images/img9.avif" alt="Sustainability at FizzyCulture" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate900/70 via-transparent to-transparent"></div>
+          <div
+            class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/5] border-4 border-white dark:border-[#111111]">
+            <img src="images/img9.avif" alt="Sustainability at FizzyCulture"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
           </div>
-          <!-- Overlay chips -->
           <div class="absolute bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] flex flex-col gap-3">
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
+            <div
+              class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-kombugreen/30 flex items-center justify-center text-kombugreen"><i class="fas fa-solar-panel text-sm"></i></div>
-                <span class="text-white text-xs font-black">Renewable Energy</span>
+                <div class="w-8 h-8 rounded-xl bg-kombugreen/30 flex items-center justify-center text-kombugreen"><i
+                    class="fas fa-solar-panel text-sm"></i></div>
+                <span class="text-white text-xs font-semibold">Renewable Energy</span>
               </div>
-              <span class="text-black font-black text-sm">100%</span>
+              <span class="text-white font-semibold text-sm">100%</span>
             </div>
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
+            <div
+              class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-kombuorange/30 flex items-center justify-center text-kombuorange"><i class="fas fa-box-open text-sm"></i></div>
-                <span class="text-white text-xs font-black">Compostable Packaging</span>
+                <div class="w-8 h-8 rounded-xl bg-kombuorange/30 flex items-center justify-center text-kombuorange"><i
+                    class="fas fa-box-open text-sm"></i></div>
+                <span class="text-white text-xs font-semibold">Compostable Packaging</span>
               </div>
-              <span class="text-black font-black text-sm">100%</span>
+              <span class="text-white font-semibold text-sm">100%</span>
             </div>
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
+            <div
+              class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3 flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-purple-500/30 flex items-center justify-center text-purple-400"><i class="fas fa-tree text-sm"></i></div>
-                <span class="text-white text-xs font-black">Carbon Offset</span>
+                <div class="w-8 h-8 rounded-xl bg-kombugreen/30 flex items-center justify-center text-kombugreen"><i
+                    class="fas fa-tree text-sm"></i></div>
+                <span class="text-white text-xs font-semibold">Carbon Offset</span>
               </div>
-              <span class="text-black font-black text-sm">150%</span>
+              <span class="text-white font-semibold text-sm">150%</span>
             </div>
           </div>
         </div>
 
-        <!-- Right — copy + bar chart -->
         <div>
           <div class="inline-flex items-center space-x-2 mb-6">
             <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Earth Matters</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">Earth
+              Matters</span>
           </div>
 
-          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight text-center lg:text-left" style="font-family:'Playfair Display',serif;">
-            Good for You. <br/><span class="gradient-text">Good for Earth.</span>
+          <h2
+            class="text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight text-center lg:text-left"
+            style="font-family:'Playfair Display',serif;">
+            Good for You. <br /><span class="gradient-text">Good for Earth.</span>
           </h2>
 
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-10 text-center lg:text-left">
-            We believe the gut health of the planet is just as important as yours. Our sustainability commitments aren't marketing spin — they're baked into our cost structure.
+          <p
+            class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-10 text-center lg:text-left">
+            We believe the gut health of the planet is just as important as yours. Our sustainability commitments aren't
+            marketing spin — they're baked into our cost structure.
           </p>
 
-          <!-- Progress bars -->
           <div class="space-y-6">
 
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-black text-gray-900 dark:text-white">Ingredients sourced locally (&lt;100 miles)</span>
-                <span class="text-sm font-black text-kombugreen">87%</span>
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">Ingredients sourced locally (&lt;100
+                  miles)</span>
+                <span class="text-sm font-semibold text-kombugreen">87%</span>
               </div>
-              <div class="h-2.5 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div class="bar-fill" style="--bar-w:87%; animation-delay:.1s;"></div>
               </div>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-black text-gray-900 dark:text-white">USDA Certified Organic ingredients</span>
-                <span class="text-sm font-black text-kombuorange">100%</span>
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">USDA Certified Organic ingredients</span>
+                <span class="text-sm font-semibold text-kombuorange">100%</span>
               </div>
-              <div class="h-2.5 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div class="bar-fill" style="--bar-w:100%; animation-delay:.25s;"></div>
               </div>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-black text-gray-900 dark:text-white">SCOBY waste composted / upcycled</span>
-                <span class="text-sm font-black text-purple-500">95%</span>
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">SCOBY waste composted / upcycled</span>
+                <span class="text-sm font-semibold text-kombugreen">95%</span>
               </div>
-              <div class="h-2.5 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div class="bar-fill" style="--bar-w:95%; animation-delay:.4s;"></div>
               </div>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-black text-gray-900 dark:text-white">Shipping packaging recycled/compostable</span>
-                <span class="text-sm font-black text-teal-500">100%</span>
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">Shipping packaging
+                  recycled/compostable</span>
+                <span class="text-sm font-semibold text-kombuorange">100%</span>
               </div>
-              <div class="h-2.5 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div class="bar-fill" style="--bar-w:100%; animation-delay:.55s;"></div>
               </div>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-black text-gray-900 dark:text-white">Carbon offset vs annual emissions</span>
-                <span class="text-sm font-black text-kombugreen">150%</span>
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">Carbon offset vs annual emissions</span>
+                <span class="text-sm font-semibold text-kombugreen">150%</span>
               </div>
-              <div class="h-2.5 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div class="bar-fill" style="--bar-w:100%; animation-delay:.7s;"></div>
               </div>
             </div>
 
           </div>
 
-         
+
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       8. AWARDS & PRESS  —  Logo strip + quote cards
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
-    <div class="absolute bottom-0 left-0 w-80 h-80 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
+  <section class="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500 overflow-hidden relative border-t border-gray-100 dark:border-gray-800">
+    <div
+      class="absolute bottom-0 left-0 w-80 h-80 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none">
+    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="text-center mb-14">
         <div class="inline-flex items-center justify-center space-x-2 mb-4">
           <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">As Seen In</span>
+          <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">As Seen
+            In</span>
           <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">
+        <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight mb-4"
+          style="font-family:'Playfair Display',serif;">
           Awards &amp; <span class="gradient-text">Recognition.</span>
         </h2>
       </div>
 
-      <!-- Press logo placeholders -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16">
-        <div class="flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl p-6 hover:border-kombugreen/40 border border-gray-200 dark:border-slate-700 transition-colors group">
-          <span class="font-black text-lg text-gray-400 dark:text-slate-500 group-hover:text-kombugreen transition-colors tracking-tight uppercase" style="font-family:'Bebas Neue',cursive;">Bon Appétit</span>
+        <div
+          class="flex items-center justify-center bg-gray-50 dark:bg-[#111111] rounded-2xl p-6 hover:border-kombugreen/40 border border-gray-200 dark:border-gray-800 transition-colors group">
+          <span
+            class="font-semibold text-lg text-gray-400 dark:text-gray-500 group-hover:text-kombugreen transition-colors tracking-tight uppercase"
+            style="font-family:'Bebas Neue',cursive;">Bon Appétit</span>
         </div>
-        <div class="flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl p-6 hover:border-kombuorange/40 border border-gray-200 dark:border-slate-700 transition-colors group">
-          <span class="font-black text-lg text-gray-400 dark:text-slate-500 group-hover:text-kombuorange transition-colors tracking-tight uppercase" style="font-family:'Bebas Neue',cursive;">Eater PDX</span>
+        <div
+          class="flex items-center justify-center bg-gray-50 dark:bg-[#111111] rounded-2xl p-6 hover:border-kombuorange/40 border border-gray-200 dark:border-gray-800 transition-colors group">
+          <span
+            class="font-semibold text-lg text-gray-400 dark:text-gray-500 group-hover:text-kombuorange transition-colors tracking-tight uppercase"
+            style="font-family:'Bebas Neue',cursive;">Eater PDX</span>
         </div>
-        <div class="flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl p-6 hover:border-purple-500/40 border border-gray-200 dark:border-slate-700 transition-colors group">
-          <span class="font-black text-lg text-gray-400 dark:text-slate-500 group-hover:text-purple-500 transition-colors tracking-tight uppercase" style="font-family:'Bebas Neue',cursive;">Forbes 30U30</span>
+        <div
+          class="flex items-center justify-center bg-gray-50 dark:bg-[#111111] rounded-2xl p-6 hover:border-kombugreen/40 border border-gray-200 dark:border-gray-800 transition-colors group">
+          <span
+            class="font-semibold text-lg text-gray-400 dark:text-gray-500 group-hover:text-kombugreen transition-colors tracking-tight uppercase"
+            style="font-family:'Bebas Neue',cursive;">Forbes 30U30</span>
         </div>
-        <div class="flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl p-6 hover:border-teal-500/40 border border-gray-200 dark:border-slate-700 transition-colors group">
-          <span class="font-black text-lg text-gray-400 dark:text-slate-500 group-hover:text-teal-500 transition-colors tracking-tight uppercase" style="font-family:'Bebas Neue',cursive;">Willamette Wk</span>
+        <div
+          class="flex items-center justify-center bg-gray-50 dark:bg-[#111111] rounded-2xl p-6 hover:border-kombuorange/40 border border-gray-200 dark:border-gray-800 transition-colors group">
+          <span
+            class="font-semibold text-lg text-gray-400 dark:text-gray-500 group-hover:text-kombuorange transition-colors tracking-tight uppercase"
+            style="font-family:'Bebas Neue',cursive;">Willamette Wk</span>
         </div>
       </div>
 
-      <!-- Award cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="lift bg-gradient-to-br from-kombugreen/5 to-kombuorange/5 dark:from-kombugreen/10 dark:to-kombuorange/10 border border-kombugreen/20 rounded-[2rem] p-8">
+        <div
+          class="lift bg-gradient-to-br from-kombugreen/5 to-kombuorange/5 dark:from-kombugreen/10 dark:to-kombuorange/10 border border-kombugreen/20 rounded-[2rem] p-8">
           <div class="flex items-center gap-4 mb-5">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center text-white shadow-lg">
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center text-white shadow-lg">
               <i class="fas fa-trophy text-xl"></i>
             </div>
             <div>
-              <div class="text-xs font-black uppercase tracking-widest text-kombugreen">2024</div>
-              <div class="font-black text-gray-900 dark:text-white text-sm">National Fermented Foods Awards</div>
+              <div class="text-xs font-semibold uppercase tracking-widest text-kombugreen">2024</div>
+              <div class="font-semibold text-gray-900 dark:text-white text-sm">National Fermented Foods Awards</div>
             </div>
           </div>
-          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-2">Best Craft Beverage</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Beating 340 entries across all fermented beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Best Craft Beverage</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Beating 340 entries across all fermented
+            beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
         </div>
 
-        <div class="lift bg-gradient-to-br from-kombuorange/5 to-purple-500/5 dark:from-kombuorange/10 dark:to-purple-500/10 border border-kombuorange/20 rounded-[2rem] p-8">
+        <div
+          class="lift bg-gradient-to-br from-kombuorange/5 to-kombugreen/5 dark:from-kombuorange/10 dark:to-kombugreen/10 border border-kombuorange/20 rounded-[2rem] p-8">
           <div class="flex items-center gap-4 mb-5">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-purple-500 flex items-center justify-center text-white shadow-lg">
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-kombugreen flex items-center justify-center text-white shadow-lg">
               <i class="fas fa-medal text-xl"></i>
             </div>
             <div>
-              <div class="text-xs font-black uppercase tracking-widest text-kombuorange">2023</div>
-              <div class="font-black text-gray-900 dark:text-white text-sm">Oregon Small Business Awards</div>
+              <div class="text-xs font-semibold uppercase tracking-widest text-kombuorange">2023</div>
+              <div class="font-semibold text-gray-900 dark:text-white text-sm">Oregon Small Business Awards</div>
             </div>
           </div>
-          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-2">Most Sustainable Brand</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Beating 340 entries across all fermented beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Most Sustainable Brand</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Beating 340 entries across all fermented
+            beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
         </div>
 
-        <div class="lift bg-gradient-to-br from-purple-500/5 to-kombugreen/5 dark:from-purple-500/10 dark:to-kombugreen/10 border border-purple-500/20 rounded-[2rem] p-8">
+        <div
+          class="lift bg-gradient-to-br from-kombugreen/5 to-kombuorange/5 dark:from-kombugreen/10 dark:to-kombuorange/10 border border-kombugreen/20 rounded-[2rem] p-8">
           <div class="flex items-center gap-4 mb-5">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-kombugreen flex items-center justify-center text-white shadow-lg">
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-kombuorange flex items-center justify-center text-white shadow-lg">
               <i class="fas fa-star text-xl"></i>
             </div>
             <div>
-              <div class="text-xs font-black uppercase tracking-widest text-purple-500">2022</div>
-              <div class="font-black text-gray-900 dark:text-white text-sm">Forbes 30 Under 30</div>
+              <div class="text-xs font-semibold uppercase tracking-widest text-kombugreen">2022</div>
+              <div class="font-semibold text-gray-900 dark:text-white text-sm">Forbes 30 Under 30</div>
             </div>
           </div>
-          <h3 class="text-lg font-black text-gray-900 dark:text-white mb-2">Food & Drink Category</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400">Beating 340 entries across all fermented beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Food & Drink Category</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Beating 340 entries across all fermented
+            beverage categories. The judges called the Berry Hibiscus "a revelation."</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════
-       9. CTA — Join the culture
-  ══════════════════════════════════════════════════════════════ -->
-  <section class="py-16 md:py-24 bg-white dark:bg-slate900 transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section
+    class="py-16 md:py-24 bg-white dark:bg-black transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden">
     <div class="max-w-7xl mx-auto relative">
 
-      <div class="relative bg-slate900 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
+      <div
+        class="relative bg-black rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
 
-        <!-- BG texture & glows -->
-        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+        <div
+          class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]">
+        </div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+          class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none">
+        </div>
 
-        <!-- Floating bubbles -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div class="cta-bubble w-10 h-10" style="left:8%; bottom:0; animation:ctaBubble 7s ease-in infinite; animation-delay:0s;"></div>
-          <div class="cta-bubble w-16 h-16" style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
-          <div class="cta-bubble w-8  h-8"  style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
-          <div class="cta-bubble w-20 h-20" style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
+          <div class="cta-bubble w-10 h-10"
+            style="left:8%; bottom:0; animation:ctaBubble 7s ease-in infinite; animation-delay:0s;"></div>
+          <div class="cta-bubble w-16 h-16"
+            style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
+          <div class="cta-bubble w-8  h-8"
+            style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
+          <div class="cta-bubble w-20 h-20"
+            style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
         </div>
 
         <div class="relative z-10 max-w-3xl mx-auto text-center">
 
-          <div class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
+          <div
+            class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
             <i class="fas fa-flask text-kombugreen text-sm"></i>
-            <span class="uppercase tracking-widest text-[11px] font-black text-white">Become Part of the Story</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-white">Become Part of the Story</span>
           </div>
 
-          <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tight" style="font-family:'Playfair Display',serif;">
-            Ready to Trust <br class="hidden sm:block"/> <span class="gradient-text italic">Your Gut?</span>
+          <h2 class="text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-tight mb-6 tracking-tight"
+            style="font-family:'Playfair Display',serif;">
+            Ready to Trust <br class="hidden sm:block" /> <span class="gradient-text italic">Your Gut?</span>
           </h2>
 
-          <p class="text-white/80 font-bold text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
+          <p class="text-white/80 font-medium text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
             Shop the full range, visit us at the taproom, or subscribe to the Culture Club — your gut will thank you.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="shop.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
-              <span class="flex items-center justify-center gap-2">Shop All Flavours <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
+            <a href="shop.html"
+              class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-semibold uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+              <span class="flex items-center justify-center gap-2">Shop All Flavours <i
+                  class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
             </a>
-            <a href="taproom.html" class="group flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+            <a href="taproom.html"
+              class="group flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all duration-300">
               Visit the Taproom <i class="fas fa-map-marker-alt text-xs"></i>
             </a>
           </div>
@@ -709,11 +823,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <div id="footer"></div>
 
   <script src="navbar.js"></script>
   <script src="footer.js"></script>
 
 </body>
+
 </html>

@@ -42,10 +42,7 @@
 
         /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #8FC140, #FF7043);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white; /* Changed to white for dark theme contrast */
         }
 
         /* Outlined 404 Text - FIXED FOR VISIBILITY */
@@ -89,8 +86,7 @@
 
         /* Gradient Button Hover */
         .kombu-btn {
-            background: linear-gradient(to right, #8FC140, #FF7043);
-            background-size: 200% auto;
+            background: #8FC140; /* Solid kombugreen */
             transition: all 0.5s ease;
         }
         .kombu-btn:hover {
@@ -117,19 +113,19 @@
             
             <!-- Label -->
             <div class="inline-flex items-center space-x-2 mb-6">
-                <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+                <span class="w-8 h-1 bg-kombugreen rounded-full"></span>
                 <span class="uppercase tracking-widest text-[11px] font-black text-slate-400">Error Page</span>
-                <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+                <span class="w-8 h-1 bg-kombuorange rounded-full"></span>
             </div>
 
             <!-- Headline -->
             <h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] mb-8 tracking-tight drop-shadow-lg" style="font-family:'Playfair Display',serif;">
                 Lost in the <br/>
-                <span class="gradient-text italic">Fermentation Tank.</span>
+                <span class="text-white italic">Fermentation Tank.</span>
             </h1>
 
             <!-- Big 404 (Above Paragraph) -->
-            <div class="text-[120px] sm:text-[160px] font-black leading-none gradient-text mb-8 select-none" style="font-family:'Bebas Neue',cursive; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));">
+            <div class="text-[120px] sm:text-[160px] font-black leading-none text-white mb-8 select-none" style="font-family:'Bebas Neue',cursive; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));">
                 404
             </div>
 

@@ -1,12 +1,12 @@
 // Kombucha Brewery Navigation Bar
-// Theme: Guava Green (#8FC140), Bright Orange (#FF7043), White, and Deep Slate
+// Theme: Guava Green (#8FC140), Bright Orange (#FF7043), White, and True Black/Dark Grey
 
 document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.getElementById("navbar");
   if (!navbar) return;
 
   navbar.innerHTML = `
-<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md dark:bg-[#0f172a]/90">
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md dark:bg-black/90">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 md:h-24">
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span>Home</span>
             <i class="fas fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180" style="color: var(--kombu-green);"></i>
           </button>
-          <div id="homeMenu" class="hidden absolute mt-3 w-48 bg-white dark:bg-[#1e293b] rounded-2xl shadow-xl py-3 z-50 transform transition-all duration-200 origin-top border border-gray-100 dark:border-slate-700">
+          <div id="homeMenu" class="hidden absolute mt-3 w-48 bg-white dark:bg-[#111111] rounded-2xl shadow-xl py-3 z-50 transform transition-all duration-200 origin-top border border-gray-100 dark:border-gray-800">
             <a href="index.html" class="home-link block px-5 py-2 transition-all duration-200 hover:translate-x-1 text-gray-800 dark:text-gray-200 hover:text-[#FF7043] dark:hover:text-[#FF7043]">Home 1</a>
             <a href="home2.html" class="home-link block px-5 py-2 transition-all duration-200 hover:translate-x-1 text-gray-800 dark:text-gray-200 hover:text-[#FF7043] dark:hover:text-[#FF7043]">Home 2</a>
           </div>
@@ -54,34 +54,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="hidden xl:flex items-center space-x-4 rtl:space-x-reverse">
         
-         <div class="flex items-center bg-gray-100/50 dark:bg-slate-800/50 rounded-full p-1 border border-gray-200 dark:border-slate-700 backdrop-blur-sm">
+         <div class="flex items-center bg-gray-100/50 dark:bg-[#111111]/50 rounded-full p-1 border border-gray-200 dark:border-gray-800 backdrop-blur-sm">
           <button id="rtlToggle" class="w-10 h-8 flex items-center justify-center text-xs font-bold text-gray-500 dark:text-gray-400 hover:text-[#8FC140] transition-colors rounded-full">
             <span class="rtl-text">RTL</span>
           </button>
-          <div class="w-px h-4 bg-gray-300 dark:bg-slate-600 mx-1"></div>
+          <div class="w-px h-4 bg-gray-300 dark:bg-gray-700 mx-1"></div>
          <button id="darkToggle" class="w-10 h-8 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-[#FF7043] transition-colors rounded-full">
             <i id="darkIcon" class="fas fa-moon text-md"></i>
           </button>
         </div>
 
         <div class="flex space-x-2 rtl:space-x-reverse">
-         <a href="login.html" class="px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wide text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 bg-gradient-to-r from-[#8FC140] to-[#FF7043] hover:from-[#7da838] hover:to-[#e6653c] border-none">
+         <a href="login.html" class="px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wide text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 bg-[#8FC140] hover:bg-[#7da838] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 border-none">
             Log In
           </a>
-          <a href="signup.html" class="px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wide text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 bg-gradient-to-r from-[#8FC140] to-[#FF7043] hover:from-[#7da838] hover:to-[#e6653c] border-none">
+          <a href="signup.html" class="px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wide text-white transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 bg-[#FF7043] hover:bg-[#e6653c] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 border-none">
             Sign Up
           </a>
         </div>
       </div>
 
       <div class="flex xl:hidden items-center space-x-2">
-        <button id="mobileBtn" class="w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-[#8fc14020] flex items-center justify-center transition-all duration-300" style="color: var(--kombu-green);">
+        <button id="mobileBtn" class="w-12 h-12 rounded-full bg-gray-100 dark:bg-[#111111] hover:bg-[#8fc14020] flex items-center justify-center transition-all duration-300" style="color: var(--kombu-green);">
           <i id="mobileIcon" class="fas fa-bars text-xl"></i>
         </button>
       </div>
     </div>
 
-    <div id="mobileMenu" class="xl:hidden hidden py-6 border-t transition-all duration-300 dark:border-slate-700 border-gray-200">
+    <div id="mobileMenu" class="xl:hidden hidden py-6 border-t transition-all duration-300 dark:border-gray-800 border-gray-200">
       
       <div class="space-y-2 font-bold tracking-wide">
         
@@ -106,13 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a href="contact.html" class="flex items-center text-gray-800 dark:text-white px-5 py-3 transition-all duration-300 rounded-2xl hover:bg-[#8fc14015] hover:translate-x-1">Contact</a>
       </div>
 
-      <div class="mt-8 pt-6 pb-4 border-t dark:border-slate-700 border-gray-200 space-y-6">
+      <div class="mt-8 pt-6 pb-4 border-t dark:border-gray-800 border-gray-200 space-y-6">
          <div class="flex justify-center w-full">
-           <div class="flex items-center bg-gray-100/50 dark:bg-slate-800/50 rounded-full p-1.5 border border-gray-200 dark:border-slate-700">
+           <div class="flex items-center bg-gray-100/50 dark:bg-[#111111]/50 rounded-full p-1.5 border border-gray-200 dark:border-gray-800">
             <button id="mobileRtlToggle" class="w-16 h-10 flex items-center justify-center text-xs font-bold text-gray-500 dark:text-gray-400 hover:text-[#8FC140] transition-colors rounded-full">
               <span class="rtl-text">RTL</span>
             </button>
-            <div class="w-px h-6 bg-gray-300 dark:bg-slate-600 mx-2"></div>
+            <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2"></div>
             <button id="mobileDarkToggle" class="w-16 h-10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-[#FF7043] transition-colors rounded-full">
               <i id="mobileDarkIcon" class="fas fa-moon text-lg"></i>
             </button>
@@ -120,10 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
 
         <div class="flex flex-col w-full gap-3 px-4">
-          <a href="login.html" class="w-full px-5 py-3.5 font-bold uppercase tracking-wider text-center text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg bg-gradient-to-r from-[#8FC140] to-[#FF7043]">
+          <a href="login.html" class="w-full px-5 py-3.5 font-bold uppercase tracking-wider text-center text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg bg-[#8FC140]">
             Log In
           </a>
-          <a href="signup.html" class="w-full px-5 py-3.5 font-bold uppercase tracking-wider text-center text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg bg-gradient-to-r from-[#8FC140] to-[#FF7043]">
+          <a href="signup.html" class="w-full px-5 py-3.5 font-bold uppercase tracking-wider text-center text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg bg-[#8FC140]">
             Sign Up
           </a>
         </div>
@@ -147,9 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
       transition: background-color 0.3s ease, color 0.3s ease;
     }
     
-    /* Sleek slate dark mode instead of pure black */
+    /* True Black and Dark Grey dark mode */
     html.dark body {
-      background-color: #0f172a; 
+      background-color: #000000; 
       color: #f8fafc;
     }
 

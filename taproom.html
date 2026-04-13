@@ -1,232 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> The Taproom</title>
+  <title>The Taproom</title>
   <script src="tailwind.js"></script>
-    <link rel="icon" href="images\logo.png">
+  <link rel="icon" href="images\logo.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600&family=Bebas+Neue&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
 
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        colors: {
-          kombugreen: '#8FC140',
-          kombuorange: '#FF7043',
-          slate900: '#0f172a',
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            kombugreen: '#8FC140',
+            kombuorange: '#FF7043',
+          }
         }
       }
     }
-  }
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Menu Toggle
-    const mobileBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
+  </script>
 
-    mobileBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      if (mobileMenu.classList.contains('hidden')) {
-        hamburgerIcon.classList.remove('fa-times');
-        hamburgerIcon.classList.add('fa-bars');
-      } else {
-        hamburgerIcon.classList.remove('fa-bars');
-        hamburgerIcon.classList.add('fa-times');
+  <style>
+    :root {
+      --green: #8FC140;
+      --orange: #FF7043;
+    }
+
+    @media(max-width:640px) {
+      .ticker-track {
+        animation-duration: 18s;
       }
-    });
+    }
 
-    // 2. Theme Toggle (Dark/Light)
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const htmlElement = document.documentElement;
+    /* ── Gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-    themeToggleBtn.addEventListener('click', () => {
-      htmlElement.classList.toggle('dark');
-      if (htmlElement.classList.contains('dark')) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-      }
-    });
+    /* ── Glass ── */
+    .glass {
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .15);
+    }
 
-    // 3. RTL (Right-to-Left) Toggle
-    const rtlToggleBtn = document.getElementById('rtl-toggle');
-    const rtlText = document.getElementById('rtl-text');
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+      width: 6px
+    }
 
-    rtlToggleBtn.addEventListener('click', () => {
-      const currentDir = htmlElement.getAttribute('dir');
-      if (currentDir === 'rtl') {
-        htmlElement.setAttribute('dir', 'ltr');
-        rtlText.innerText = 'RTL';
-      } else {
-        htmlElement.setAttribute('dir', 'rtl');
-        rtlText.innerText = 'LTR';
-      }
-    });
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9
+    }
 
-    // 4. Navbar Scroll Effect (Shrink on scroll)
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('shadow-lg', '-translate-y-10'); // Hides top bar on scroll
-      } else {
-        header.classList.remove('shadow-lg', '-translate-y-10');
-      }
-    });
-  });
-</script>
+    ::-webkit-scrollbar-thumb {
+      background: var(--green);
+      border-radius: 3px
+    }
 
-<style>
-  :root { --green:#8FC140; --orange:#FF7043; --dark:#0f172a; }
+    .dark ::-webkit-scrollbar-track {
+      background: #000000
+    }
 
+    /* ── Lift ── */
+    .lift {
+      transition: transform .3s ease, box-shadow .3s ease
+    }
 
- 
-  @media(max-width:640px){ .ticker-track{ animation-duration:18s; } }
+    .lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 56px rgba(0, 0, 0, .13)
+    }
 
-  /* ── Gradient text ── */
-  .gradient-text {
-    background:linear-gradient(135deg,var(--green),var(--orange));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-  }
+    /* ── CTA bubble ── */
+    .cta-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .13)
+    }
 
-  /* ── Glass ── */
-  .glass {
-    background:rgba(255,255,255,.07);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,.15);
-  }
+    /* ── Tap card swipe bar ── */
+    .tap-card .swipe-bar {
+      width: 0;
+      transition: width .55s cubic-bezier(.22, 1, .36, 1);
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--green), var(--orange));
+    }
 
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar{width:6px}
-  ::-webkit-scrollbar-track{background:#f1f5f9}
-  ::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
-  .dark ::-webkit-scrollbar-track{background:#0f172a}
+    .tap-card:hover .swipe-bar {
+      width: 100%
+    }
 
-  /* ── Lift ── */
-  .lift{transition:transform .3s ease,box-shadow .3s ease}
-  .lift:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(0,0,0,.13)}
+    /* ── Gallery hover ── */
+    .gallery-cell {
+      overflow: hidden
+    }
 
-  /* ── CTA bubble ── */
-  .cta-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+    .gallery-cell img {
+      transition: transform .7s ease, filter .4s ease;
+      filter: brightness(.9) saturate(1.05)
+    }
 
-  /* ── Tap card swipe bar ── */
-  .tap-card .swipe-bar{
-    width:0;
-    transition:width .55s cubic-bezier(.22,1,.36,1);
-    height:3px;border-radius:99px;
-    background:linear-gradient(90deg,var(--green),var(--orange));
-  }
-  .tap-card:hover .swipe-bar{width:100%}
+    .gallery-cell:hover img {
+      transform: scale(1.07);
+      filter: brightness(1.05) saturate(1.15)
+    }
 
-  /* ── Gallery hover ── */
-  .gallery-cell{overflow:hidden}
-  .gallery-cell img{transition:transform .7s ease,filter .4s ease;filter:brightness(.9) saturate(1.05)}
-  .gallery-cell:hover img{transform:scale(1.07);filter:brightness(1.05) saturate(1.15)}
+    /* ── FAQ ── */
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease
+    }
 
-  /* ── FAQ ── */
-  .faq-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
-  .faq-open .faq-body{max-height:280px;padding-bottom:1.25rem}
-  .faq-open .faq-icon{transform:rotate(45deg);background:linear-gradient(135deg,var(--green),var(--orange));color:#fff}
-  .faq-icon{transition:transform .3s ease,background .3s ease,color .3s ease}
+    .faq-open .faq-body {
+      max-height: 280px;
+      padding-bottom: 1.25rem
+    }
 
-  /* ── Hours tab active ── */
-  .hr-tab.active{background:linear-gradient(135deg,var(--green),var(--orange));color:#fff}
-  .hr-tab{cursor:pointer;transition:all .25s ease}
+    .faq-open .faq-icon {
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      color: #fff
+    }
 
-  /* ── Newsletter input ── */
-  .nl-input:focus{outline:none;box-shadow:0 0 0 3px rgba(143,193,64,.3)}
+    .faq-icon {
+      transition: transform .3s ease, background .3s ease, color .3s ease
+    }
 
-  /* ── Bar fill ── */
-  .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--orange));animation:barReveal 1.4s cubic-bezier(.22,1,.36,1) both}
-</style>
+    /* ── Hours tab active ── */
+    .hr-tab.active {
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      color: #fff
+    }
 
-<body class="bg-slate-50 dark:bg-slate900 text-gray-800 dark:text-slate-200 transition-colors duration-500 font-sans overflow-x-hidden">
+    .hr-tab {
+      cursor: pointer;
+      transition: all .25s ease
+    }
+
+    /* ── Newsletter input ── */
+    .nl-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(143, 193, 64, .3)
+    }
+
+    /* ── Bar fill ── */
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--green), var(--orange));
+      animation: barReveal 1.4s cubic-bezier(.22, 1, .36, 1) both
+    }
+  </style>
+</head>
+
+<body
+  class="bg-gray-50 dark:bg-black text-gray-800 dark:text-gray-200 transition-colors duration-500 font-sans overflow-x-hidden">
 
   <div id="navbar"></div>
 
-  <!-- ══════════════════════════════════════════════════════
-       1. HERO — Cinematic full-screen + spinning badge ring
-  ══════════════════════════════════════════════════════ -->
-  <section class="relative w-full min-h-[100svh] flex items-center justify-center pb-16 pt-24 overflow-hidden bg-slate900">
+  <section
+    class="relative w-full min-h-[100svh] flex items-center justify-center pb-16 pt-24 overflow-hidden bg-black">
 
-    <!-- BG image -->
     <div class="absolute inset-0 z-0">
       <img src="images/img6.avif" alt="FizzyCulture Taproom" class="w-full h-full object-cover opacity-30 scale-105" />
-      <div class="absolute inset-0 bg-gradient-to-t from-slate900 via-slate900/75 to-slate900/40"></div>
-      <div class="absolute top-1/3 left-1/4  w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[150px] pointer-events-none"></div>
-      <div class="absolute bottom-1/4 right-1/5 w-[400px] h-[400px] bg-kombuorange/12 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/40"></div>
+      <div
+        class="absolute top-1/3 left-1/4  w-[500px] h-[500px] bg-kombugreen/15 rounded-full blur-[150px] pointer-events-none">
+      </div>
+      <div
+        class="absolute bottom-1/4 right-1/5 w-[400px] h-[400px] bg-kombuorange/12 rounded-full blur-[120px] pointer-events-none">
+      </div>
     </div>
 
-    <!-- Giant watermark -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
-      <span class="font-black text-white/[0.025] uppercase tracking-[.3em] whitespace-nowrap" style="font-family:'Bebas Neue',cursive;font-size:clamp(5rem,20vw,15rem);">TAPROOM</span>
+      <span class="font-semibold text-white/[0.025] uppercase tracking-[.3em] whitespace-nowrap"
+        style="font-family:'Bebas Neue',cursive;font-size:clamp(5rem,20vw,15rem);">TAPROOM</span>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full flex flex-col items-center text-center">
 
-      <!-- Breadcrumb -->
       <div class="anim-fade-up flex items-center justify-center gap-2 mb-8">
-        <a href="index.html" class="text-[11px] font-black uppercase tracking-widest text-slate-500 hover:text-kombugreen transition-colors">Home</a>
-        <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-        <span class="text-[11px] font-black uppercase tracking-widest text-kombugreen">Taproom</span>
+        <a href="index.html"
+          class="text-[11px] font-semibold uppercase tracking-widest text-gray-400 hover:text-kombugreen transition-colors">Home</a>
+        <i class="fas fa-chevron-right text-[9px] text-gray-600"></i>
+        <span class="text-[11px] font-semibold uppercase tracking-widest text-kombugreen">Taproom</span>
       </div>
 
       <div class="max-w-4xl flex flex-col items-center text-center">
 
-        <!-- Live status pill -->
-        <div class="anim-fade-up inline-flex items-center justify-center gap-2.5 mb-7 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/20 shadow-lg" style="animation-delay:.1s;">
+        <div
+          class="anim-fade-up inline-flex items-center justify-center gap-2.5 mb-7 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/20 shadow-lg"
+          style="animation-delay:.1s;">
           <span class="live-blink relative flex h-2.5 w-2.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombugreen opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-kombugreen"></span>
           </span>
-          <span class="text-[11px] font-black uppercase tracking-widest text-white">Open Now · 11 AM – 9 PM</span>
+          <span class="text-[11px] font-semibold uppercase tracking-widest text-white">Open Now · 11 AM – 9 PM</span>
         </div>
 
-        <h1 class="anim-slide-l font-black text-white leading-none mb-6 tracking-tight" style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,5rem);">
-          Pull Up a<br/><span class="gradient-text italic">Barstool</span>
+        <h1 class="anim-slide-l font-semibold text-white leading-none mb-6 tracking-tight"
+          style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,5rem);">
+          Pull Up a<br /><span class="gradient-text italic">Barstool</span>
         </h1>
 
-        <p class="anim-fade-up text-lg sm:text-xl font-bold text-slate-300 leading-relaxed max-w-2xl mx-auto mb-10" style="animation-delay:.25s;">
-          12 rotating taps. A dog-friendly patio. Live music every Friday and Saturday. A SCOBY named Gerald who's been bubbling since 2017. This is where FizzyCulture lives.
+        <p class="anim-fade-up text-lg sm:text-xl font-medium text-gray-300 leading-relaxed max-w-2xl mx-auto mb-10"
+          style="animation-delay:.25s;">
+          12 rotating taps. A dog-friendly patio. Live music every Friday and Saturday. A SCOBY named Gerald who's been
+          bubbling since 2017. This is where FizzyCulture lives.
         </p>
 
-        <div class="anim-fade-up flex flex-col sm:flex-row justify-center items-center gap-4" style="animation-delay:.4s;">
-          <a href="shop.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
-            <span class="flex items-center justify-center gap-2">See Today's Taps <i class="fas fa-beer text-xs group-hover:rotate-12 transition-transform"></i></span>
+        <div class="anim-fade-up flex flex-col sm:flex-row justify-center items-center gap-4"
+          style="animation-delay:.4s;">
+          <a href="shop.html"
+            class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-semibold uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+            <span class="flex items-center justify-center gap-2">See Today's Taps <i
+                class="fas fa-beer text-xs group-hover:rotate-12 transition-transform"></i></span>
           </a>
-          <a href="contact.html" class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+          <a href="contact.html"
+            class="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all duration-300">
             Plan Your Visit <i class="fas fa-map-marker-alt text-xs"></i>
           </a>
         </div>
-
-        
 
       </div>
     </div>
 
   </section>
 
-
-  
-
-
-  <!-- ══════════════════════════════════════════════════════
-       3. THE SPACE — Bento gallery mosaic
-  ══════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
+  <section class="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500 overflow-hidden relative">
+    <div
+      class="absolute -top-24 -right-24 w-96 h-96 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none">
+    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -234,297 +251,427 @@
         <div>
           <div class="inline-flex items-center justify-center space-x-2 mb-4">
             <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">The Space</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">The
+              Space</span>
             <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
           </div>
-          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1]" style="font-family:'Playfair Display',serif;">
+          <h2 class="text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight leading-[1.1]"
+            style="font-family:'Playfair Display',serif;">
             5,000 Sq Ft of <span class="gradient-text">Pure Ferment.</span>
           </h2>
         </div>
-        <p class="text-base font-bold text-gray-600 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+        <p class="text-base font-medium text-gray-600 dark:text-gray-400 max-w-md mx-auto leading-relaxed">
           Raw concrete floors, warm oak bars, hanging botanicals — and the hiss of live culture all around you.
         </p>
       </div>
 
-      <!-- Bento grid -->
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
 
-        <div class="gallery-cell col-span-2 rounded-[2rem] shadow-xl overflow-hidden relative group" style="aspect-ratio:16/8;">
+        <div class="gallery-cell col-span-2 rounded-[2rem] shadow-xl overflow-hidden relative group"
+          style="aspect-ratio:16/8;">
           <img src="images/img6.avif" alt="The main bar" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate900/75 via-transparent to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 sm:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen block mb-1">Main Bar</span>
-            <h4 class="text-xl sm:text-2xl font-black text-white">12-Tap Pour Wall</h4>
-            <p class="text-sm text-slate-300 font-semibold mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">Ask your bartender what's freshest — the board rotates daily.</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+          <div
+            class="absolute bottom-0 left-0 p-6 sm:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <span class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen block mb-1">Main Bar</span>
+            <h4 class="text-xl sm:text-2xl font-semibold text-white">12-Tap Pour Wall</h4>
+            <p
+              class="text-sm text-gray-300 font-medium mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-sm">
+              Ask your bartender what's freshest — the board rotates daily.</p>
           </div>
         </div>
 
-        <div class="gallery-cell rounded-[2rem] shadow-xl overflow-hidden relative group row-span-2" style="min-height:280px;">
+        <div class="gallery-cell rounded-[2rem] shadow-xl overflow-hidden relative group row-span-2"
+          style="min-height:280px;">
           <img src="images/img7.avif" alt="Dog-friendly patio" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate900/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-            <span class="text-[9px] font-black uppercase tracking-widest text-kombugreen block mb-1">Dog Friendly</span>
-            <h4 class="text-lg font-black text-white">The Patio</h4>
-            <p class="text-xs text-slate-300 font-semibold mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">Heated year-round. Bring your pup.</p>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div
+            class="absolute bottom-0 left-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <span class="text-[9px] font-semibold uppercase tracking-widest text-kombugreen block mb-1">Dog Friendly</span>
+            <h4 class="text-lg font-semibold text-white">The Patio</h4>
+            <p
+              class="text-xs text-gray-300 font-medium mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              Heated year-round. Bring your pup.</p>
           </div>
         </div>
 
         <div class="gallery-cell rounded-[2rem] shadow-xl overflow-hidden relative group aspect-video">
           <img src="images/img8.avif" alt="Live music" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate900/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-            <span class="text-[9px] font-black uppercase tracking-widest text-kombuorange block mb-1">Fri &amp; Sat Nights</span>
-            <h4 class="text-base font-black text-white">Live Music Stage</h4>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div
+            class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <span class="text-[9px] font-semibold uppercase tracking-widest text-kombuorange block mb-1">Fri & Sat
+              Nights</span>
+            <h4 class="text-base font-semibold text-white">Live Music Stage</h4>
           </div>
         </div>
 
         <div class="gallery-cell rounded-[2rem] shadow-xl overflow-hidden relative group aspect-video">
           <img src="images/img9.avif" alt="Brewing vessels" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate900/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-            <span class="text-[9px] font-black uppercase tracking-widest text-purple-400 block mb-1">Open Kitchen</span>
-            <h4 class="text-base font-black text-white">Brew Vessels</h4>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          <div
+            class="absolute bottom-0 left-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <span class="text-[9px] font-semibold uppercase tracking-widest text-kombugreen block mb-1">Open Kitchen</span>
+            <h4 class="text-base font-semibold text-white">Brew Vessels</h4>
           </div>
         </div>
 
       </div>
 
-      <!-- Feature icon strip -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-        <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen flex-shrink-0"><i class="fas fa-paw"></i></div>
-          <div><div class="text-sm font-black text-gray-900 dark:text-white">Dog Friendly</div><div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">All breeds welcome</div></div>
+        <div
+          class="bg-gray-50 dark:bg-[#111111] rounded-2xl p-5 border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+          <div
+            class="w-10 h-10 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen flex-shrink-0">
+            <i class="fas fa-paw"></i></div>
+          <div>
+            <div class="text-sm font-semibold text-gray-900 dark:text-white">Dog Friendly</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">All breeds welcome</div>
+          </div>
         </div>
-        <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-kombuorange/15 flex items-center justify-center text-kombuorange flex-shrink-0"><i class="fas fa-music"></i></div>
-          <div><div class="text-sm font-black text-gray-900 dark:text-white">Live Musically</div><div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">Fri &amp; Sat, no cover</div></div>
+        <div
+          class="bg-gray-50 dark:bg-[#111111] rounded-2xl p-5 border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+          <div
+            class="w-10 h-10 rounded-xl bg-kombuorange/15 flex items-center justify-center text-kombuorange flex-shrink-0">
+            <i class="fas fa-music"></i></div>
+          <div>
+            <div class="text-sm font-semibold text-gray-900 dark:text-white">Live Musically</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Fri & Sat, no cover</div>
+          </div>
         </div>
-        <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-500 flex-shrink-0"><i class="fas fa-recycle"></i></div>
-          <div><div class="text-sm font-black text-gray-900 dark:text-white">Growler Refills</div><div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">$2 off your own vessel</div></div>
+        <div
+          class="bg-gray-50 dark:bg-[#111111] rounded-2xl p-5 border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+          <div
+            class="w-10 h-10 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen flex-shrink-0">
+            <i class="fas fa-recycle"></i></div>
+          <div>
+            <div class="text-sm font-semibold text-gray-900 dark:text-white">Growler Refills</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">$2 off your own vessel</div>
+          </div>
         </div>
-        <div class="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-500 flex-shrink-0"><i class="fas fa-child"></i></div>
-          <div><div class="text-sm font-black text-gray-900 dark:text-white">All-Age Groups</div><div class="text-xs text-gray-500 dark:text-slate-400 font-semibold">Zero alcohol on tap</div></div>
+        <div
+          class="bg-gray-50 dark:bg-[#111111] rounded-2xl p-5 border border-gray-100 dark:border-gray-800 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-xl bg-kombuorange/15 flex items-center justify-center text-kombuorange flex-shrink-0">
+            <i class="fas fa-child"></i></div>
+          <div>
+            <div class="text-sm font-semibold text-gray-900 dark:text-white">All-Age Groups</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">Zero alcohol on tap</div>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-
-
-
-  <!-- ══════════════════════════════════════════════════════
-       5. EXPERIENCES — 3 alternating editorial rows
-  ══════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-white dark:bg-slate900 transition-colors duration-500 overflow-hidden relative">
-    <div class="absolute top-0 left-0 w-80 h-80 bg-kombugreen/5 dark:bg-kombugreen/8 rounded-full blur-[90px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-kombuorange/5 dark:bg-kombuorange/8 rounded-full blur-[90px] pointer-events-none"></div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <section class="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500 overflow-hidden relative border-t border-gray-100 dark:border-gray-800">
+    <div
+      class="absolute top-0 left-0 w-80 h-80 bg-kombugreen/5 dark:bg-kombugreen/8 rounded-full blur-[90px] pointer-events-none">
+    </div>
+    <div
+      class="absolute bottom-0 right-0 w-80 h-80 bg-kombuorange/5 dark:bg-kombuorange/8 rounded-full blur-[90px] pointer-events-none">
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
       <div class="flex flex-col items-center text-center gap-6 mb-14">
         <div>
           <div class="inline-flex items-center justify-center space-x-2 mb-4">
             <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Tap Board</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">Tap
+              Board</span>
             <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
           </div>
-          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1]" style="font-family:'Playfair Display',serif;">
+          <h2 class="text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight leading-[1.1]"
+            style="font-family:'Playfair Display',serif;">
             Today's <span class="gradient-text">Pour List.</span>
           </h2>
         </div>
-        <div class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 shadow-sm px-4 py-2.5 rounded-full">
+        <div
+          class="flex items-center justify-center gap-2 bg-gray-50 dark:bg-[#111111] border border-gray-200 dark:border-gray-800 shadow-sm px-4 py-2.5 rounded-full">
           <span class="live-blink relative flex h-2 w-2 flex-shrink-0">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-kombugreen opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-kombugreen"></span>
           </span>
-          <span class="text-[11px] font-black uppercase tracking-widest text-gray-700 dark:text-slate-300">Updated Daily · Menu May Vary</span>
+          <span class="text-[11px] font-semibold uppercase tracking-widest text-gray-700 dark:text-gray-300">Updated Daily
+            · Menu May Vary</span>
         </div>
       </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
 
-      <!-- Row A — Patio -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="relative order-2 lg:order-1">
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-slate-800">
-            <img src="images/img7.avif" alt="Dog-friendly patio" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-          </div>
-          <div class="absolute -bottom-5 right-6 anim-float bg-white dark:bg-slate-800 rounded-2xl px-5 py-3 shadow-xl border border-gray-100 dark:border-slate-700 flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen"><i class="fas fa-paw text-sm"></i></div>
-            <div><div class="text-sm font-black text-gray-900 dark:text-white">Dog Friendly</div><div class="text-[10px] font-black uppercase tracking-widest text-gray-500">Water bowl on the house</div></div>
-          </div>
-        </div>
-        <div class="order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div class="inline-flex items-center space-x-2 mb-5">
-            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">The Outdoor Patio</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight" style="font-family:'Playfair Display',serif;">
-            Sun, Sips &amp;<br/><span class="gradient-text">Happy Dogs</span>
-          </h2>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-5">Shaded by heritage oaks, lined with herb planters that occasionally make it into the brews, and heated all year so the season never ends.</p>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">String lights at dusk. Someone always has a guitar. Bring your dog — they get a water bowl and a house biscuit.</p>
-          
-        </div>
-      </div>
-
-      <!-- Row B — Live Music -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div class="inline-flex items-center space-x-2 mb-5">
-            <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Live Music</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight" style="font-family:'Playfair Display',serif;">
-            Every Fri &amp; Sat<br/><span class="gradient-text">Sound On.</span>
-          </h2>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-5">Local musicians across folk, jazz, indie — and the occasional experimental fermentation-themed outfit. Sets start at 7 PM. Never a cover charge. Ever.</p>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">Check our Instagram for the weekly line-up. Patio fills fast on warm nights — come early for the best spot under the oaks.</p>
-          <a href="taproom.html" class="group flex items-center gap-3 text-gray-900 dark:text-white font-black uppercase tracking-widest text-sm hover:text-kombuorange transition-colors">
-            <span>See Upcoming Acts</span>
-            <div class="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-kombuorange group-hover:border-kombuorange group-hover:text-white transition-all">
-              <i class="fas fa-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="relative order-2 lg:order-1">
+            <div
+              class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-[#111111]">
+              <img src="images/img7.avif" alt="Dog-friendly patio"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
             </div>
-          </a>
-        </div>
-        <div class="relative">
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-slate-800">
-            <img src="images/img8.avif" alt="Live music" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            <div
+              class="absolute -bottom-5 right-6 anim-float bg-white dark:bg-[#111111] rounded-2xl px-5 py-3 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen"><i
+                  class="fas fa-paw text-sm"></i></div>
+              <div>
+                <div class="text-sm font-semibold text-gray-900 dark:text-white">Dog Friendly</div>
+                <div class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Water bowl on the house
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="absolute -top-5 left-6 anim-float-rev bg-gradient-to-r from-kombuorange to-red-500 text-white rounded-2xl px-5 py-3 shadow-xl flex items-center gap-3">
-            <i class="fas fa-music text-lg"></i>
-            <div><div class="text-sm font-black">Live Tonight</div><div class="text-[10px] font-black uppercase tracking-widest opacity-80">7PM · No Cover</div></div>
-          </div>
-        </div>
-      </div>
+          <div class="order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left">
+            <div class="inline-flex items-center space-x-2 mb-5">
+              <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+              <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">The
+                Outdoor Patio</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight"
+              style="font-family:'Playfair Display',serif;">
+              Sun, Sips &<br /><span class="gradient-text">Happy Dogs</span>
+            </h2>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-5">Shaded by heritage
+              oaks, lined with herb planters that occasionally make it into the brews, and heated all year so the season
+              never ends.</p>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-8">String lights at dusk.
+              Someone always has a guitar. Bring your dog — they get a water bowl and a house biscuit.</p>
 
-      <!-- Row C — Growler Refills -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="relative order-2 lg:order-1">
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-slate-800">
-            <img src="images/img2.avif" alt="Growler station" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-          </div>
-          <div class="absolute -bottom-5 left-6 anim-float bg-white dark:bg-slate-800 rounded-2xl px-5 py-3 shadow-xl border border-gray-100 dark:border-slate-700 flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen"><i class="fas fa-recycle text-sm"></i></div>
-            <div><div class="text-sm font-black text-gray-900 dark:text-white">Save $2 Per Fill</div><div class="text-[10px] font-black uppercase tracking-widest text-gray-500">Bring your own growler</div></div>
           </div>
         </div>
-        <div class="order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div class="inline-flex items-center space-x-2 mb-5">
-            <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Growler Station</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight" style="font-family:'Playfair Display',serif;">
-            Take the Party<br/><span class="gradient-text">Home with You.</span>
-          </h2>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-5">Grab a 32oz or 64oz growler — or bring your own — and we'll fill it straight from any tap. Return your vessel for $2 off every refill.</p>
-          <p class="text-base font-bold text-gray-600 dark:text-slate-400 leading-relaxed mb-8">Stays fresh for 2 weeks refrigerated. Perfect for parties, camping, and convincing your sceptical friends.</p>
-         
-        </div>
-      </div>
 
-    </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+            <div class="inline-flex items-center space-x-2 mb-5">
+              <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
+              <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">Live
+                Music</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight"
+              style="font-family:'Playfair Display',serif;">
+              Every Fri & Sat<br /><span class="gradient-text">Sound On.</span>
+            </h2>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-5">Local musicians across
+              folk, jazz, indie — and the occasional experimental fermentation-themed outfit. Sets start at 7 PM. Never
+              a cover charge. Ever.</p>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Check our Instagram
+              for the weekly line-up. Patio fills fast on warm nights — come early for the best spot under the oaks.</p>
+            <a href="taproom.html"
+              class="group flex items-center gap-3 text-gray-900 dark:text-white font-semibold uppercase tracking-widest text-sm hover:text-kombuorange transition-colors">
+              <span>See Upcoming Acts</span>
+              <div
+                class="w-10 h-10 rounded-full border-2 border-current flex items-center justify-center group-hover:bg-kombuorange group-hover:border-kombuorange group-hover:text-white transition-all">
+                <i class="fas fa-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+              </div>
+            </a>
+          </div>
+          <div class="relative">
+            <div
+              class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-[#111111]">
+              <img src="images/img8.avif" alt="Live music"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div
+              class="absolute -top-5 left-6 anim-float-rev bg-gradient-to-r from-kombugreen to-kombuorange text-white rounded-2xl px-5 py-3 shadow-xl flex items-center gap-3">
+              <i class="fas fa-music text-lg"></i>
+              <div>
+                <div class="text-sm font-semibold">Live Tonight</div>
+                <div class="text-[10px] font-semibold uppercase tracking-widest opacity-80">7PM · No Cover</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="relative order-2 lg:order-1">
+            <div
+              class="rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] border-4 border-white dark:border-[#111111]">
+              <img src="images/img2.avif" alt="Growler station"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div
+              class="absolute -bottom-5 left-6 anim-float bg-white dark:bg-[#111111] rounded-2xl px-5 py-3 shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-kombugreen/15 flex items-center justify-center text-kombugreen"><i
+                  class="fas fa-recycle text-sm"></i></div>
+              <div>
+                <div class="text-sm font-semibold text-gray-900 dark:text-white">Save $2 Per Fill</div>
+                <div class="text-[10px] font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Bring your own growler</div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left">
+            <div class="inline-flex items-center space-x-2 mb-5">
+              <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
+              <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">Growler
+                Station</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-semibold text-gray-900 dark:text-white leading-[1.1] mb-5 tracking-tight"
+              style="font-family:'Playfair Display',serif;">
+              Take the Party<br /><span class="gradient-text">Home with You.</span>
+            </h2>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-5">Grab a 32oz or 64oz
+              growler — or bring your own — and we'll fill it straight from any tap. Return your vessel for $2 off every
+              refill.</p>
+            <p class="text-base font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Stays fresh for 2
+              weeks refrigerated. Perfect for parties, camping, and convincing your sceptical friends.</p>
+
+          </div>
+        </div>
+
+      </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════════════════════
-       6. EVENTS & WORKSHOPS — card grid on light BG
-  ══════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden relative">
+  <section
+    class="py-24 md:py-32 bg-gray-50 dark:bg-[#111111]/40 transition-colors duration-500 overflow-hidden relative border-t border-gray-100 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="flex flex-col items-center text-center gap-6 mb-14">
         <div>
           <div class="inline-flex items-center justify-center space-x-2 mb-4">
             <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-            <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">What's On</span>
+            <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">What's
+              On</span>
             <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
           </div>
-          <h2 class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-[1.1]" style="font-family:'Playfair Display',serif;">
-            Events &amp; <span class="gradient-text">Workshops.</span>
+          <h2 class="text-4xl sm:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight leading-[1.1]"
+            style="font-family:'Playfair Display',serif;">
+            Events & <span class="gradient-text">Workshops.</span>
           </h2>
         </div>
-        <a href="process.html" class="flex-shrink-0 flex items-center justify-center gap-2 text-sm font-black uppercase tracking-widest text-kombugreen hover:text-kombuorange transition-colors">Full Calendar <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="process.html"
+          class="flex-shrink-0 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-widest text-kombugreen hover:text-kombuorange transition-colors">Full
+          Calendar <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg"><i class="fas fa-flask text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Every Saturday</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-flask text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Every
+              Saturday</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">Homebrew Workshop</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-clock text-kombugreen text-xs"></i> 12:00 PM · 90 min</div>
-            <span class="text-xs font-black text-white bg-kombugreen px-3 py-1.5 rounded-full">Free</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">
+            Homebrew Workshop</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-clock text-kombugreen text-xs"></i> 12:00 PM · 90 min</div>
+            <span class="text-xs font-semibold text-white bg-kombugreen px-3 py-1.5 rounded-full">Free</span>
           </div>
         </div>
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg"><i class="fas fa-music text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">Fri &amp; Sat</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-music text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">Fri
+              & Sat</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">Live Local Music</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-clock text-kombuorange text-xs"></i> 7:00 PM · Until close</div>
-            <span class="text-xs font-black text-white bg-kombuorange px-3 py-1.5 rounded-full">No Cover</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">
+            Live Local Music</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-clock text-kombuorange text-xs"></i> 7:00 PM · Until close</div>
+            <span class="text-xs font-semibold text-white bg-kombuorange px-3 py-1.5 rounded-full">No Cover</span>
           </div>
         </div>
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg"><i class="fas fa-users text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Monthly</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-users text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Monthly</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">Culture Club Meet-Up</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-clock text-kombugreen text-xs"></i> 6:30 PM · Last Thursday</div>
-            <span class="text-xs font-black text-white bg-kombugreen px-3 py-1.5 rounded-full">Enquire</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">
+            Culture Club Meet-Up</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-clock text-kombugreen text-xs"></i> 6:30 PM · Last Thursday</div>
+            <span class="text-xs font-semibold text-white bg-kombugreen px-3 py-1.5 rounded-full">Enquire</span>
           </div>
         </div>
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg"><i class="fas fa-microscope text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">Bi-Weekly</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-microscope text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">Bi-Weekly</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">Gut Health Talk</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-clock text-kombuorange text-xs"></i> 5:30 PM · Wednesdays</div>
-            <span class="text-xs font-black text-white bg-kombuorange px-3 py-1.5 rounded-full">Free</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">
+            Gut Health Talk</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-clock text-kombuorange text-xs"></i> 5:30 PM · Wednesdays</div>
+            <span class="text-xs font-semibold text-white bg-kombuorange px-3 py-1.5 rounded-full">Free</span>
           </div>
         </div>
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg"><i class="fas fa-sun text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Every Sunday</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombugreen to-[#7da838] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-sun text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombugreen bg-kombugreen/10 dark:bg-kombugreen/20 px-3 py-1.5 rounded-full">Every
+              Sunday</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">Sunday Brunch Sips</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-clock text-kombugreen text-xs"></i> 10:00 AM – 2:00 PM</div>
-            <span class="text-xs font-black text-white bg-kombugreen px-3 py-1.5 rounded-full">$22 / person</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombugreen transition-colors">
+            Sunday Brunch Sips</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-clock text-kombugreen text-xs"></i> 10:00 AM – 2:00 PM</div>
+            <span class="text-xs font-semibold text-white bg-kombugreen px-3 py-1.5 rounded-full">$22 / person</span>
           </div>
         </div>
 
-        <div class="lift bg-white dark:bg-slate-800 rounded-[2rem] p-7 border border-gray-100 dark:border-slate-700 shadow-sm group">
+        <div
+          class="lift bg-white dark:bg-[#111111] rounded-[2rem] p-7 border border-gray-100 dark:border-gray-800 shadow-sm group">
           <div class="flex items-center justify-between mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg"><i class="fas fa-birthday-cake text-xl"></i></div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">By Request</span>
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-kombuorange to-[#e65c2f] flex items-center justify-center text-white shadow-lg">
+              <i class="fas fa-birthday-cake text-xl"></i></div>
+            <span
+              class="text-[10px] font-semibold uppercase tracking-widest text-kombuorange bg-kombuorange/10 dark:bg-kombuorange/20 px-3 py-1.5 rounded-full">By
+              Request</span>
           </div>
-          <h3 class="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">Private Hire</h3>
-          <p class="text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed mb-6">Learn wild fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity and a high tolerance for interesting smells.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-slate-700">
-            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-slate-400 font-semibold"><i class="fas fa-calendar-check text-kombuorange text-xs"></i> Flexible timing</div>
-            <span class="text-xs font-black text-white bg-kombuorange px-3 py-1.5 rounded-full">Enquire</span>
+          <h3
+            class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-kombuorange transition-colors">
+            Private Hire</h3>
+          <p class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed mb-6">Learn wild
+            fermentation from our head brewer. Leave with your own 1L starter kit. No experience needed — just curiosity
+            and a high tolerance for interesting smells.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium"><i
+                class="fas fa-calendar-check text-kombuorange text-xs"></i> Flexible timing</div>
+            <span class="text-xs font-semibold text-white bg-kombuorange px-3 py-1.5 rounded-full">Enquire</span>
           </div>
         </div>
 
@@ -532,143 +679,192 @@
     </div>
   </section>
 
+  <section
+    class="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500 overflow-hidden relative border-t border-gray-100 dark:border-gray-800">
+    <div
+      class="absolute top-0 right-0 w-72 h-72 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none">
+    </div>
 
-  
-
-  <!-- ══════════════════════════════════════════════════════
-       8. FAQ ACCORDION
-  ══════════════════════════════════════════════════════ -->
-  <section class="py-24 md:py-32 bg-slate-100 dark:bg-slate-800/40 transition-colors duration-500 overflow-hidden relative">
-    <div class="absolute top-0 right-0 w-72 h-72 bg-kombugreen/5 dark:bg-kombugreen/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
       <div class="text-center mb-14">
         <div class="inline-flex items-center justify-center space-x-2 mb-4">
           <span class="w-8 h-1 bg-gradient-to-r from-kombugreen to-kombuorange rounded-full"></span>
-          <span class="uppercase tracking-widest text-[11px] font-black text-gray-500 dark:text-slate-400">Good to Know</span>
+          <span class="uppercase tracking-widest text-[11px] font-semibold text-gray-500 dark:text-gray-400">Good to
+            Know</span>
           <span class="w-8 h-1 bg-gradient-to-r from-kombuorange to-kombugreen rounded-full"></span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4" style="font-family:'Playfair Display',serif;">Taproom <span class="gradient-text">FAQ.</span></h2>
-        <p class="text-gray-600 dark:text-slate-400 font-bold text-lg max-w-lg mx-auto">Everything you wondered but didn't want to ask the bartender.</p>
+        <h2 class="text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white tracking-tight mb-4"
+          style="font-family:'Playfair Display',serif;">Taproom <span class="gradient-text">FAQ.</span></h2>
+        <p class="text-gray-600 dark:text-gray-400 font-medium text-lg max-w-lg mx-auto">Everything you wondered but
+          didn't want to ask the bartender.</p>
       </div>
 
       <div class="space-y-3">
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">Does the kombucha contain alcohol?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">Does the kombucha contain alcohol?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">All our kombuchas finish under 0.5% ABV — less than a ripe banana. We're a zero-alcohol taproom, fully all-ages, all day, every day.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">All our
+            kombuchas finish under 0.5% ABV — less than a ripe banana. We're a zero-alcohol taproom, fully all-ages, all
+            day, every day.</div>
         </div>
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">Is it all-ages and family-friendly?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">Is it all-ages and family-friendly?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">100%. We have high chairs, a small play corner on the patio, and a kids' menu with our mildest flavours in smaller pours. Bring the whole crew.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">100%. We
+            have high chairs, a small play corner on the patio, and a kids' menu with our mildest flavours in smaller
+            pours. Bring the whole crew.</div>
         </div>
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">Can I bring my own growler for refills?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">Can I bring my own growler for
+              refills?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">Absolutely — and we'll knock $2 off as a thank-you for being sustainable. Any clean, sanitised vessel is welcome: glass, stainless, or our own branded growlers available in-store.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Absolutely
+            — and we'll knock $2 off as a thank-you for being sustainable. Any clean, sanitised vessel is welcome:
+            glass, stainless, or our own branded growlers available in-store.</div>
         </div>
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">Do I need a reservation to visit?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">Do I need a reservation to visit?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">Walk-ins are always welcome. For groups of 8+, we recommend booking ahead. Friday and Saturday evenings fill up quickly — especially when live music is on.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Walk-ins
+            are always welcome. For groups of 8+, we recommend booking ahead. Friday and Saturday evenings fill up
+            quickly — especially when live music is on.</div>
         </div>
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">Is there food available?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">Is there food available?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">We serve a seasonal fermented bites menu: kimchi flatbreads, miso-glazed snacks, pickle boards, and rotating specials. You're also welcome to bring outside food. Sunday brunch features full plates from our kitchen partner next door.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">We serve a
+            seasonal fermented bites menu: kimchi flatbreads, miso-glazed snacks, pickle boards, and rotating specials.
+            You're also welcome to bring outside food. Sunday brunch features full plates from our kitchen partner next
+            door.</div>
         </div>
 
-        <div class="faq-item bg-white dark:bg-slate-800 rounded-[1.5rem] border border-gray-100 dark:border-slate-700 overflow-hidden">
+        <div
+          class="faq-item bg-gray-50 dark:bg-[#111111] rounded-[1.5rem] border border-gray-200 dark:border-gray-800 overflow-hidden">
           <button class="w-full flex items-center justify-between p-6 text-left gap-4" onclick="toggleFaq(this)">
-            <span class="text-base font-black text-gray-900 dark:text-white">How do I book a private event?</span>
-            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-gray-600 dark:text-slate-400 flex-shrink-0 text-sm"><i class="fas fa-plus"></i></div>
+            <span class="text-base font-semibold text-gray-900 dark:text-white">How do I book a private event?</span>
+            <div
+              class="faq-icon w-8 h-8 rounded-full bg-white dark:bg-black flex items-center justify-center text-gray-600 dark:text-gray-400 flex-shrink-0 text-sm">
+              <i class="fas fa-plus"></i></div>
           </button>
-          <div class="faq-body px-6 text-sm font-semibold text-gray-600 dark:text-slate-400 leading-relaxed">Email events@fizzyCulture.com or fill out the private hire form online. We accommodate intimate groups (20+) up to full-venue buyouts for 250. Unlimited kombucha, decoration support, and an optional brewery tour included.</div>
+          <div class="faq-body px-6 text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">Email
+            events@fizzyCulture.com or fill out the private hire form online. We accommodate intimate groups (20+) up to
+            full-venue buyouts for 250. Unlimited kombucha, decoration support, and an optional brewery tour included.
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-
-  <!-- ══════════════════════════════════════════════════════
-       9. CTA — Reserve + Newsletter (2-col dark banner)
-  ══════════════════════════════════════════════════════ -->
-  <section class="py-16 md:py-24 bg-white dark:bg-slate900 transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <section
+    class="py-16 md:py-24 bg-gray-50 dark:bg-black transition-colors duration-500 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-gray-800">
     <div class="max-w-7xl mx-auto">
-      <div class="relative bg-slate900 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20">
+      <div
+        class="relative bg-black rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl p-10 sm:p-16 lg:p-20 border border-gray-800">
 
-        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none"></div>
+        <div
+          class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]">
+        </div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-kombugreen/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+          class="absolute bottom-0 right-1/4 w-80 h-80 bg-kombuorange/10 rounded-full blur-[80px] pointer-events-none">
+        </div>
 
-        <!-- Floating bubbles -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div class="cta-bubble w-10 h-10" style="left:8%;  bottom:0; animation:ctaBubble 7s  ease-in infinite; animation-delay:0s;"></div>
-          <div class="cta-bubble w-16 h-16" style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
-          <div class="cta-bubble w-8  h-8"  style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
-          <div class="cta-bubble w-20 h-20" style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
+          <div class="cta-bubble w-10 h-10"
+            style="left:8%;  bottom:0; animation:ctaBubble 7s  ease-in infinite; animation-delay:0s;"></div>
+          <div class="cta-bubble w-16 h-16"
+            style="left:35%; bottom:0; animation:ctaBubble 10s ease-in infinite; animation-delay:2s;"></div>
+          <div class="cta-bubble w-8  h-8"
+            style="left:62%; bottom:0; animation:ctaBubble 6s  ease-in infinite; animation-delay:1s;"></div>
+          <div class="cta-bubble w-20 h-20"
+            style="left:82%; bottom:0; animation:ctaBubble 9s  ease-in infinite; animation-delay:3s;"></div>
         </div>
 
         <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          <!-- Left — reserve CTA -->
           <div class="text-center lg:text-left">
-            <div class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
+            <div
+              class="inline-flex items-center space-x-2 mb-6 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20 shadow-sm">
               <i class="fas fa-map-marker-alt text-kombugreen text-sm"></i>
-              <span class="uppercase tracking-widest text-[11px] font-black text-white">We're On SE Division, Portland</span>
+              <span class="uppercase tracking-widest text-[11px] font-semibold text-white">We're On SE Division,
+                Portland</span>
             </div>
-            <h2 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-5 tracking-tight" style="font-family:'Playfair Display',serif;">
-              Ready to Pull Up<br/><span class="gradient-text italic">a Barstool?</span>
+            <h2 class="text-4xl sm:text-5xl font-semibold text-white leading-tight mb-5 tracking-tight"
+              style="font-family:'Playfair Display',serif;">
+              Ready to Pull Up<br /><span class="gradient-text italic">a Barstool?</span>
             </h2>
-            <p class="text-white/80 font-bold text-base md:text-lg mb-8 max-w-sm leading-relaxed">Walk in any day or book ahead for groups. Either way, Gerald and all 12 taps will be waiting.</p>
+            <p class="text-white/80 font-medium text-base md:text-lg mb-8 max-w-sm leading-relaxed">Walk in any day or
+              book ahead for groups. Either way, Gerald and all 12 taps will be waiting.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="contact.html" class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-black uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
-                <span class="flex items-center justify-center gap-2">Book a Table <i class="fas fa-calendar-check text-xs group-hover:scale-110 transition-transform"></i></span>
+              <a href="contact.html"
+                class="group px-8 py-4 bg-gradient-to-r from-kombugreen to-[#7da838] text-white text-sm font-semibold uppercase tracking-widest rounded-full text-center shadow-lg hover:shadow-kombugreen/40 hover:-translate-y-1 transition-all">
+                <span class="flex items-center justify-center gap-2">Book a Table <i
+                    class="fas fa-calendar-check text-xs group-hover:scale-110 transition-transform"></i></span>
               </a>
-              <a href="https://maps.google.com" target="_blank" class="flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-black uppercase tracking-widest rounded-full hover:bg-white hover:text-slate900 transition-all duration-300">
+              <a href="https://maps.google.com" target="_blank"
+                class="flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white text-sm font-semibold uppercase tracking-widest rounded-full hover:bg-white hover:text-black transition-all duration-300">
                 Get Directions <i class="fas fa-map-marker-alt text-xs"></i>
               </a>
             </div>
           </div>
 
-          <!-- Right — newsletter -->
           <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-[2rem] p-8">
-            <div class="inline-flex items-center space-x-2 mb-5 bg-white/10 px-4 py-2 rounded-full border border-white/10">
+            <div
+              class="inline-flex items-center space-x-2 mb-5 bg-white/10 px-4 py-2 rounded-full border border-white/10">
               <i class="fas fa-envelope text-kombugreen text-xs"></i>
-              <span class="uppercase tracking-widest text-[10px] font-black text-white">Events Digest</span>
+              <span class="uppercase tracking-widest text-[10px] font-semibold text-white">Events Digest</span>
             </div>
-            <h3 class="text-2xl font-black text-white mb-2" style="font-family:'Playfair Display',serif;">Never Miss a <span class="gradient-text">Drop.</span></h3>
-            <p class="text-white/70 font-semibold text-sm mb-6 leading-relaxed">New tap drops, live music line-ups, workshop dates, and Culture Club perks — straight to your inbox every week.</p>
+            <h3 class="text-2xl font-semibold text-white mb-2" style="font-family:'Playfair Display',serif;">Never Miss a
+              <span class="gradient-text">Drop.</span></h3>
+            <p class="text-white/70 font-medium text-sm mb-6 leading-relaxed">New tap drops, live music line-ups,
+              workshop dates, and Culture Club perks — straight to your inbox every week.</p>
             <div class="flex flex-col gap-3">
-              <input type="email" placeholder="your@email.com" class="nl-input w-full px-5 py-3.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/40 font-semibold text-sm transition-all" />
-              <button class="w-full py-3.5 bg-gradient-to-r from-kombugreen to-[#7da838] text-white font-black uppercase tracking-widest text-xs rounded-full hover:shadow-lg hover:shadow-kombugreen/30 hover:-translate-y-0.5 transition-all">Subscribe — It's Free</button>
+              <input type="email" placeholder="your@email.com"
+                class="nl-input w-full px-5 py-3.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/40 font-medium text-sm transition-all" />
+              <button
+                class="w-full py-3.5 bg-gradient-to-r from-kombugreen to-[#7da838] text-white font-semibold uppercase tracking-widest text-xs rounded-full hover:shadow-lg hover:shadow-kombugreen/30 hover:-translate-y-0.5 transition-all">Subscribe
+                — It's Free</button>
             </div>
-            <p class="text-white/30 text-[11px] font-semibold mt-3 text-center">No spam. Unsubscribe anytime.</p>
+            <p class="text-white/30 text-[11px] font-medium mt-3 text-center">No spam. Unsubscribe anytime.</p>
           </div>
 
         </div>
       </div>
     </div>
   </section>
-
 
   <div id="footer"></div>
   <script src="navbar.js"></script>
@@ -688,16 +884,17 @@
       document.querySelectorAll('.hr-tab').forEach(t => {
         t.classList.remove('active');
         if (!t.classList.contains('active')) {
-          t.classList.add('bg-slate-100','text-gray-700');
+          t.classList.add('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-400');
           t.classList.remove('text-white');
         }
       });
       tab.classList.add('active');
-      tab.classList.remove('bg-slate-100','text-gray-700');
+      tab.classList.remove('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-400');
       document.querySelectorAll('.day-panel').forEach(p => p.classList.add('hidden'));
       document.getElementById(panelId).classList.remove('hidden');
     }
   </script>
 
 </body>
+
 </html>
